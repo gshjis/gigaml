@@ -2,7 +2,7 @@
 
 HOST ?= 0.0.0.0
 PORT ?= 8000
+ENV_FILE ?= .dev.env
 
 run:
-	@echo "Server started"
-	uvicorn main:app --reload --host $(HOST) --port $(PORT)
+	@uvicorn app.core.main:app --reload --host $(HOST) --port $(PORT) --env-file $(ENV_FILE)
