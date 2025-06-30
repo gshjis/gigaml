@@ -1,7 +1,20 @@
-import sqlite3
-from app.core.settings import Settings
+from typing import Iterator
+from contextlib import contextmanager
 
-settings  = Settings()
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker, Session
 
-def get_db_connection()->sqlite3.Connection:
-    return sqlite3.connect(settings.DB_NAME)
+from app.core.settings import settings
+
+from app.models import Base
+
+engine = create_engine(f'{settings.DB_TYPE}:///{settings.DB_NAME}')
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+Base.metadata.create_all(bind=engine)
+
+def get_db_session() -> Iterator[Session]:
+    session = SessionLocal()
+    try:
+        yield session
+    finally:
+        session.close()

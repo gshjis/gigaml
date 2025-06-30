@@ -1,39 +1,27 @@
-from fastapi import APIRouter
-from app.schemas.task import Task
+from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session
 from typing import List
-from app.core.database import get_db_connection
+
+from app.schemas.task import Task
+
+from app.core.database import get_db_session
+
+from app.repository import TaskRepository
 
 router = APIRouter(prefix='/tasks', tags=['tasks'])
 
 @router.get('/all', response_model=List[Task])
-def get_tasks():
-    connection = get_db_connection() 
-    cursor = connection.cursor()
-        
-    # Получаем данные
-    cursor.execute("SELECT * FROM Tasks")
-    columns = [column[0] for column in cursor.description]  # Получаем названия колонок
-    tasks = [dict(zip(columns, row)) for row in cursor.fetchall()]  # Конвертируем в словари
-    
-    connection.close()
-    return tasks
+async def get_tasks(
+    task_repo: TaskRepository = Depends(TaskRepository)
+):  
+    return task_repo.get_all_tasks()
 
-@router.post('/')
-def create_task(task: Task):
-    connection = get_db_connection() 
-    cursor = connection.cursor()
-    
-    # Убираем id из INSERT, если он автоинкрементный
-    cursor.execute(
-        "INSERT INTO Tasks (id, name, pomodoro_count, category_id) VALUES (?, ?, ?, ?)",
-        (task.id, task.name, task.pomodoro_count, task.category_id)
-    )
-    connection.commit()
-    
-    task_id = cursor.lastrowid
-    cursor.execute("SELECT * FROM Tasks WHERE Tasks.id == ?", (task_id,))
-    columns = [column[0] for column in cursor.description]
-    new_task = dict(zip(columns, cursor.fetchone()))  # Конвертируем в словарь
-    
-    connection.close()
-    return new_task
+
+@router.post('/create')
+async def create_task(task: Task):
+    pass
+
+@router.delete('/delete')
+async def delete_task(id_task:int, 
+                      task_repo: TaskRepository = Depends(TaskRepository)):
+    task_repo.delete_task(id_task)
