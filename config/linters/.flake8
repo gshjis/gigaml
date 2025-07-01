@@ -1,0 +1,12 @@
+[flake8]
+max-line-length = 88  # Совместимость с black
+extend-ignore = 
+    E203,  # Конфликт с black
+    W503   # Перенос строки перед оператором
+exclude = 
+    .git,
+    __pycache__,
+    alembic/versions,
+    .venv
+per-file-ignores =
+    __init__.py:F401  # Игнорировать неиспользуемые импорты в __init__.py

@@ -13,6 +13,16 @@ pydantic = "^2.11.7"
 pydantic-settings = "^2.10.1"
 sqlalchemy = "^2.0.41"
 alembic = "^1.16.2"
+psycopg2-binary = "^2.9.10"
+
+
+[tool.poetry.group.dev.dependencies]
+flake8 = "^7.3.0"
+pylint = "^3.3.7"
+mypy = "^1.16.1"
+black = "^25.1.0"
+isort = "^6.0.1"
+bandit = "^1.8.5"
 
 
 [build-system]
