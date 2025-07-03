@@ -20,7 +20,7 @@ help:
 # Запуск сервера
 .PHONY: run
 run:
-	@uvicorn app.core.main:app --reload --host $(HOST) --port $(PORT) --env-file $(ENV_FILE) --log-level $(LOG_LEVEL)
+	@uvicorn app.core.main:app --reload --host $(HOST) --port $(PORT) --env-file $(ENV_FILE)
 
 # Миграции (используйте: make migrate comment="Your message")
 .PHONY: migrate

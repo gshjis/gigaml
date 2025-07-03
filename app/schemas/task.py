@@ -1,14 +1,18 @@
-from pydantic import BaseModel, model_validator
+from typing import Any
+
+from pydantic import BaseModel, Field, model_validator
 
 
-class Task(BaseModel):
-    id: int | None = None
-    name: str | None = None
-    pomodoro_count: int | None = None
-    category_id: int
+class TaskSchema(BaseModel):
+    id: int = Field(gt=0)
+    name: str = Field(max_length=80)
+    pomodoro_count: int = Field(gt=0)
+    category_id: int = Field(gt=0)
 
-    @model_validator(mode="after")
-    def check_name_or_pomodoro_count_none(self):
-        if self.name is None and self.pomodoro_count is None:
-            raise ValueError("Name or pomodoro_count must be provided.")
-        return self
+    @model_validator(mode="before")
+    @classmethod
+    def set_default_name_if_empty(cls, data: Any) -> Any:
+        if isinstance(data, dict):
+            if data.get("name") is None:
+                data["name"] = f"Task {data.get('id', '?')}"
+        return data

@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session, sessionmaker
 from app.core.settings import settings
 from app.models import Base
 
-engine = create_engine(f"{settings.DB_TYPE}:///{settings.DB_NAME}")
+engine = create_engine(settings.DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base.metadata.create_all(bind=engine)
 

@@ -1,34 +1,18 @@
-# Use postgres/example user/password credentials
+version: "3.8"
 
 services:
   db:
     image: postgres:16.2
     restart: always
-    # set shared memory limit when using docker compose
     shm_size: 128mb
     ports:
       - "5432:5432"
-    # or set shared memory limit when deploy via swarm stack
-    #volumes:
-    #  - type: tmpfs
-    #    target: /dev/shm
-    #    tmpfs:
-    #      size: 134217728 # 128*2^20 bytes = 128Mb
     environment:
-      POSTGRES_PASSWORD: password
-      POSTGRES_USER: postgres
-      POSTGRES_DB: pomodoro
+      POSTGRES_PASSWORD: password # Пароль для суперпользователя
+      POSTGRES_USER: postgres # Имя пользователя (опционально, по умолчанию 'postgres')
+      POSTGRES_DB: pomodoro # Создаваемая БД при старте
+    volumes:
+      - postgres_data:/var/lib/postgresql/data # Сохраняем данные между перезапусками
 
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8080:8080
-
-networks:
-  default:
-    driver: bridge
-    enable_ipv6: false
-    ipam:
-      config:
-        - subnet: 172.20.0.0/16 # Фиксируем подсеть
+volumes:
+  postgres_data:
