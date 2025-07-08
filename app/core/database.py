@@ -8,8 +8,6 @@ from app.models import Base
 
 engine = create_engine(settings.DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-Base.metadata.create_all(bind=engine)
-
 
 def get_db_session() -> Iterator[Session]:
     session = SessionLocal()

@@ -2,17 +2,25 @@ version: "3.8"
 
 services:
   db:
-    image: postgres:16.2
+    image: postgres:latest
     restart: always
-    shm_size: 128mb
-    ports:
-      - "5432:5432"
     environment:
-      POSTGRES_PASSWORD: password # Пароль для суперпользователя
-      POSTGRES_USER: postgres # Имя пользователя (опционально, по умолчанию 'postgres')
-      POSTGRES_DB: pomodoro # Создаваемая БД при старте
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: gshjis
+      POSTGRES_DB: pomodoro
     volumes:
-      - postgres_data:/var/lib/postgresql/data # Сохраняем данные между перезапусками
+      - postgres_data:/home/gshjis/Загрузки/db
+    shm_size: 128mb
+
+  service:
+    build: .
+    restart: always
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: "postgresql+psycopg2://gshjis:password@db:5432/pomodoro"
 
 volumes:
   postgres_data:

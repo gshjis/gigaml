@@ -8,6 +8,7 @@ class TaskSchema(BaseModel):
     name: str = Field(max_length=80)
     pomodoro_count: int = Field(gt=0)
     category_id: int = Field(gt=0)
+    description: str = Field(max_length=200, example = "Task description")
 
     @model_validator(mode="before")
     @classmethod

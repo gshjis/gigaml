@@ -32,35 +32,19 @@ endif
 	@alembic upgrade head
 
 # Линтеры
-.PHONY: lint lint-flake8 lint-mypy lint-black lint-isort lint-pylint lint-bandit
-lint: lint-flake8 lint-mypy lint-black lint-isort lint-pylint lint-bandit
-
-lint-flake8:
+.PHONY: lint
+lint:
 	@flake8 app tests
-
-lint-mypy:
 	@mypy app tests
-
-lint-black:
 	@black --check app tests
-
-lint-isort:
 	@isort --check-only app tests
-
-lint-pylint:
 	@pylint app tests
-
-lint-bandit:
 	@bandit -r app
 
 # Форматирование
-.PHONY: format format-black format-isort
-format: format-black format-isort
-
-format-black:
+.PHONY: format
+format: 
 	@black app tests
-
-format-isort:
 	@isort app tests
 
 # Docker-версия миграций (если используете Docker)

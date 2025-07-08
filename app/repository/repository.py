@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 
 from app.core.database import get_db_session
 
-T = TypeVar("T")  # Обобщённый тип для модели SQLAlchemy
+T = TypeVar("T")
 
 
 class BaseRepository(ABC, Generic[T]):
