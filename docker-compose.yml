@@ -2,17 +2,22 @@ version: "3.8"
 
 services:
   db:
-    image: postgres:16.2
+    image: postgres:latest
     restart: always
-    shm_size: 128mb
-    ports:
-      - "5432:5432"
     environment:
-      POSTGRES_PASSWORD: password # Пароль для суперпользователя
-      POSTGRES_USER: postgres # Имя пользователя (опционально, по умолчанию 'postgres')
-      POSTGRES_DB: pomodoro # Создаваемая БД при старте
-    volumes:
-      - postgres_data:/var/lib/postgresql/data # Сохраняем данные между перезапусками
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: gshjis
+      POSTGRES_DB: pomodoro
+    shm_size: 128mb
+
+  service:
+    build: .
+    restart: always
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    command: sh -c "make run"
 
 volumes:
   postgres_data:

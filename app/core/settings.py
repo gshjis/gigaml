@@ -6,5 +6,9 @@ class Settings(BaseSettings):
     GOOGLE_TOKEN_ID: str = "ajqas9d7fa90s7df22bLUylnkLlnhjhAS7"
     DATABASE_URL: str = ""
 
+    REDIS_HOST: str = "localhost"
+    REDIS_PORT: int = 6379
+    REDIS_PASSWORD: str = None
+
 
 settings = Settings()
