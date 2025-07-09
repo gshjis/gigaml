@@ -10,7 +10,6 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
-COPY .dev.env .
 
 # Команда для запуска приложения
-CMD ["make", "run"]
+CMD ["make", "run_docker_server"]

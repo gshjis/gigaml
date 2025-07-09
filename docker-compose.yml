@@ -8,8 +8,6 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_USER: gshjis
       POSTGRES_DB: pomodoro
-    volumes:
-      - postgres_data:/home/gshjis/Загрузки/db
     shm_size: 128mb
 
   service:
@@ -19,8 +17,7 @@ services:
       - "8000:8000"
     depends_on:
       - db
-    environment:
-      DATABASE_URL: "postgresql+psycopg2://gshjis:password@db:5432/pomodoro"
+    command: sh -c "make run"
 
 volumes:
   postgres_data:

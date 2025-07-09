@@ -1,4 +1,5 @@
 import redis
+
 from app.core.settings import settings
 
 redis_pool = redis.ConnectionPool(
@@ -7,8 +8,9 @@ redis_pool = redis.ConnectionPool(
     password=settings.REDIS_PASSWORD,
     db=0,
     decode_responses=True,
-    max_connections=10
+    max_connections=10,
 )
+
 
 def get_redis():
     """Зависимость для FastAPI или других компонентов."""

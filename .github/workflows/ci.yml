@@ -1,0 +1,30 @@
+name: Linters CI
+
+on: [push, pull_request] # Запуск при любом push/PR
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+
+      - name: Install linters
+        run: |
+          pip install black isort flake8 mypy
+
+      - name: Run Black (форматирование)
+        run: black --check .
+
+      - name: Run isort (сортировка импортов)
+        run: isort --check .
+
+      - name: Run Flake8 (стиль кода)
+        run: flake8 .
+
+      - name: Run Mypy (типизация)
+        run: mypy .

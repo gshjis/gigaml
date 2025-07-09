@@ -10,4 +10,5 @@ class Settings(BaseSettings):
     REDIS_PORT: int = 6379
     REDIS_PASSWORD: str = None
 
+
 settings = Settings()
