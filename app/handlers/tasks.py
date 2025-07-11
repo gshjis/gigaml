@@ -7,7 +7,7 @@ from app.schemas.task import (TaskSchemaInput, TaskSchemaOutput,
                               TaskSchemaUpdate)
 from app.service.task import TaskService
 
-router = APIRouter(prefix="/tasks", tags=["tasks"])
+router = APIRouter(prefix="/tasks", tags=["Tasks 📑"])
 
 
 @router.get(
@@ -54,13 +54,16 @@ async def get_all_tasks(
         status.HTTP_400_BAD_REQUEST: {
             "description": "Invalid task data",
             "content": {
-                "application/json": {"example": {"detail": "Invalid pomodoro count"}}
+                "application/json": {"example": {
+                    "detail": "Invalid pomodoro count"
+                }}
             },
         },
     },
 )
 async def create_task(
-    task_data: TaskSchemaInput, service: TaskService = Depends(get_task_service)
+    task_data: TaskSchemaInput,
+    service: TaskService = Depends(get_task_service)
 ) -> TaskSchemaOutput:
     """
     Create a new task.
@@ -77,7 +80,8 @@ async def create_task(
     try:
         return service.create_task(task_data)
     except InvalidTaskDataError as e:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
 
 
 @router.delete(
@@ -85,11 +89,14 @@ async def create_task(
     status_code=status.HTTP_204_NO_CONTENT,
     summary="Delete a task",
     responses={
-        status.HTTP_204_NO_CONTENT: {"description": "Task deleted successfully"},
+        status.HTTP_204_NO_CONTENT: {
+            "description": "Task deleted successfully"
+        },
         status.HTTP_404_NOT_FOUND: {
             "description": "Task not found",
             "content": {
-                "application/json": {"example": {"detail": "Task 123 not found"}}
+                "application/json": {"example": {"detail": "Task 123 not found"
+                                                 }}
             },
         },
     },
