@@ -1,5 +1,5 @@
 import redis
-
+from typing import Any
 from app.core.settings import settings
 
 redis_pool = redis.ConnectionPool(
@@ -11,7 +11,15 @@ redis_pool = redis.ConnectionPool(
     max_connections=10,
 )
 
+def get_redis() -> Any:
+    """
+    Get a Redis connection.
 
-def get_redis():
-    """Зависимость для FastAPI или других компонентов."""
-    return redis.Redis(connection_pool=redis_pool)
+    Returns:
+        redis.Redis: A Redis connection.
+    """
+    try:
+        return redis.Redis(connection_pool=redis_pool)
+    except redis.ConnectionError as e:
+        print(f"Error connecting to Redis: {e}")
+        return None

@@ -11,6 +11,8 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
 def get_db_session() -> Iterator[Session]:
+    """Return DB session"""
+
     session = SessionLocal()
     try:
         print("Session opened")

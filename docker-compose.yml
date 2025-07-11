@@ -17,7 +17,13 @@ services:
       - "8000:8000"
     depends_on:
       - db
-    command: sh -c "make run"
+    command: sh -c "make apply_db && make run"
+
+  cache:
+    image: redis:7.2.4-alpine
+    restart: always
+    ports:
+      - "6379:6379"
 
 volumes:
   postgres_data:

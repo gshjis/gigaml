@@ -5,7 +5,14 @@ from sqlalchemy.orm import (DeclarativeBase, Mapped, declared_attr,
                             mapped_column)
 
 
-class Base(DeclarativeBase):
+class SoftDeleteMixin:
+    """Mixin for soft delete"""
+    is_deleted: Mapped[bool] = mapped_column(default=False)
+    
+
+class Base(DeclarativeBase, SoftDeleteMixin):
+    """Base model"""
+
     __abstract__ = True
 
     id: Mapped[int] = mapped_column(primary_key=True)
@@ -19,5 +26,3 @@ class Base(DeclarativeBase):
         return cls.__name__.lower() + "s"
 
 
-class SoftDeleteMixin:
-    is_deleted: Mapped[bool] = mapped_column(default=False)
