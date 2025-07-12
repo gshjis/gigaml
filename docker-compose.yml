@@ -9,6 +9,8 @@ services:
       POSTGRES_USER: gshjis
       POSTGRES_DB: pomodoro
     shm_size: 128mb
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
 
   service:
     build: .
@@ -17,7 +19,8 @@ services:
       - "8000:8000"
     depends_on:
       - db
-    command: sh -c "make apply_db && make run"
+      - cache
+    command: sh -c "make apply_db && make test && make run"
 
   cache:
     image: redis:7.2.4-alpine

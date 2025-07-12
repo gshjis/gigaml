@@ -1,25 +1,28 @@
-import redis
+import logging
+import redis.asyncio as aioredis
 from typing import Any
 from app.core.settings import settings
 
-redis_pool = redis.ConnectionPool(
-    host=settings.REDIS_HOST,
-    port=settings.REDIS_PORT,
-    password=settings.REDIS_PASSWORD,
-    db=0,
-    decode_responses=True,
-    max_connections=10,
-)
+logger = logging.getLogger(__name__)
 
-def get_redis() -> Any:
+async def get_redis() -> aioredis.Redis:
     """
-    Get a Redis connection.
+    Get an async Redis connection.
 
     Returns:
-        redis.Redis: A Redis connection.
+        aioredis.Redis: An async Redis connection.
     """
     try:
-        return redis.Redis(connection_pool=redis_pool)
-    except redis.ConnectionError as e:
-        print(f"Error connecting to Redis: {e}")
+        redis_client = aioredis.Redis(
+            host=settings.REDIS_HOST,
+            port=settings.REDIS_PORT,
+            password=settings.REDIS_PASSWORD,
+            db=0,
+            decode_responses=True,
+            max_connections=10,
+        )
+        await redis_client.ping()
+        return redis_client
+    except aioredis.ConnectionError as e:
+        logger.error(f"Error connecting to Redis: {e}")
         return None

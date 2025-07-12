@@ -1,4 +1,8 @@
 # app/models/task.py
+import logging
+
+logger = logging.getLogger(__name__)
+
 from sqlalchemy import Integer, String
 from sqlalchemy.orm import Mapped, mapped_column
 

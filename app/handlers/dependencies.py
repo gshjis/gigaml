@@ -1,28 +1,26 @@
-from typing import Annotated, Callable, Type, TypeVar
+from typing import Annotated, Callable, Type
 
 from fastapi import Depends
-from sqlalchemy.orm import Session
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.database import get_db_session
 from app.repository import BaseRepository, TaskRepository
 from app.service.task import TaskService
 
-T = TypeVar("T", bound=BaseRepository)
+T = Type
 
-
-def get_repository(repo_type: Type[T]) -> Callable[[Session], T]:
+async def get_repository(repo_type: Type[T]) -> Callable[[AsyncSession], T]:
     """Фабрика зависимостей для репозиториев"""
 
-    def _get_repo(
-        db_session: Annotated[Session, Depends(get_db_session)]
+    async def _get_repo(
+        db_session: Annotated[AsyncSession, Depends(get_db_session)]
     ) -> T:
         return repo_type(db_session)
 
     return _get_repo
 
-
-def get_task_service(
-    db_session: Annotated[Session, Depends(get_db_session)],
+async def get_task_service(
+    db_session: Annotated[AsyncSession, Depends(get_db_session)],
 ) -> TaskService:
     """Фабрика зависимостей для сервиса задач"""
     return TaskService(TaskRepository(db_session))

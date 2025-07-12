@@ -3,6 +3,7 @@ from datetime import datetime
 from sqlalchemy import func
 from sqlalchemy.orm import (DeclarativeBase, Mapped, declared_attr,
                             mapped_column)
+from sqlalchemy.ext.asyncio import AsyncAttrs
 
 
 class SoftDeleteMixin:
@@ -10,7 +11,7 @@ class SoftDeleteMixin:
     is_deleted: Mapped[bool] = mapped_column(default=False)
     
 
-class Base(DeclarativeBase, SoftDeleteMixin):
+class Base(AsyncAttrs, DeclarativeBase, SoftDeleteMixin):
     """Base model"""
 
     __abstract__ = True

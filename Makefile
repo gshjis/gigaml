@@ -15,22 +15,32 @@ help:
 	@echo "  migrate   - Create and apply database migrations (comment='Message')"
 	@echo "  lint      - Run all linters"
 	@echo "  format    - Auto-format code"
+	@echo "  test      - Run tests"
 	@echo "  help      - Show this help"
 
 # Запуск сервера
 .PHONY: run
 run:
-	@uvicorn app.core.main:app --reload --host $(HOST) --port $(PORT) --env-file $(ENV_FILE)
+	@uvicorn app.core.main:app --reload --host $(HOST) --port $(PORT) --env-file $(ENV_FILE) --log-level error
 
 .PHONY: run_container
 run_container:
 	@docker compose build
-	@docker compose up -d
+	@docker compose up
 
 clean:
 	@docker compose down --volumes --remove-orphans
 
 .PHONY: apply_db
 apply_db:
+	@sleep 5
 	@echo "DB created!"
 	@alembic upgrade head
+
+.PHONY: test
+test:
+	pytest tests/
+
+.PHONY: export-requirements
+export-requirements:
+	poetry export -f requirements.txt --output requirements.txt --without-hashes --with dev
