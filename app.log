@@ -2878,3 +2878,235 @@ WHERE tasks.is_deleted IS false ORDER BY tasks.created_at DESC
 2025-07-13 09:40:02,519 [INFO] app.core.logging_config: Shutdown completed
 2025-07-13 09:40:02,519 [INFO] uvicorn.error: Application shutdown complete.
 2025-07-13 09:40:02,519 [INFO] uvicorn.error: Finished server process [8]
+2025-07-13 09:49:00,221 [INFO] uvicorn.error: Started server process [8]
+2025-07-13 09:49:00,221 [INFO] uvicorn.error: Waiting for application startup.
+2025-07-13 09:49:00,222 [INFO] app.core.logging_config: Initializing application...
+2025-07-13 09:49:00,222 [INFO] app.core.logging_config: Connecting to Redis...
+2025-07-13 09:49:00,228 [INFO] app.core.logging_config: Redis connected successfully
+2025-07-13 09:49:00,228 [INFO] app.core.logging_config: Verifying database connection...
+2025-07-13 09:49:00,228 [INFO] app.core.logging_config: Session opened
+2025-07-13 09:49:00,229 [INFO] app.core.logging_config: Database connection verified
+2025-07-13 09:49:00,229 [INFO] uvicorn.error: Application startup complete.
+2025-07-13 09:49:00,229 [INFO] app.core.logging_config: Session closed
+2025-07-13 09:49:02,832 [INFO] app.core.logging_config: Session opened
+2025-07-13 09:49:02,832 [INFO] app.handlers.tasks: Fetching all tasks
+2025-07-13 09:49:02,832 [INFO] app.service.task: Fetching all tasks
+2025-07-13 09:49:02,870 [INFO] sqlalchemy.engine.Engine: select pg_catalog.version()
+2025-07-13 09:49:02,870 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2025-07-13 09:49:02,873 [INFO] sqlalchemy.engine.Engine: select current_schema()
+2025-07-13 09:49:02,873 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2025-07-13 09:49:02,875 [INFO] sqlalchemy.engine.Engine: show standard_conforming_strings
+2025-07-13 09:49:02,875 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2025-07-13 09:49:02,877 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2025-07-13 09:49:02,883 [INFO] sqlalchemy.engine.Engine: SELECT tasks.name, tasks.pomodoro_count, tasks.category_id, tasks.description, tasks.id, tasks.created_at, tasks.updated_at, tasks.is_deleted 
+FROM tasks 
+WHERE tasks.is_deleted IS false ORDER BY tasks.created_at DESC
+2025-07-13 09:49:02,883 [INFO] sqlalchemy.engine.Engine: [generated in 0.00065s] ()
+2025-07-13 09:49:02,887 [INFO] app.service.task: Fetched 1 tasks successfully
+2025-07-13 09:49:02,888 [INFO] app.handlers.tasks: Fetched 1 tasks successfully
+2025-07-13 09:49:02,888 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2025-07-13 09:49:02,889 [INFO] app.core.logging_config: Session closed
+2025-07-13 09:49:02,889 [INFO] uvicorn.access: 172.20.0.1:60130 - "GET /api/tasks HTTP/1.1" 200
+2025-07-13 09:49:04,780 [INFO] uvicorn.access: 172.20.0.1:60130 - "GET /ping/db HTTP/1.1" 200
+2025-07-13 09:49:10,404 [INFO] app.core.logging_config: Session opened
+2025-07-13 09:49:10,404 [INFO] app.handlers.tasks: Fetching all tasks
+2025-07-13 09:49:10,404 [INFO] app.service.task: Fetching all tasks
+2025-07-13 09:49:10,406 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2025-07-13 09:49:10,406 [INFO] sqlalchemy.engine.Engine: SELECT tasks.name, tasks.pomodoro_count, tasks.category_id, tasks.description, tasks.id, tasks.created_at, tasks.updated_at, tasks.is_deleted 
+FROM tasks 
+WHERE tasks.is_deleted IS false ORDER BY tasks.created_at DESC
+2025-07-13 09:49:10,407 [INFO] sqlalchemy.engine.Engine: [cached since 7.524s ago] ()
+2025-07-13 09:49:10,408 [INFO] app.service.task: Fetched 1 tasks successfully
+2025-07-13 09:49:10,408 [INFO] app.handlers.tasks: Fetched 1 tasks successfully
+2025-07-13 09:49:10,409 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2025-07-13 09:49:10,409 [INFO] app.core.logging_config: Session closed
+2025-07-13 09:49:10,409 [INFO] uvicorn.access: 172.20.0.1:58306 - "GET /api/tasks HTTP/1.1" 200
+2025-07-13 09:49:15,623 [INFO] app.core.logging_config: Session opened
+2025-07-13 09:49:15,623 [INFO] app.handlers.tasks: Fetching all tasks
+2025-07-13 09:49:15,623 [INFO] app.service.task: Fetching all tasks
+2025-07-13 09:49:15,625 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2025-07-13 09:49:15,625 [INFO] sqlalchemy.engine.Engine: SELECT tasks.name, tasks.pomodoro_count, tasks.category_id, tasks.description, tasks.id, tasks.created_at, tasks.updated_at, tasks.is_deleted 
+FROM tasks 
+WHERE tasks.is_deleted IS false ORDER BY tasks.created_at DESC
+2025-07-13 09:49:15,625 [INFO] sqlalchemy.engine.Engine: [cached since 12.74s ago] ()
+2025-07-13 09:49:15,627 [INFO] app.service.task: Fetched 1 tasks successfully
+2025-07-13 09:49:15,627 [INFO] app.handlers.tasks: Fetched 1 tasks successfully
+2025-07-13 09:49:15,627 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2025-07-13 09:49:15,628 [INFO] app.core.logging_config: Session closed
+2025-07-13 09:49:15,628 [INFO] uvicorn.access: 172.20.0.1:58316 - "GET /api/tasks HTTP/1.1" 200
+2025-07-13 09:49:34,236 [INFO] uvicorn.access: 172.20.0.1:40544 - "GET /ping/db HTTP/1.1" 200
+2025-07-13 09:49:54,625 [INFO] uvicorn.error: Shutting down
+2025-07-13 09:49:54,726 [INFO] uvicorn.error: Waiting for application shutdown.
+2025-07-13 09:49:54,726 [INFO] app.core.logging_config: Shutting down application...
+2025-07-13 09:49:54,726 [INFO] app.core.logging_config: Closing Redis connection...
+2025-07-13 09:49:54,727 [INFO] app.core.logging_config: Disposing database engine...
+2025-07-13 09:49:54,732 [INFO] app.core.logging_config: Shutdown completed
+2025-07-13 09:49:54,732 [INFO] uvicorn.error: Application shutdown complete.
+2025-07-13 09:49:54,733 [INFO] uvicorn.error: Finished server process [8]
+2025-07-13 09:52:06,601 [INFO] uvicorn.error: Started server process [8]
+2025-07-13 09:52:06,601 [INFO] uvicorn.error: Waiting for application startup.
+2025-07-13 09:52:06,601 [INFO] app.core.logging_config: Initializing application...
+2025-07-13 09:52:06,601 [INFO] app.core.logging_config: Connecting to Redis...
+2025-07-13 09:52:06,612 [INFO] app.core.logging_config: Redis connected successfully
+2025-07-13 09:52:06,612 [INFO] app.core.logging_config: Verifying database connection...
+2025-07-13 09:52:06,612 [INFO] app.core.logging_config: Session opened
+2025-07-13 09:52:06,612 [INFO] app.core.logging_config: Database connection verified
+2025-07-13 09:52:06,612 [INFO] uvicorn.error: Application startup complete.
+2025-07-13 09:52:06,613 [INFO] app.core.logging_config: Session closed
+2025-07-13 09:52:09,470 [INFO] uvicorn.access: 172.20.0.1:54576 - "GET /tasks HTTP/1.1" 404
+2025-07-13 09:52:47,658 [INFO] uvicorn.error: Shutting down
+2025-07-13 09:52:47,759 [INFO] uvicorn.error: Waiting for application shutdown.
+2025-07-13 09:52:47,759 [INFO] app.core.logging_config: Shutting down application...
+2025-07-13 09:52:47,760 [INFO] app.core.logging_config: Closing Redis connection...
+2025-07-13 09:52:47,760 [INFO] app.core.logging_config: Disposing database engine...
+2025-07-13 09:52:47,761 [INFO] app.core.logging_config: Shutdown completed
+2025-07-13 09:52:47,761 [INFO] uvicorn.error: Application shutdown complete.
+2025-07-13 09:52:47,761 [INFO] uvicorn.error: Finished server process [8]
+2025-07-13 09:53:01,008 [INFO] uvicorn.error: Started server process [8]
+2025-07-13 09:53:01,008 [INFO] uvicorn.error: Waiting for application startup.
+2025-07-13 09:53:01,008 [INFO] app.core.logging_config: Initializing application...
+2025-07-13 09:53:01,008 [INFO] app.core.logging_config: Connecting to Redis...
+2025-07-13 09:53:01,018 [INFO] app.core.logging_config: Redis connected successfully
+2025-07-13 09:53:01,018 [INFO] app.core.logging_config: Verifying database connection...
+2025-07-13 09:53:01,018 [INFO] app.core.logging_config: Session opened
+2025-07-13 09:53:01,018 [INFO] app.core.logging_config: Database connection verified
+2025-07-13 09:53:01,019 [INFO] uvicorn.error: Application startup complete.
+2025-07-13 09:53:01,019 [INFO] app.core.logging_config: Session closed
+2025-07-13 09:53:03,285 [INFO] app.core.logging_config: Session opened
+2025-07-13 09:53:03,285 [INFO] app.handlers.tasks: Fetching all tasks
+2025-07-13 09:53:03,285 [INFO] app.service.task: Fetching all tasks
+2025-07-13 09:53:03,323 [INFO] sqlalchemy.engine.Engine: select pg_catalog.version()
+2025-07-13 09:53:03,323 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2025-07-13 09:53:03,325 [INFO] sqlalchemy.engine.Engine: select current_schema()
+2025-07-13 09:53:03,325 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2025-07-13 09:53:03,327 [INFO] sqlalchemy.engine.Engine: show standard_conforming_strings
+2025-07-13 09:53:03,327 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2025-07-13 09:53:03,328 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2025-07-13 09:53:03,333 [INFO] sqlalchemy.engine.Engine: SELECT tasks.name, tasks.pomodoro_count, tasks.category_id, tasks.description, tasks.id, tasks.created_at, tasks.updated_at, tasks.is_deleted 
+FROM tasks 
+WHERE tasks.is_deleted IS false ORDER BY tasks.created_at DESC
+2025-07-13 09:53:03,333 [INFO] sqlalchemy.engine.Engine: [generated in 0.00074s] ()
+2025-07-13 09:53:03,338 [INFO] app.service.task: Fetched 1 tasks successfully
+2025-07-13 09:53:03,339 [INFO] app.handlers.tasks: Fetched 1 tasks successfully
+2025-07-13 09:53:03,339 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2025-07-13 09:53:03,340 [INFO] app.core.logging_config: Session closed
+2025-07-13 09:53:03,340 [INFO] uvicorn.access: 172.20.0.1:50514 - "GET /api/tasks HTTP/1.1" 200
+2025-07-13 09:53:05,376 [INFO] uvicorn.access: 172.20.0.1:50514 - "GET /ping/db HTTP/1.1" 200
+2025-07-13 09:53:17,591 [INFO] uvicorn.access: 172.20.0.1:53224 - "OPTIONS /api/tasks HTTP/1.1" 200
+2025-07-13 09:53:17,595 [INFO] uvicorn.access: 172.20.0.1:53230 - "POST /api/tasks HTTP/1.1" 405
+2025-07-13 09:53:17,602 [INFO] app.core.logging_config: Session opened
+2025-07-13 09:53:17,603 [INFO] app.handlers.tasks: Fetching all tasks
+2025-07-13 09:53:17,603 [INFO] app.service.task: Fetching all tasks
+2025-07-13 09:53:17,605 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2025-07-13 09:53:17,606 [INFO] sqlalchemy.engine.Engine: SELECT tasks.name, tasks.pomodoro_count, tasks.category_id, tasks.description, tasks.id, tasks.created_at, tasks.updated_at, tasks.is_deleted 
+FROM tasks 
+WHERE tasks.is_deleted IS false ORDER BY tasks.created_at DESC
+2025-07-13 09:53:17,606 [INFO] sqlalchemy.engine.Engine: [cached since 14.27s ago] ()
+2025-07-13 09:53:17,608 [INFO] app.service.task: Fetched 1 tasks successfully
+2025-07-13 09:53:17,609 [INFO] app.handlers.tasks: Fetched 1 tasks successfully
+2025-07-13 09:53:17,609 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2025-07-13 09:53:17,610 [INFO] app.core.logging_config: Session closed
+2025-07-13 09:53:17,610 [INFO] uvicorn.access: 172.20.0.1:53230 - "GET /api/tasks HTTP/1.1" 200
+2025-07-13 09:53:33,647 [INFO] app.core.logging_config: Session opened
+2025-07-13 09:53:33,647 [INFO] app.handlers.tasks: Fetching all tasks
+2025-07-13 09:53:33,647 [INFO] app.service.task: Fetching all tasks
+2025-07-13 09:53:33,649 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2025-07-13 09:53:33,649 [INFO] sqlalchemy.engine.Engine: SELECT tasks.name, tasks.pomodoro_count, tasks.category_id, tasks.description, tasks.id, tasks.created_at, tasks.updated_at, tasks.is_deleted 
+FROM tasks 
+WHERE tasks.is_deleted IS false ORDER BY tasks.created_at DESC
+2025-07-13 09:53:33,650 [INFO] sqlalchemy.engine.Engine: [cached since 30.32s ago] ()
+2025-07-13 09:53:33,651 [INFO] app.service.task: Fetched 1 tasks successfully
+2025-07-13 09:53:33,651 [INFO] app.handlers.tasks: Fetched 1 tasks successfully
+2025-07-13 09:53:33,652 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2025-07-13 09:53:33,652 [INFO] app.core.logging_config: Session closed
+2025-07-13 09:53:33,653 [INFO] uvicorn.access: 172.20.0.1:49180 - "GET /api/tasks HTTP/1.1" 200
+2025-07-13 09:53:37,000 [INFO] uvicorn.access: 172.20.0.1:49180 - "POST /api/tasks HTTP/1.1" 405
+2025-07-13 09:53:37,008 [INFO] app.core.logging_config: Session opened
+2025-07-13 09:53:37,008 [INFO] app.handlers.tasks: Fetching all tasks
+2025-07-13 09:53:37,009 [INFO] app.service.task: Fetching all tasks
+2025-07-13 09:53:37,011 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2025-07-13 09:53:37,011 [INFO] sqlalchemy.engine.Engine: SELECT tasks.name, tasks.pomodoro_count, tasks.category_id, tasks.description, tasks.id, tasks.created_at, tasks.updated_at, tasks.is_deleted 
+FROM tasks 
+WHERE tasks.is_deleted IS false ORDER BY tasks.created_at DESC
+2025-07-13 09:53:37,012 [INFO] sqlalchemy.engine.Engine: [cached since 33.68s ago] ()
+2025-07-13 09:53:37,013 [INFO] app.service.task: Fetched 1 tasks successfully
+2025-07-13 09:53:37,013 [INFO] app.handlers.tasks: Fetched 1 tasks successfully
+2025-07-13 09:53:37,013 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2025-07-13 09:53:37,014 [INFO] app.core.logging_config: Session closed
+2025-07-13 09:53:37,014 [INFO] uvicorn.access: 172.20.0.1:49180 - "GET /api/tasks HTTP/1.1" 200
+2025-07-13 09:53:41,938 [INFO] app.core.logging_config: Session opened
+2025-07-13 09:53:41,938 [INFO] app.handlers.tasks: Fetching all tasks
+2025-07-13 09:53:41,938 [INFO] app.service.task: Fetching all tasks
+2025-07-13 09:53:41,940 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2025-07-13 09:53:41,940 [INFO] sqlalchemy.engine.Engine: SELECT tasks.name, tasks.pomodoro_count, tasks.category_id, tasks.description, tasks.id, tasks.created_at, tasks.updated_at, tasks.is_deleted 
+FROM tasks 
+WHERE tasks.is_deleted IS false ORDER BY tasks.created_at DESC
+2025-07-13 09:53:41,940 [INFO] sqlalchemy.engine.Engine: [cached since 38.61s ago] ()
+2025-07-13 09:53:41,942 [INFO] app.service.task: Fetched 1 tasks successfully
+2025-07-13 09:53:41,942 [INFO] app.handlers.tasks: Fetched 1 tasks successfully
+2025-07-13 09:53:41,942 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2025-07-13 09:53:41,943 [INFO] app.core.logging_config: Session closed
+2025-07-13 09:53:41,943 [INFO] uvicorn.access: 172.20.0.1:49180 - "GET /api/tasks HTTP/1.1" 200
+2025-07-13 09:53:42,633 [INFO] app.core.logging_config: Session opened
+2025-07-13 09:53:42,633 [INFO] app.handlers.tasks: Fetching all tasks
+2025-07-13 09:53:42,633 [INFO] app.service.task: Fetching all tasks
+2025-07-13 09:53:42,634 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2025-07-13 09:53:42,635 [INFO] sqlalchemy.engine.Engine: SELECT tasks.name, tasks.pomodoro_count, tasks.category_id, tasks.description, tasks.id, tasks.created_at, tasks.updated_at, tasks.is_deleted 
+FROM tasks 
+WHERE tasks.is_deleted IS false ORDER BY tasks.created_at DESC
+2025-07-13 09:53:42,635 [INFO] sqlalchemy.engine.Engine: [cached since 39.3s ago] ()
+2025-07-13 09:53:42,636 [INFO] app.service.task: Fetched 1 tasks successfully
+2025-07-13 09:53:42,637 [INFO] app.handlers.tasks: Fetched 1 tasks successfully
+2025-07-13 09:53:42,637 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2025-07-13 09:53:42,638 [INFO] app.core.logging_config: Session closed
+2025-07-13 09:53:42,639 [INFO] uvicorn.access: 172.20.0.1:49180 - "GET /api/tasks HTTP/1.1" 200
+2025-07-13 09:53:53,790 [INFO] uvicorn.access: 172.20.0.1:56572 - "POST /api/tasks HTTP/1.1" 405
+2025-07-13 09:53:53,798 [INFO] app.core.logging_config: Session opened
+2025-07-13 09:53:53,798 [INFO] app.handlers.tasks: Fetching all tasks
+2025-07-13 09:53:53,798 [INFO] app.service.task: Fetching all tasks
+2025-07-13 09:53:53,803 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2025-07-13 09:53:53,803 [INFO] sqlalchemy.engine.Engine: SELECT tasks.name, tasks.pomodoro_count, tasks.category_id, tasks.description, tasks.id, tasks.created_at, tasks.updated_at, tasks.is_deleted 
+FROM tasks 
+WHERE tasks.is_deleted IS false ORDER BY tasks.created_at DESC
+2025-07-13 09:53:53,803 [INFO] sqlalchemy.engine.Engine: [cached since 50.47s ago] ()
+2025-07-13 09:53:53,804 [INFO] app.service.task: Fetched 1 tasks successfully
+2025-07-13 09:53:53,805 [INFO] app.handlers.tasks: Fetched 1 tasks successfully
+2025-07-13 09:53:53,805 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2025-07-13 09:53:53,805 [INFO] app.core.logging_config: Session closed
+2025-07-13 09:53:53,806 [INFO] uvicorn.access: 172.20.0.1:56572 - "GET /api/tasks HTTP/1.1" 200
+2025-07-13 09:53:56,864 [INFO] app.core.logging_config: Session opened
+2025-07-13 09:53:56,864 [INFO] app.handlers.tasks: Fetching all tasks
+2025-07-13 09:53:56,864 [INFO] app.service.task: Fetching all tasks
+2025-07-13 09:53:56,866 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2025-07-13 09:53:56,866 [INFO] sqlalchemy.engine.Engine: SELECT tasks.name, tasks.pomodoro_count, tasks.category_id, tasks.description, tasks.id, tasks.created_at, tasks.updated_at, tasks.is_deleted 
+FROM tasks 
+WHERE tasks.is_deleted IS false ORDER BY tasks.created_at DESC
+2025-07-13 09:53:56,867 [INFO] sqlalchemy.engine.Engine: [cached since 53.53s ago] ()
+2025-07-13 09:53:56,868 [INFO] app.service.task: Fetched 1 tasks successfully
+2025-07-13 09:53:56,868 [INFO] app.handlers.tasks: Fetched 1 tasks successfully
+2025-07-13 09:53:56,868 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2025-07-13 09:53:56,869 [INFO] app.core.logging_config: Session closed
+2025-07-13 09:53:56,869 [INFO] uvicorn.access: 172.20.0.1:56572 - "GET /api/tasks HTTP/1.1" 200
+2025-07-13 09:54:03,368 [INFO] uvicorn.access: 172.20.0.1:57912 - "GET /docs HTTP/1.1" 200
+2025-07-13 09:54:03,473 [INFO] uvicorn.access: 172.20.0.1:57912 - "GET /openapi.json HTTP/1.1" 200
+2025-07-13 09:54:08,834 [INFO] app.core.logging_config: Session opened
+2025-07-13 09:54:08,835 [INFO] app.handlers.tasks: Fetching all tasks
+2025-07-13 09:54:08,835 [INFO] app.service.task: Fetching all tasks
+2025-07-13 09:54:08,836 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2025-07-13 09:54:08,837 [INFO] sqlalchemy.engine.Engine: SELECT tasks.name, tasks.pomodoro_count, tasks.category_id, tasks.description, tasks.id, tasks.created_at, tasks.updated_at, tasks.is_deleted 
+FROM tasks 
+WHERE tasks.is_deleted IS false ORDER BY tasks.created_at DESC
+2025-07-13 09:54:08,837 [INFO] sqlalchemy.engine.Engine: [cached since 65.5s ago] ()
+2025-07-13 09:54:08,839 [INFO] app.service.task: Fetched 1 tasks successfully
+2025-07-13 09:54:08,839 [INFO] app.handlers.tasks: Fetched 1 tasks successfully
+2025-07-13 09:54:08,840 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2025-07-13 09:54:08,841 [INFO] app.core.logging_config: Session closed
+2025-07-13 09:54:08,841 [INFO] uvicorn.access: 172.20.0.1:57924 - "GET /api/tasks HTTP/1.1" 200
+2025-07-13 09:55:02,532 [INFO] uvicorn.error: Shutting down
+2025-07-13 09:55:02,634 [INFO] uvicorn.error: Waiting for application shutdown.
+2025-07-13 09:55:02,634 [INFO] app.core.logging_config: Shutting down application...
+2025-07-13 09:55:02,634 [INFO] app.core.logging_config: Closing Redis connection...
+2025-07-13 09:55:02,635 [INFO] app.core.logging_config: Disposing database engine...
+2025-07-13 09:55:02,640 [INFO] app.core.logging_config: Shutdown completed
+2025-07-13 09:55:02,640 [INFO] uvicorn.error: Application shutdown complete.
+2025-07-13 09:55:02,640 [INFO] uvicorn.error: Finished server process [8]

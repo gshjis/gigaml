@@ -41,6 +41,25 @@
             border-radius: 5px;
             overflow-x: auto;
         }
+        .task-form {
+            margin-bottom: 20px;
+        }
+        .task-form input, .task-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .task-list {
+            margin-top: 20px;
+        }
+        .task-item {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -55,6 +74,18 @@
             <h2>Task Endpoint</h2>
             <button onclick="fetchTasks()">Fetch Tasks</button>
             <pre id="task-response"></pre>
+        </div>
+        <div class="task-form">
+            <h2>Add Task</h2>
+            <input type="text" id="task-name" placeholder="Task Name">
+            <textarea id="task-description" placeholder="Task Description"></textarea>
+            <input type="number" id="task-pomodoro-count" placeholder="Pomodoro Count">
+            <input type="number" id="task-category-id" placeholder="Category ID">
+            <button onclick="addTask()">Add Task</button>
+        </div>
+        <div class="task-list">
+            <h2>Tasks</h2>
+            <div id="task-list"></div>
         </div>
     </div>
     <script>
@@ -73,9 +104,54 @@
                 const response = await fetch('http://localhost:8000/api/tasks');
                 const data = await response.json();
                 document.getElementById('task-response').textContent = JSON.stringify(data, null, 2);
+                displayTasks(data);
             } catch (error) {
                 document.getElementById('task-response').textContent = 'Error fetching tasks';
             }
+        }
+
+        async function addTask() {
+            const name = document.getElementById('task-name').value;
+            const description = document.getElementById('task-description').value;
+            const pomodoroCount = document.getElementById('task-pomodoro-count').value;
+            const categoryId = document.getElementById('task-category-id').value;
+
+            const task = {
+                name,
+                description,
+                pomodoro_count: pomodoroCount,
+                category_id: categoryId
+            };
+
+            try {
+                const response = await fetch('http://localhost:8000/api/tasks', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(task)
+                });
+                const data = await response.json();
+                fetchTasks(); // Refresh the task list
+            } catch (error) {
+                console.error('Error adding task:', error);
+            }
+        }
+
+        function displayTasks(tasks) {
+            const taskList = document.getElementById('task-list');
+            taskList.innerHTML = '';
+            tasks.forEach(task => {
+                const taskItem = document.createElement('div');
+                taskItem.className = 'task-item';
+                taskItem.innerHTML = `
+                    <h3>${task.name}</h3>
+                    <p>${task.description}</p>
+                    <p>Pomodoro Count: ${task.pomodoro_count}</p>
+                    <p>Category ID: ${task.category_id}</p>
+                `;
+                taskList.appendChild(taskItem);
+            });
         }
     </script>
 </body>
