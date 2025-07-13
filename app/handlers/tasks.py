@@ -50,7 +50,7 @@ async def get_all_tasks(
     return tasks
 
 @router.post(
-    "/",
+    "",
     response_model=TaskSchemaOutput,
     status_code=status.HTTP_201_CREATED,
     summary="Create a new task",

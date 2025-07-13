@@ -1,158 +1,92 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pomodoro Frontend</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f4f4f4;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .endpoint {
-            margin-bottom: 20px;
-        }
-        .endpoint h2 {
-            margin-bottom: 10px;
-        }
-        .endpoint button {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .endpoint button:hover {
-            background-color: #0056b3;
-        }
-        .endpoint pre {
-            background-color: #e9ecef;
-            padding: 10px;
-            border-radius: 5px;
-            overflow-x: auto;
-        }
-        .task-form {
-            margin-bottom: 20px;
-        }
-        .task-form input, .task-form textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .task-list {
-            margin-top: 20px;
-        }
-        .task-item {
-            background-color: #f9f9f9;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 10px;
-        }
-    </style>
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Pomodoro Frontend</h1>
-        <div class="endpoint" id="ping-endpoint">
-            <h2>Ping Endpoint</h2>
-            <button onclick="fetchPing()">Fetch Ping</button>
-            <pre id="ping-response"></pre>
+        <header>
+            <h1>Task Manager</h1>
+            <div>
+                <button id="dark-mode-toggle" class="btn btn-icon">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button id="add-task-btn" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Add Task
+                </button>
+            </div>
+        </header>
+
+        <div id="loading-state" class="loading-state hidden">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Loading tasks...</p>
         </div>
-        <div class="endpoint" id="task-endpoint">
-            <h2>Task Endpoint</h2>
-            <button onclick="fetchTasks()">Fetch Tasks</button>
-            <pre id="task-response"></pre>
+
+        <div id="empty-state" class="empty-state hidden">
+            <i class="fas fa-tasks"></i>
+            <h3>No tasks yet</h3>
+            <p>Get started by creating your first task</p>
+            <button id="add-first-task" class="btn btn-primary btn-small mt-4">
+                <i class="fas fa-plus"></i> Add Task
+            </button>
         </div>
-        <div class="task-form">
-            <h2>Add Task</h2>
-            <input type="text" id="task-name" placeholder="Task Name">
-            <textarea id="task-description" placeholder="Task Description"></textarea>
-            <input type="number" id="task-pomodoro-count" placeholder="Pomodoro Count">
-            <input type="number" id="task-category-id" placeholder="Category ID">
-            <button onclick="addTask()">Add Task</button>
+
+        <div id="tasks-list" class="tasks-container"></div>
+
+        <!-- Task Modal -->
+        <div id="task-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modal-title">Add New Task</h3>
+                    <button id="close-modal" class="modal-close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <form id="task-form">
+                    <div class="modal-body">
+                        <input type="hidden" id="task-id">
+                        <div class="form-group">
+                            <label for="task-name" class="form-label">Task Name</label>
+                            <input type="text" id="task-name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="task-description" class="form-label">Description</label>
+                            <textarea id="task-description" class="form-control" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="task-pomodoros" class="form-label">Pomodoros</label>
+                            <input type="number" id="task-pomodoros" class="form-control" min="1" value="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="task-category" class="form-label">Category</label>
+                            <select id="task-category" class="form-control" required>
+                                <option value="1">Work</option>
+                                <option value="2">Personal</option>
+                                <option value="3">Study</option>
+                                <option value="4">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="cancel-task" class="btn btn-outline">Cancel</button>
+                        <button type="submit" id="submit-task" class="btn btn-primary">
+                            <span class="btn-text">Add Task</span>
+                            <i class="fas fa-spinner spinner hidden"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class="task-list">
-            <h2>Tasks</h2>
-            <div id="task-list"></div>
-        </div>
+
+        <!-- Notifications -->
+        <div id="notification-container" class="notification-container"></div>
     </div>
-    <script>
-        async function fetchPing() {
-            try {
-                const response = await fetch('http://localhost:8000/ping/db');
-                const data = await response.json();
-                document.getElementById('ping-response').textContent = JSON.stringify(data, null, 2);
-            } catch (error) {
-                document.getElementById('ping-response').textContent = 'Error fetching ping';
-            }
-        }
 
-        async function fetchTasks() {
-            try {
-                const response = await fetch('http://localhost:8000/api/tasks');
-                const data = await response.json();
-                document.getElementById('task-response').textContent = JSON.stringify(data, null, 2);
-                displayTasks(data);
-            } catch (error) {
-                document.getElementById('task-response').textContent = 'Error fetching tasks';
-            }
-        }
-
-        async function addTask() {
-            const name = document.getElementById('task-name').value;
-            const description = document.getElementById('task-description').value;
-            const pomodoroCount = document.getElementById('task-pomodoro-count').value;
-            const categoryId = document.getElementById('task-category-id').value;
-
-            const task = {
-                name,
-                description,
-                pomodoro_count: pomodoroCount,
-                category_id: categoryId
-            };
-
-            try {
-                const response = await fetch('http://localhost:8000/api/tasks', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(task)
-                });
-                const data = await response.json();
-                fetchTasks(); // Refresh the task list
-            } catch (error) {
-                console.error('Error adding task:', error);
-            }
-        }
-
-        function displayTasks(tasks) {
-            const taskList = document.getElementById('task-list');
-            taskList.innerHTML = '';
-            tasks.forEach(task => {
-                const taskItem = document.createElement('div');
-                taskItem.className = 'task-item';
-                taskItem.innerHTML = `
-                    <h3>${task.name}</h3>
-                    <p>${task.description}</p>
-                    <p>Pomodoro Count: ${task.pomodoro_count}</p>
-                    <p>Category ID: ${task.category_id}</p>
-                `;
-                taskList.appendChild(taskItem);
-            });
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
