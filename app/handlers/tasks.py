@@ -7,14 +7,14 @@ from app.schemas.task import (TaskSchemaInput, TaskSchemaOutput,
                               TaskSchemaUpdate)
 from app.service.task import TaskService
 
-router = APIRouter(prefix="/tasks", tags=["Tasks 📑"])
+router = APIRouter(prefix="/api/tasks", tags=["Tasks 📑"])
 
 import logging
 
 logger = logging.getLogger(__name__)
 
 @router.get(
-    "/",
+    "",
     response_model=list[TaskSchemaOutput],
     summary="Get all tasks",
     responses={
