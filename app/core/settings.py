@@ -1,14 +1,12 @@
 from pydantic_settings import BaseSettings
 
-
 class Settings(BaseSettings):
-
-    GOOGLE_TOKEN_ID: str = "ajqas9d7fa90s7df22bLUylnkLlnhjhAS7"
-    DATABASE_URL: str = ""
-
-    REDIS_HOST: str = "localhost"
-    REDIS_PORT: int = 6379
+    DATABASE_URL: str
+    REDIS_HOST: str
+    REDIS_PORT: int
     REDIS_PASSWORD: str | None = None
 
+    class Config:
+        env_file = ".env"
 
 settings = Settings()

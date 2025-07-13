@@ -7,11 +7,14 @@ from app.schemas.task import (TaskSchemaInput, TaskSchemaOutput,
                               TaskSchemaUpdate)
 from app.service.task import TaskService
 
-router = APIRouter(prefix="/tasks", tags=["Tasks 📑"])
+router = APIRouter(prefix="/api/tasks", tags=["Tasks 📑"])
 
+import logging
+
+logger = logging.getLogger(__name__)
 
 @router.get(
-    "/",
+    "",
     response_model=list[TaskSchemaOutput],
     summary="Get all tasks",
     responses={
@@ -41,11 +44,13 @@ async def get_all_tasks(
     Returns:
         List of TaskSchemaOutput objects representing all active tasks
     """
-    return service.get_all_tasks()
-
+    logger.info("Fetching all tasks")
+    tasks = await service.get_all_tasks()
+    logger.info("Fetched %s tasks successfully", len(tasks))
+    return tasks
 
 @router.post(
-    "/",
+    "",
     response_model=TaskSchemaOutput,
     status_code=status.HTTP_201_CREATED,
     summary="Create a new task",
@@ -78,11 +83,13 @@ async def create_task(
         HTTPException: If input data is invalid
     """
     try:
-        return service.create_task(task_data)
+        logger.info("Creating task with data: %s", task_data)
+        return await service.create_task(task_data)
     except InvalidTaskDataError as e:
+        logger.error("Invalid task data: %s", e)
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
-
+            status_code=status.HTTP_400_BAD_REQUEST, detail=str(e)
+        )
 
 @router.delete(
     "/{task_id}",
@@ -116,9 +123,10 @@ async def delete_task(
     Raises:
         HTTPException: If task is not found
     """
-    service.delete_task(task_id)
+    logger.info("Deleting task with ID: %s", task_id)
+    await service.delete_task(task_id)
+    logger.info("Task deleted successfully: %s", task_id)
     return Response(status_code=status.HTTP_204_NO_CONTENT)
-
 
 @router.patch(
     "/{task_id}",
@@ -148,4 +156,5 @@ async def update_task(
     Raises:
         HTTPException: If task not found or invalid data
     """
-    return service.update_task(task_id, update_data)
+    logger.info("Updating task with ID: %s and data: %s", task_id, update_data)
+    return await service.update_task(task_id, update_data)

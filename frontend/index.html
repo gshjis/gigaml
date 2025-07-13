@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Task Manager</h1>
+            <div>
+                <button id="dark-mode-toggle" class="btn btn-icon">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button id="add-task-btn" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Add Task
+                </button>
+            </div>
+        </header>
+
+        <div id="loading-state" class="loading-state hidden">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Loading tasks...</p>
+        </div>
+
+        <div id="empty-state" class="empty-state hidden">
+            <i class="fas fa-tasks"></i>
+            <h3>No tasks yet</h3>
+            <p>Get started by creating your first task</p>
+            <button id="add-first-task" class="btn btn-primary btn-small mt-4">
+                <i class="fas fa-plus"></i> Add Task
+            </button>
+        </div>
+
+        <div id="tasks-list" class="tasks-container"></div>
+
+        <!-- Task Modal -->
+        <div id="task-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modal-title">Add New Task</h3>
+                    <button id="close-modal" class="modal-close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <form id="task-form">
+                    <div class="modal-body">
+                        <input type="hidden" id="task-id">
+                        <div class="form-group">
+                            <label for="task-name" class="form-label">Task Name</label>
+                            <input type="text" id="task-name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="task-description" class="form-label">Description</label>
+                            <textarea id="task-description" class="form-control" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="task-pomodoros" class="form-label">Pomodoros</label>
+                            <input type="number" id="task-pomodoros" class="form-control" min="1" value="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="task-category" class="form-label">Category</label>
+                            <select id="task-category" class="form-control" required>
+                                <option value="1">Work</option>
+                                <option value="2">Personal</option>
+                                <option value="3">Study</option>
+                                <option value="4">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="cancel-task" class="btn btn-outline">Cancel</button>
+                        <button type="submit" id="submit-task" class="btn btn-primary">
+                            <span class="btn-text">Add Task</span>
+                            <i class="fas fa-spinner spinner hidden"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Notifications -->
+        <div id="notification-container" class="notification-container"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

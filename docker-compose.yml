@@ -1,6 +1,24 @@
-version: "3.8"
-
 services:
+  backend:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    command: uvicorn app.core.main:app --host 0.0.0.0 --port 8000 --reload
+    depends_on:
+      db:
+        condition: service_healthy
+      cache:
+        condition: service_healthy
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+
   db:
     image: postgres:latest
     restart: always
@@ -8,22 +26,22 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_USER: gshjis
       POSTGRES_DB: pomodoro
-    shm_size: 128mb
-
-  service:
-    build: .
-    restart: always
-    ports:
-      - "8000:8000"
-    depends_on:
-      - db
-    command: sh -c "make apply_db && make run"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gshjis -d pomodoro"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   cache:
     image: redis:7.2.4-alpine
     restart: always
-    ports:
-      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
 volumes:
   postgres_data:

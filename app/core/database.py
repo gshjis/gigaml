@@ -1,22 +1,33 @@
 # app/core/database.py
-from typing import Iterator
-
-from sqlalchemy import create_engine
-from sqlalchemy.orm import Session, sessionmaker
-
+from typing import AsyncIterator
+import logging
+from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, async_sessionmaker
+from sqlalchemy.ext.asyncio import AsyncEngine
+from app.core.logging_config import logger
 from app.core.settings import settings
 
-engine = create_engine(settings.DATABASE_URL)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+DATABASE_URL = settings.DATABASE_URL
+
+engine: AsyncEngine = create_async_engine(
+    DATABASE_URL,
+    echo=True,
+    pool_pre_ping=True,
+)
+AsyncSessionLocal = async_sessionmaker(
+    bind=engine,
+    class_=AsyncSession,
+    autocommit=False,
+    autoflush=False,
+    expire_on_commit=False,
+)
 
 
-def get_db_session() -> Iterator[Session]:
-    """Return DB session"""
-
-    session = SessionLocal()
-    try:
-        print("Session opened")
-        yield session
-    finally:
-        session.close()
-        print("Session closed")
+async def get_db_session() -> AsyncIterator[AsyncSession]:
+    """Return async DB session"""
+    async with AsyncSessionLocal() as session:
+        try:
+            logger.info("Session opened")
+            yield session
+        finally:
+            await session.close()
+            logger.info("Session closed")
