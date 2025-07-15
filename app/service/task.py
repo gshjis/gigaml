@@ -5,13 +5,13 @@ from app.utils.cache import cache_result
 from app.core.exceptions import DatabaseError, TaskNotFoundError
 from app.models.task import Task
 from app.repository.task import TaskRepository
+from app.repository.user_repository import UserRepository
 from app.schemas.task import TaskSchemaInput, TaskSchemaOutput, TaskSchemaUpdate
 
 logger = logging.getLogger(__name__)
 
 class TaskService:
     def __init__(self, task_repository: TaskRepository):
-        # 
         self.repository = task_repository
 
     async def create_task(self, task_data: TaskSchemaInput) -> TaskSchemaOutput:

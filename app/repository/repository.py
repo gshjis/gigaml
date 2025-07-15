@@ -24,7 +24,7 @@ class BaseRepository(ABC, Generic[T]):
 
         Args:
             id: ID объекта
-            include_deleted: Если True, вернет даже удаленные объекты
+            include_deleted: Если True, вернет даже мягко удаленные объекты
 
         Returns:
             Объект или None если не найден

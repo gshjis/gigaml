@@ -3,6 +3,10 @@ class TaskNotFoundError(Exception):
 
     pass
 
+class UserAlreadyExistsError(Exception):
+    """Raised when a user with the provided email already exists."""
+
+
 
 class InvalidTaskDataError(Exception):
     """Вызывается при невалидных данных задачи"""

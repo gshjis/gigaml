@@ -1,5 +1,4 @@
-from .category import CategoryRepository
-from .repository import BaseRepository
-from .task import TaskRepository
-
-__all__ = ["BaseRepository", "TaskRepository", "CategoryRepository"]
+# app/repository/__init__.pyfrom app.repository.category import *
+from app.repository.repository import *
+from app.repository.task import *
+from app.repository.user_repository import *

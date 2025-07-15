@@ -33,7 +33,6 @@ clean:
 
 .PHONY: apply_db
 apply_db:
-	@sleep 5
 	@echo "DB created!"
 	@alembic upgrade head
 

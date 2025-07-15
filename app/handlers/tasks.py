@@ -1,11 +1,14 @@
 # app/handlers/task.py
 from fastapi import APIRouter, Depends, HTTPException, Response, status
+from app.core.authz import require_role, require_permission
+from app.core.permissions import Role, Permission
 
 from app.core.exceptions import InvalidTaskDataError
-from app.handlers.dependencies import get_task_service
+from app.core.dependencies import get_task_service
 from app.schemas.task import (TaskSchemaInput, TaskSchemaOutput,
                               TaskSchemaUpdate)
 from app.service.task import TaskService
+from app.models.user import User
 
 router = APIRouter(prefix="/api/tasks", tags=["Tasks 📑"])
 
@@ -68,7 +71,8 @@ async def get_all_tasks(
 )
 async def create_task(
     task_data: TaskSchemaInput,
-    service: TaskService = Depends(get_task_service)
+    service: TaskService = Depends(get_task_service),
+    user: User = Depends(require_permission(Permission.WRITE))
 ) -> TaskSchemaOutput:
     """
     Create a new task.
@@ -109,7 +113,9 @@ async def create_task(
     },
 )
 async def delete_task(
-    task_id: int, service: TaskService = Depends(get_task_service)
+    task_id: int,
+    service: TaskService = Depends(get_task_service),
+    user: User = Depends(require_permission(Permission.DELETE))
 ) -> Response:
     """
     Delete a task by ID.
@@ -142,6 +148,7 @@ async def update_task(
     task_id: int,
     update_data: TaskSchemaUpdate,
     service: TaskService = Depends(get_task_service),
+    user: User = Depends(require_permission(Permission.WRITE))
 ) -> TaskSchemaOutput:
     """
     Partially update a task.
