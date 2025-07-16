@@ -6,7 +6,6 @@ from jose import JWTError, jwt
 from passlib.context import CryptContext
 
 from app.core.settings import settings
-from app.models.user import User
 
 # Password hashing
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -21,6 +20,16 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
+    """
+    Verify a plain password against a hashed password.
+
+    Args:
+        plain_password (str): The plain password to verify.
+        hashed_password (str): The hashed password to compare against.
+
+    Returns:
+        bool: True if the password matches, False otherwise.
+    """
     logger.info("Verifying password")
     return pwd_context.verify(plain_password, hashed_password)
 
@@ -57,7 +66,9 @@ def create_refresh_token(
 def decode_token(token: str) -> Optional[dict]:
     logger.info("Decoding token")
     try:
+        print(token)
         payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[ALGORITHM])
+        print(payload)
         return payload if payload else None
     except JWTError as e:
         logger.error(f"Token decoding error: {str(e)}")

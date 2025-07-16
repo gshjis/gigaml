@@ -19,5 +19,5 @@ class User(Base):
     is_superuser = Column(Boolean, default=False)
     role = Column(RoleEnum, default=Role.USER)
     permissions = Column(Text, default=json.dumps([Permission.READ.value, Permission.DELETE.value, Permission.WRITE.value ]))
-    
+    refresh_token = Column(String, nullable=True)
     tasks = relationship("Task", back_populates="owner")

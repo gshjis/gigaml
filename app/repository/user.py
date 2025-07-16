@@ -12,7 +12,6 @@ class UserRepository:
         result = await self.db.execute(select(User).filter(User.email == email))
         return result.scalar_one_or_none()
     
-
     async def create_user(self, user: UserCreate) -> User:
         db_user = User(
             username=user.username,
@@ -23,3 +22,7 @@ class UserRepository:
         await self.db.commit()
         await self.db.refresh(db_user)
         return db_user
+
+    async def get_user_by_id(self, id: int) -> User | None:
+        result = await self.db.execute(select(User).filter(User.id == id))
+        return result.scalar_one_or_none()

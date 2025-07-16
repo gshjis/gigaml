@@ -1,5 +1,5 @@
 from sqlalchemy.ext.asyncio import AsyncSession
-from app.repository.user_repository import UserRepository
+from app.repository.user import UserRepository
 from app.schemas.user import UserCreate, UserOut
 from app.core.auth import get_password_hash, create_access_token, decode_token
 from app.core.exceptions import UserAlreadyExistsError
@@ -23,7 +23,7 @@ class UserService:
         if not payload:
             raise ValueError("Invalid refresh token")
 
-        user = await self.repository.get_user_by_email(payload["sub"])
+        user = await self.repository.get_user_by_id(payload["sub"])
         if not user:
             raise ValueError("User not found")
 

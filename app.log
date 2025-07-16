@@ -9832,3 +9832,1451 @@ WHERE tasks.id = $1::INTEGER
 2025-07-16 07:14:43,833 [INFO] app.core.logging_config: Shutdown completed
 2025-07-16 07:14:43,833 [INFO] uvicorn.error: Application shutdown complete.
 2025-07-16 07:14:43,833 [INFO] uvicorn.error: Finished server process [92]
+2025-07-16 07:24:10,501 [INFO] uvicorn.error: Started server process [9]
+2025-07-16 07:24:10,501 [INFO] uvicorn.error: Waiting for application startup.
+2025-07-16 07:24:10,501 [INFO] app.core.logging_config: Initializing application...
+2025-07-16 07:24:10,501 [INFO] app.core.logging_config: Connecting to Redis...
+2025-07-16 07:24:10,506 [INFO] app.core.logging_config: Redis connected successfully
+2025-07-16 07:24:10,507 [INFO] app.core.logging_config: Verifying database connection...
+2025-07-16 07:24:10,507 [INFO] app.core.logging_config: Session opened
+2025-07-16 07:24:10,507 [INFO] app.core.logging_config: Database connection verified
+2025-07-16 07:24:10,507 [INFO] uvicorn.error: Application startup complete.
+2025-07-16 07:24:10,508 [INFO] app.core.logging_config: Session closed
+2025-07-16 07:24:19,176 [INFO] uvicorn.access: 172.20.0.1:60132 - "OPTIONS /api/tasks HTTP/1.1" 200
+2025-07-16 07:24:19,180 [INFO] app.core.logging_config: Session opened
+2025-07-16 07:24:19,180 [INFO] app.core.authz: Retrieving current user
+2025-07-16 07:24:19,180 [ERROR] app.core.authz: Missing access token
+2025-07-16 07:24:19,180 [INFO] app.core.logging_config: Session closed
+2025-07-16 07:24:19,181 [INFO] uvicorn.access: 172.20.0.1:60142 - "POST /api/tasks HTTP/1.1" 401
+2025-07-16 07:25:58,694 [INFO] uvicorn.error: Shutting down
+2025-07-16 07:25:58,794 [INFO] uvicorn.error: Waiting for application shutdown.
+2025-07-16 07:25:58,795 [INFO] app.core.logging_config: Shutting down application...
+2025-07-16 07:25:58,795 [INFO] app.core.logging_config: Closing Redis connection...
+2025-07-16 07:25:58,795 [INFO] app.core.logging_config: Disposing database engine...
+2025-07-16 07:25:58,796 [INFO] app.core.logging_config: Shutdown completed
+2025-07-16 07:25:58,796 [INFO] uvicorn.error: Application shutdown complete.
+2025-07-16 07:25:58,796 [INFO] uvicorn.error: Finished server process [9]
+2025-07-16 07:26:45,150 [INFO] uvicorn.error: Started server process [9]
+2025-07-16 07:26:45,150 [INFO] uvicorn.error: Waiting for application startup.
+2025-07-16 07:26:45,150 [INFO] app.core.logging_config: Initializing application...
+2025-07-16 07:26:45,150 [INFO] app.core.logging_config: Connecting to Redis...
+2025-07-16 07:26:45,154 [INFO] app.core.logging_config: Redis connected successfully
+2025-07-16 07:26:45,154 [INFO] app.core.logging_config: Verifying database connection...
+2025-07-16 07:26:45,154 [INFO] app.core.logging_config: Session opened
+2025-07-16 07:26:45,154 [INFO] app.core.logging_config: Database connection verified
+2025-07-16 07:26:45,155 [INFO] uvicorn.error: Application startup complete.
+2025-07-16 07:26:45,155 [INFO] app.core.logging_config: Session closed
+2025-07-16 07:26:48,936 [INFO] app.core.logging_config: Session opened
+2025-07-16 07:26:48,937 [INFO] app.core.authz: Retrieving current user
+2025-07-16 07:26:48,937 [ERROR] app.core.authz: Missing access token
+2025-07-16 07:26:48,937 [INFO] app.core.logging_config: Session closed
+2025-07-16 07:26:48,938 [INFO] uvicorn.access: 172.20.0.1:37240 - "POST /api/tasks HTTP/1.1" 401
+2025-07-16 07:28:09,020 [INFO] app.core.logging_config: Session opened
+2025-07-16 07:28:09,020 [INFO] app.core.authz: Retrieving current user
+2025-07-16 07:28:09,020 [INFO] app.core.auth: Decoding token
+2025-07-16 07:28:09,066 [INFO] sqlalchemy.engine.Engine: select pg_catalog.version()
+2025-07-16 07:28:09,066 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2025-07-16 07:28:09,068 [INFO] sqlalchemy.engine.Engine: select current_schema()
+2025-07-16 07:28:09,069 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2025-07-16 07:28:09,071 [INFO] sqlalchemy.engine.Engine: show standard_conforming_strings
+2025-07-16 07:28:09,071 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2025-07-16 07:28:09,074 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2025-07-16 07:28:09,085 [INFO] sqlalchemy.engine.Engine: SELECT users.id AS users_id, users.username AS users_username, users.email AS users_email, users.hashed_password AS users_hashed_password, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.role AS users_role, users.permissions AS users_permissions, users.created_at AS users_created_at, users.updated_at AS users_updated_at, users.is_deleted AS users_is_deleted 
+FROM users 
+WHERE users.id = $1::INTEGER
+2025-07-16 07:28:09,085 [INFO] sqlalchemy.engine.Engine: [generated in 0.00056s] (10,)
+2025-07-16 07:28:09,104 [INFO] app.core.authz: User retrieved: user@example.com
+2025-07-16 07:28:09,105 [INFO] app.handlers.tasks: Fetching all tasks
+2025-07-16 07:28:09,105 [INFO] app.service.task: Fetching tasks for user ID: 10 with include_deleted: False
+2025-07-16 07:28:09,105 [INFO] app.repository.task: Fetching tasks for user ID: 10 with include_deleted: False
+2025-07-16 07:28:09,108 [INFO] sqlalchemy.engine.Engine: SELECT tasks.name, tasks.pomodoro_count, tasks.category_id, tasks.description, tasks.owner_id, tasks.id, tasks.created_at, tasks.updated_at, tasks.is_deleted 
+FROM tasks 
+WHERE tasks.owner_id = $1::INTEGER AND tasks.is_deleted IS false ORDER BY tasks.created_at DESC
+2025-07-16 07:28:09,108 [INFO] sqlalchemy.engine.Engine: [generated in 0.00057s] (10,)
+2025-07-16 07:28:09,111 [INFO] app.repository.task: Fetched 1 tasks for user ID: 10
+2025-07-16 07:28:09,112 [INFO] app.service.task: Fetched 1 tasks for user ID: 10
+2025-07-16 07:28:09,113 [INFO] app.handlers.tasks: Fetched 1 tasks successfully
+2025-07-16 07:28:09,114 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2025-07-16 07:28:09,115 [INFO] app.core.logging_config: Session closed
+2025-07-16 07:28:09,115 [INFO] uvicorn.access: 172.20.0.1:51932 - "GET /api/tasks HTTP/1.1" 200
+2025-07-16 07:28:31,618 [INFO] app.core.logging_config: Session opened
+2025-07-16 07:28:31,618 [INFO] app.core.authz: Retrieving current user
+2025-07-16 07:28:31,618 [ERROR] app.core.authz: Missing access token
+2025-07-16 07:28:31,618 [INFO] app.core.logging_config: Session closed
+2025-07-16 07:28:31,619 [INFO] uvicorn.access: 172.20.0.1:35256 - "GET /api/tasks HTTP/1.1" 401
+2025-07-16 07:28:35,590 [INFO] app.core.logging_config: Session opened
+2025-07-16 07:28:35,591 [INFO] app.core.authz: Retrieving current user
+2025-07-16 07:28:35,591 [INFO] app.core.auth: Decoding token
+2025-07-16 07:28:35,593 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2025-07-16 07:28:35,593 [INFO] sqlalchemy.engine.Engine: SELECT users.id AS users_id, users.username AS users_username, users.email AS users_email, users.hashed_password AS users_hashed_password, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.role AS users_role, users.permissions AS users_permissions, users.created_at AS users_created_at, users.updated_at AS users_updated_at, users.is_deleted AS users_is_deleted 
+FROM users 
+WHERE users.id = $1::INTEGER
+2025-07-16 07:28:35,593 [INFO] sqlalchemy.engine.Engine: [cached since 26.51s ago] (10,)
+2025-07-16 07:28:35,596 [INFO] app.core.authz: User retrieved: user@example.com
+2025-07-16 07:28:35,596 [INFO] app.handlers.tasks: Fetching all tasks
+2025-07-16 07:28:35,597 [INFO] app.service.task: Fetching tasks for user ID: 10 with include_deleted: False
+2025-07-16 07:28:35,597 [INFO] app.repository.task: Fetching tasks for user ID: 10 with include_deleted: False
+2025-07-16 07:28:35,598 [INFO] sqlalchemy.engine.Engine: SELECT tasks.name, tasks.pomodoro_count, tasks.category_id, tasks.description, tasks.owner_id, tasks.id, tasks.created_at, tasks.updated_at, tasks.is_deleted 
+FROM tasks 
+WHERE tasks.owner_id = $1::INTEGER AND tasks.is_deleted IS false ORDER BY tasks.created_at DESC
+2025-07-16 07:28:35,598 [INFO] sqlalchemy.engine.Engine: [cached since 26.49s ago] (10,)
+2025-07-16 07:28:35,599 [INFO] app.repository.task: Fetched 1 tasks for user ID: 10
+2025-07-16 07:28:35,600 [INFO] app.service.task: Fetched 1 tasks for user ID: 10
+2025-07-16 07:28:35,600 [INFO] app.handlers.tasks: Fetched 1 tasks successfully
+2025-07-16 07:28:35,601 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2025-07-16 07:28:35,601 [INFO] app.core.logging_config: Session closed
+2025-07-16 07:28:35,602 [INFO] uvicorn.access: 172.20.0.1:38088 - "GET /api/tasks HTTP/1.1" 200
+2025-07-16 07:30:25,470 [INFO] app.core.logging_config: Session opened
+2025-07-16 07:30:25,470 [INFO] app.core.authz: Retrieving current user
+2025-07-16 07:30:25,470 [ERROR] app.core.authz: Missing access token
+2025-07-16 07:30:25,470 [INFO] app.core.logging_config: Session closed
+2025-07-16 07:30:25,470 [INFO] uvicorn.access: 172.20.0.1:42066 - "POST /api/tasks HTTP/1.1" 401
+2025-07-16 07:41:26,669 [INFO] app.core.logging_config: Session opened
+2025-07-16 07:41:26,669 [INFO] app.core.authz: Retrieving current user
+2025-07-16 07:41:26,669 [INFO] app.core.auth: Decoding token
+2025-07-16 07:41:26,670 [ERROR] app.core.auth: Token decoding error: Signature has expired.
+2025-07-16 07:41:26,670 [ERROR] app.core.authz: Invalid token
+2025-07-16 07:41:26,670 [INFO] app.core.logging_config: Session closed
+2025-07-16 07:41:26,670 [INFO] uvicorn.access: 172.20.0.1:57392 - "GET /api/tasks HTTP/1.1" 401
+2025-07-16 07:46:41,843 [INFO] app.core.logging_config: Session opened
+2025-07-16 07:46:41,844 [INFO] app.core.authz: Retrieving current user
+2025-07-16 07:46:41,844 [ERROR] app.core.authz: Missing access token
+2025-07-16 07:46:41,844 [INFO] app.core.logging_config: Session closed
+2025-07-16 07:46:41,845 [INFO] uvicorn.access: 172.20.0.1:55796 - "GET /api/tasks HTTP/1.1" 401
+2025-07-16 07:46:48,171 [INFO] uvicorn.error: Shutting down
+2025-07-16 07:46:48,272 [INFO] uvicorn.error: Waiting for application shutdown.
+2025-07-16 07:46:48,272 [INFO] app.core.logging_config: Shutting down application...
+2025-07-16 07:46:48,272 [INFO] app.core.logging_config: Closing Redis connection...
+2025-07-16 07:46:48,272 [INFO] app.core.logging_config: Disposing database engine...
+2025-07-16 07:46:48,276 [INFO] app.core.logging_config: Shutdown completed
+2025-07-16 07:46:48,276 [INFO] uvicorn.error: Application shutdown complete.
+2025-07-16 07:46:48,276 [INFO] uvicorn.error: Finished server process [9]
+2025-07-16 07:49:04,604 [INFO] uvicorn.error: Started server process [9]
+2025-07-16 07:49:04,605 [INFO] uvicorn.error: Waiting for application startup.
+2025-07-16 07:49:04,605 [INFO] app.core.logging_config: Initializing application...
+2025-07-16 07:49:04,605 [INFO] app.core.logging_config: Connecting to Redis...
+2025-07-16 07:49:04,609 [INFO] app.core.logging_config: Redis connected successfully
+2025-07-16 07:49:04,610 [INFO] app.core.logging_config: Verifying database connection...
+2025-07-16 07:49:04,610 [INFO] app.core.logging_config: Session opened
+2025-07-16 07:49:04,610 [INFO] app.core.logging_config: Database connection verified
+2025-07-16 07:49:04,610 [INFO] uvicorn.error: Application startup complete.
+2025-07-16 07:49:04,610 [INFO] app.core.logging_config: Session closed
+2025-07-16 07:50:44,984 [INFO] app.core.logging_config: Session opened
+2025-07-16 07:50:44,985 [INFO] app.core.authz: Retrieving current user
+2025-07-16 07:50:44,985 [INFO] app.core.auth: Decoding token
+2025-07-16 07:50:44,991 [ERROR] app.core.auth: Token decoding error: Signature has expired.
+2025-07-16 07:50:44,991 [ERROR] app.core.authz: Invalid token
+2025-07-16 07:50:44,992 [INFO] app.core.logging_config: Session closed
+2025-07-16 07:50:44,992 [INFO] uvicorn.access: 172.20.0.5:44846 - "GET /api/tasks HTTP/1.0" 401
+2025-07-16 12:18:10,053 [INFO] app.core.logging_config: Session opened
+2025-07-16 12:18:10,092 [INFO] sqlalchemy.engine.Engine: select pg_catalog.version()
+2025-07-16 12:18:10,092 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2025-07-16 12:18:10,094 [INFO] sqlalchemy.engine.Engine: select current_schema()
+2025-07-16 12:18:10,094 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2025-07-16 12:18:10,096 [INFO] sqlalchemy.engine.Engine: show standard_conforming_strings
+2025-07-16 12:18:10,096 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2025-07-16 12:18:10,097 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2025-07-16 12:18:10,108 [INFO] sqlalchemy.engine.Engine: SELECT users.id, users.username, users.email, users.hashed_password, users.is_active, users.is_superuser, users.role, users.permissions, users.created_at, users.updated_at, users.is_deleted 
+FROM users 
+WHERE users.email = $1::VARCHAR
+2025-07-16 12:18:10,108 [INFO] sqlalchemy.engine.Engine: [generated in 0.00061s] ('user@example.com',)
+2025-07-16 12:18:10,110 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2025-07-16 12:18:10,111 [INFO] app.core.logging_config: Session closed
+2025-07-16 12:18:10,111 [INFO] uvicorn.access: 172.20.0.1:39646 - "POST /auth/login HTTP/1.1" 500
+2025-07-16 12:18:10,111 [ERROR] uvicorn.error: Exception in ASGI application
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 521, in _prepare_and_execute
+    prepared_stmt, attributes = await adapt_connection._prepare(
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 768, in _prepare
+    prepared_stmt = await self._connection.prepare(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/asyncpg/connection.py", line 635, in prepare
+    return await self._prepare(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/asyncpg/connection.py", line 653, in _prepare
+    stmt = await self._get_statement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/asyncpg/connection.py", line 432, in _get_statement
+    statement = await self._protocol.prepare(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "asyncpg/protocol/protocol.pyx", line 165, in prepare
+asyncpg.exceptions.UndefinedTableError: relation "users" does not exist
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1963, in _exec_single_context
+    self.dialect.do_execute(
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 943, in do_execute
+    cursor.execute(statement, parameters)
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 580, in execute
+    self._adapt_connection.await_(
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 132, in await_only
+    return current.parent.switch(awaitable)  # type: ignore[no-any-return,attr-defined] # noqa: E501
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 196, in greenlet_spawn
+    value = await result
+            ^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 558, in _prepare_and_execute
+    self._handle_exception(error)
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 508, in _handle_exception
+    self._adapt_connection._handle_exception(error)
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 792, in _handle_exception
+    raise translated_error from error
+sqlalchemy.dialects.postgresql.asyncpg.AsyncAdapt_asyncpg_dbapi.ProgrammingError: <class 'asyncpg.exceptions.UndefinedTableError'>: relation "users" does not exist
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/usr/local/lib/python3.12/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/middleware/cors.py", line 93, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/usr/local/lib/python3.12/site-packages/starlette/middleware/cors.py", line 144, in simple_response
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/fastapi/routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/handlers/auth.py", line 34, in login_user
+    user = await service.repository.get_user_by_email(form_data.username)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/repository/user_repository.py", line 12, in get_user_by_email
+    result = await self.db.execute(select(User).filter(User.email == email))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/ext/asyncio/session.py", line 463, in execute
+    result = await greenlet_spawn(
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 201, in greenlet_spawn
+    result = context.throw(*sys.exc_info())
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2365, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2251, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1415, in execute
+    return meth(
+           ^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1637, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1842, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1982, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2351, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1963, in _exec_single_context
+    self.dialect.do_execute(
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 943, in do_execute
+    cursor.execute(statement, parameters)
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 580, in execute
+    self._adapt_connection.await_(
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 132, in await_only
+    return current.parent.switch(awaitable)  # type: ignore[no-any-return,attr-defined] # noqa: E501
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 196, in greenlet_spawn
+    value = await result
+            ^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 558, in _prepare_and_execute
+    self._handle_exception(error)
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 508, in _handle_exception
+    self._adapt_connection._handle_exception(error)
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 792, in _handle_exception
+    raise translated_error from error
+sqlalchemy.exc.ProgrammingError: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "users" does not exist
+[SQL: SELECT users.id, users.username, users.email, users.hashed_password, users.is_active, users.is_superuser, users.role, users.permissions, users.created_at, users.updated_at, users.is_deleted 
+FROM users 
+WHERE users.email = $1::VARCHAR]
+[parameters: ('user@example.com',)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-07-16 12:23:51,302 [INFO] uvicorn.error: Shutting down
+2025-07-16 12:23:51,402 [INFO] uvicorn.error: Waiting for application shutdown.
+2025-07-16 12:23:51,403 [INFO] app.core.logging_config: Shutting down application...
+2025-07-16 12:23:51,403 [INFO] app.core.logging_config: Closing Redis connection...
+2025-07-16 12:23:51,404 [INFO] app.core.logging_config: Disposing database engine...
+2025-07-16 12:23:51,410 [INFO] app.core.logging_config: Shutdown completed
+2025-07-16 12:23:51,411 [INFO] uvicorn.error: Application shutdown complete.
+2025-07-16 12:23:51,411 [INFO] uvicorn.error: Finished server process [9]
+2025-07-16 12:23:52,268 [INFO] uvicorn.error: Started server process [12]
+2025-07-16 12:23:52,268 [INFO] uvicorn.error: Waiting for application startup.
+2025-07-16 12:23:52,268 [INFO] app.core.logging_config: Initializing application...
+2025-07-16 12:23:52,268 [INFO] app.core.logging_config: Connecting to Redis...
+2025-07-16 12:23:52,274 [INFO] app.core.logging_config: Redis connected successfully
+2025-07-16 12:23:52,274 [INFO] app.core.logging_config: Verifying database connection...
+2025-07-16 12:23:52,274 [INFO] app.core.logging_config: Session opened
+2025-07-16 12:23:52,275 [INFO] app.core.logging_config: Database connection verified
+2025-07-16 12:23:52,275 [INFO] uvicorn.error: Application startup complete.
+2025-07-16 12:23:52,276 [INFO] app.core.logging_config: Session closed
+2025-07-16 12:23:58,847 [INFO] app.core.logging_config: Session opened
+2025-07-16 12:23:58,888 [INFO] sqlalchemy.engine.Engine: select pg_catalog.version()
+2025-07-16 12:23:58,889 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2025-07-16 12:23:58,891 [INFO] sqlalchemy.engine.Engine: select current_schema()
+2025-07-16 12:23:58,891 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2025-07-16 12:23:58,894 [INFO] sqlalchemy.engine.Engine: show standard_conforming_strings
+2025-07-16 12:23:58,895 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2025-07-16 12:23:58,896 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2025-07-16 12:23:58,904 [INFO] sqlalchemy.engine.Engine: SELECT users.id, users.username, users.email, users.hashed_password, users.is_active, users.is_superuser, users.role, users.permissions, users.created_at, users.updated_at, users.is_deleted 
+FROM users 
+WHERE users.email = $1::VARCHAR
+2025-07-16 12:23:58,904 [INFO] sqlalchemy.engine.Engine: [generated in 0.00035s] ('user@example.com',)
+2025-07-16 12:23:58,917 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2025-07-16 12:23:58,919 [INFO] app.core.logging_config: Session closed
+2025-07-16 12:23:58,920 [INFO] uvicorn.access: 172.20.0.1:38338 - "POST /auth/login HTTP/1.1" 401
+2025-07-16 12:24:02,102 [INFO] app.core.logging_config: Session opened
+2025-07-16 12:24:02,104 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2025-07-16 12:24:02,105 [INFO] sqlalchemy.engine.Engine: SELECT users.id, users.username, users.email, users.hashed_password, users.is_active, users.is_superuser, users.role, users.permissions, users.created_at, users.updated_at, users.is_deleted 
+FROM users 
+WHERE users.email = $1::VARCHAR
+2025-07-16 12:24:02,105 [INFO] sqlalchemy.engine.Engine: [cached since 3.201s ago] ('user@example.com',)
+2025-07-16 12:24:02,106 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2025-07-16 12:24:02,107 [INFO] app.core.logging_config: Session closed
+2025-07-16 12:24:02,107 [INFO] uvicorn.access: 172.20.0.1:38338 - "POST /auth/login HTTP/1.1" 401
+2025-07-16 12:24:25,037 [INFO] app.core.logging_config: Session opened
+2025-07-16 12:24:25,038 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2025-07-16 12:24:25,038 [INFO] sqlalchemy.engine.Engine: SELECT users.id, users.username, users.email, users.hashed_password, users.is_active, users.is_superuser, users.role, users.permissions, users.created_at, users.updated_at, users.is_deleted 
+FROM users 
+WHERE users.email = $1::VARCHAR
+2025-07-16 12:24:25,038 [INFO] sqlalchemy.engine.Engine: [cached since 26.13s ago] ('user@example.com',)
+2025-07-16 12:24:25,040 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2025-07-16 12:24:25,041 [INFO] app.core.logging_config: Session closed
+2025-07-16 12:24:25,042 [INFO] uvicorn.access: 172.20.0.1:38794 - "POST /auth/login HTTP/1.1" 401
+2025-07-16 12:24:45,328 [INFO] app.core.logging_config: Session opened
+2025-07-16 12:24:45,330 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2025-07-16 12:24:45,331 [INFO] sqlalchemy.engine.Engine: SELECT users.id, users.username, users.email, users.hashed_password, users.is_active, users.is_superuser, users.role, users.permissions, users.created_at, users.updated_at, users.is_deleted 
+FROM users 
+WHERE users.email = $1::VARCHAR
+2025-07-16 12:24:45,331 [INFO] sqlalchemy.engine.Engine: [cached since 46.43s ago] ('gay@gmail.com',)
+2025-07-16 12:24:45,332 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2025-07-16 12:24:45,333 [INFO] app.core.logging_config: Session closed
+2025-07-16 12:24:45,333 [INFO] uvicorn.access: 172.20.0.1:33898 - "POST /auth/login HTTP/1.1" 401
+2025-07-16 12:25:14,994 [INFO] app.core.logging_config: Session opened
+2025-07-16 12:25:15,001 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2025-07-16 12:25:15,001 [INFO] sqlalchemy.engine.Engine: SELECT users.id, users.username, users.email, users.hashed_password, users.is_active, users.is_superuser, users.role, users.permissions, users.created_at, users.updated_at, users.is_deleted 
+FROM users 
+WHERE users.email = $1::VARCHAR
+2025-07-16 12:25:15,001 [INFO] sqlalchemy.engine.Engine: [cached since 76.1s ago] ('user@example.com',)
+2025-07-16 12:25:15,003 [INFO] app.core.auth: Hashing password
+2025-07-16 12:25:15,210 [INFO] sqlalchemy.engine.Engine: INSERT INTO users (username, email, hashed_password, is_active, is_superuser, role, permissions, is_deleted) VALUES ($1::VARCHAR, $2::VARCHAR, $3::VARCHAR, $4::BOOLEAN, $5::BOOLEAN, $6::role, $7::VARCHAR, $8::BOOLEAN) RETURNING users.id, users.created_at, users.updated_at
+2025-07-16 12:25:15,210 [INFO] sqlalchemy.engine.Engine: [generated in 0.00028s] ('string', 'user@example.com', '$2b$12$r3WmMM7BqYtp8grqKqWi2uSUmwshtHKfe1Tv5tefJOxyAsyKLpXqi', True, False, 'USER', '["read", "delete", "write"]', False)
+2025-07-16 12:25:15,213 [INFO] sqlalchemy.engine.Engine: COMMIT
+2025-07-16 12:25:15,223 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2025-07-16 12:25:15,225 [INFO] sqlalchemy.engine.Engine: SELECT users.id, users.username, users.email, users.hashed_password, users.is_active, users.is_superuser, users.role, users.permissions, users.created_at, users.updated_at, users.is_deleted 
+FROM users 
+WHERE users.id = $1::INTEGER
+2025-07-16 12:25:15,225 [INFO] sqlalchemy.engine.Engine: [generated in 0.00038s] (1,)
+2025-07-16 12:25:15,227 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2025-07-16 12:25:15,228 [INFO] app.core.logging_config: Session closed
+2025-07-16 12:25:15,228 [INFO] uvicorn.access: 172.20.0.1:50484 - "POST /auth/register HTTP/1.1" 200
+2025-07-16 12:25:29,586 [INFO] app.core.logging_config: Session opened
+2025-07-16 12:25:29,588 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2025-07-16 12:25:29,589 [INFO] sqlalchemy.engine.Engine: SELECT users.id, users.username, users.email, users.hashed_password, users.is_active, users.is_superuser, users.role, users.permissions, users.created_at, users.updated_at, users.is_deleted 
+FROM users 
+WHERE users.email = $1::VARCHAR
+2025-07-16 12:25:29,589 [INFO] sqlalchemy.engine.Engine: [cached since 90.69s ago] ('user@example.com',)
+2025-07-16 12:25:29,590 [INFO] app.core.auth: Verifying password
+2025-07-16 12:25:29,778 [INFO] app.core.auth: Creating access token
+2025-07-16 12:25:29,782 [INFO] app.core.auth: Creating refresh token
+2025-07-16 12:25:29,783 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2025-07-16 12:25:29,784 [INFO] app.core.logging_config: Session closed
+2025-07-16 12:25:29,784 [INFO] uvicorn.access: 172.20.0.1:45998 - "POST /auth/login HTTP/1.1" 200
+2025-07-16 12:25:40,396 [INFO] app.core.logging_config: Session opened
+2025-07-16 12:25:40,396 [INFO] app.core.authz: Retrieving current user
+2025-07-16 12:25:40,396 [INFO] app.core.auth: Decoding token
+2025-07-16 12:25:40,397 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2025-07-16 12:25:40,399 [INFO] sqlalchemy.engine.Engine: SELECT users.id AS users_id, users.username AS users_username, users.email AS users_email, users.hashed_password AS users_hashed_password, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.role AS users_role, users.permissions AS users_permissions, users.created_at AS users_created_at, users.updated_at AS users_updated_at, users.is_deleted AS users_is_deleted 
+FROM users 
+WHERE users.id = $1::INTEGER
+2025-07-16 12:25:40,399 [INFO] sqlalchemy.engine.Engine: [generated in 0.00038s] (1,)
+2025-07-16 12:25:40,401 [INFO] app.core.authz: User retrieved: user@example.com
+2025-07-16 12:25:40,402 [INFO] app.handlers.tasks: Creating task with data: name='Моя задача' pomodoro_count=4 category_id=1 description='Нужно сделать это и то'
+2025-07-16 12:25:40,403 [INFO] app.service.task: Creating task with data: {'name': 'Моя задача', 'pomodoro_count': 4, 'category_id': 1, 'description': 'Нужно сделать это и то', 'owner_id': 1}
+2025-07-16 12:25:40,405 [INFO] sqlalchemy.engine.Engine: INSERT INTO tasks (name, pomodoro_count, category_id, description, owner_id, is_deleted) VALUES ($1::VARCHAR, $2::INTEGER, $3::INTEGER, $4::VARCHAR, $5::INTEGER, $6::BOOLEAN) RETURNING tasks.id, tasks.created_at, tasks.updated_at
+2025-07-16 12:25:40,406 [INFO] sqlalchemy.engine.Engine: [generated in 0.00034s] ('Моя задача', 4, 1, 'Нужно сделать это и то', 1, False)
+2025-07-16 12:25:40,408 [INFO] sqlalchemy.engine.Engine: COMMIT
+2025-07-16 12:25:40,410 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2025-07-16 12:25:40,411 [INFO] sqlalchemy.engine.Engine: SELECT tasks.name, tasks.pomodoro_count, tasks.category_id, tasks.description, tasks.owner_id, tasks.id, tasks.created_at, tasks.updated_at, tasks.is_deleted 
+FROM tasks 
+WHERE tasks.id = $1::INTEGER
+2025-07-16 12:25:40,411 [INFO] sqlalchemy.engine.Engine: [generated in 0.00030s] (1,)
+2025-07-16 12:25:40,413 [INFO] app.service.task: Task created successfully with ID: 1
+2025-07-16 12:25:40,413 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2025-07-16 12:25:40,414 [INFO] app.core.logging_config: Session closed
+2025-07-16 12:25:40,414 [INFO] uvicorn.access: 172.20.0.1:40176 - "POST /api/tasks HTTP/1.1" 201
+2025-07-16 12:25:45,497 [INFO] app.core.logging_config: Session opened
+2025-07-16 12:25:45,497 [INFO] app.core.authz: Retrieving current user
+2025-07-16 12:25:45,497 [INFO] app.core.auth: Decoding token
+2025-07-16 12:25:45,499 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2025-07-16 12:25:45,500 [INFO] sqlalchemy.engine.Engine: SELECT users.id AS users_id, users.username AS users_username, users.email AS users_email, users.hashed_password AS users_hashed_password, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.role AS users_role, users.permissions AS users_permissions, users.created_at AS users_created_at, users.updated_at AS users_updated_at, users.is_deleted AS users_is_deleted 
+FROM users 
+WHERE users.id = $1::INTEGER
+2025-07-16 12:25:45,500 [INFO] sqlalchemy.engine.Engine: [cached since 5.101s ago] (1,)
+2025-07-16 12:25:45,502 [INFO] app.core.authz: User retrieved: user@example.com
+2025-07-16 12:25:45,502 [INFO] app.handlers.tasks: Fetching all tasks
+2025-07-16 12:25:45,502 [INFO] app.service.task: Fetching tasks for user ID: 1 with include_deleted: False
+2025-07-16 12:25:45,502 [INFO] app.repository.task: Fetching tasks for user ID: 1 with include_deleted: False
+2025-07-16 12:25:45,504 [INFO] sqlalchemy.engine.Engine: SELECT tasks.name, tasks.pomodoro_count, tasks.category_id, tasks.description, tasks.owner_id, tasks.id, tasks.created_at, tasks.updated_at, tasks.is_deleted 
+FROM tasks 
+WHERE tasks.owner_id = $1::INTEGER AND tasks.is_deleted IS false ORDER BY tasks.created_at DESC
+2025-07-16 12:25:45,505 [INFO] sqlalchemy.engine.Engine: [generated in 0.00078s] (1,)
+2025-07-16 12:25:45,508 [INFO] app.repository.task: Fetched 1 tasks for user ID: 1
+2025-07-16 12:25:45,508 [INFO] app.service.task: Fetched 1 tasks for user ID: 1
+2025-07-16 12:25:45,508 [INFO] app.handlers.tasks: Fetched 1 tasks successfully
+2025-07-16 12:25:45,508 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2025-07-16 12:25:45,509 [INFO] app.core.logging_config: Session closed
+2025-07-16 12:25:45,509 [INFO] uvicorn.access: 172.20.0.1:48700 - "GET /api/tasks HTTP/1.1" 200
+2025-07-16 12:25:46,455 [INFO] app.core.logging_config: Session opened
+2025-07-16 12:25:46,455 [INFO] app.core.authz: Retrieving current user
+2025-07-16 12:25:46,455 [INFO] app.core.auth: Decoding token
+2025-07-16 12:25:46,457 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2025-07-16 12:25:46,458 [INFO] sqlalchemy.engine.Engine: SELECT users.id AS users_id, users.username AS users_username, users.email AS users_email, users.hashed_password AS users_hashed_password, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.role AS users_role, users.permissions AS users_permissions, users.created_at AS users_created_at, users.updated_at AS users_updated_at, users.is_deleted AS users_is_deleted 
+FROM users 
+WHERE users.id = $1::INTEGER
+2025-07-16 12:25:46,458 [INFO] sqlalchemy.engine.Engine: [cached since 6.059s ago] (1,)
+2025-07-16 12:25:46,459 [INFO] app.core.authz: User retrieved: user@example.com
+2025-07-16 12:25:46,459 [INFO] app.handlers.tasks: Fetching all tasks
+2025-07-16 12:25:46,460 [INFO] app.service.task: Fetching tasks for user ID: 1 with include_deleted: False
+2025-07-16 12:25:46,460 [INFO] app.repository.task: Fetching tasks for user ID: 1 with include_deleted: False
+2025-07-16 12:25:46,460 [INFO] sqlalchemy.engine.Engine: SELECT tasks.name, tasks.pomodoro_count, tasks.category_id, tasks.description, tasks.owner_id, tasks.id, tasks.created_at, tasks.updated_at, tasks.is_deleted 
+FROM tasks 
+WHERE tasks.owner_id = $1::INTEGER AND tasks.is_deleted IS false ORDER BY tasks.created_at DESC
+2025-07-16 12:25:46,461 [INFO] sqlalchemy.engine.Engine: [cached since 0.9565s ago] (1,)
+2025-07-16 12:25:46,461 [INFO] app.repository.task: Fetched 1 tasks for user ID: 1
+2025-07-16 12:25:46,462 [INFO] app.service.task: Fetched 1 tasks for user ID: 1
+2025-07-16 12:25:46,462 [INFO] app.handlers.tasks: Fetched 1 tasks successfully
+2025-07-16 12:25:46,462 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2025-07-16 12:25:46,463 [INFO] app.core.logging_config: Session closed
+2025-07-16 12:25:46,463 [INFO] uvicorn.access: 172.20.0.1:48700 - "GET /api/tasks HTTP/1.1" 200
+2025-07-16 12:25:54,588 [INFO] app.core.logging_config: Session opened
+2025-07-16 12:25:54,590 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2025-07-16 12:25:54,590 [INFO] sqlalchemy.engine.Engine: SELECT users.id, users.username, users.email, users.hashed_password, users.is_active, users.is_superuser, users.role, users.permissions, users.created_at, users.updated_at, users.is_deleted 
+FROM users 
+WHERE users.email = $1::VARCHAR
+2025-07-16 12:25:54,591 [INFO] sqlalchemy.engine.Engine: [cached since 115.7s ago] ('user2@example.com',)
+2025-07-16 12:25:54,593 [INFO] app.core.auth: Hashing password
+2025-07-16 12:25:54,783 [INFO] sqlalchemy.engine.Engine: INSERT INTO users (username, email, hashed_password, is_active, is_superuser, role, permissions, is_deleted) VALUES ($1::VARCHAR, $2::VARCHAR, $3::VARCHAR, $4::BOOLEAN, $5::BOOLEAN, $6::role, $7::VARCHAR, $8::BOOLEAN) RETURNING users.id, users.created_at, users.updated_at
+2025-07-16 12:25:54,783 [INFO] sqlalchemy.engine.Engine: [cached since 39.57s ago] ('string', 'user2@example.com', '$2b$12$Zzp.Sqr/PFkBfCN1RpHq..Rd1UEm6CJdkISM6Hd43mv.t00SZhSOi', True, False, 'USER', '["read", "delete", "write"]', False)
+2025-07-16 12:25:54,784 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2025-07-16 12:25:54,786 [INFO] app.core.logging_config: Session closed
+2025-07-16 12:25:54,787 [INFO] uvicorn.access: 172.20.0.1:49338 - "POST /auth/register HTTP/1.1" 500
+2025-07-16 12:25:54,788 [ERROR] uvicorn.error: Exception in ASGI application
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 545, in _prepare_and_execute
+    self._rows = deque(await prepared_stmt.fetch(*parameters))
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/asyncpg/prepared_stmt.py", line 176, in fetch
+    data = await self.__bind_execute(args, 0, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/asyncpg/prepared_stmt.py", line 267, in __bind_execute
+    data, status, _ = await self.__do_execute(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/asyncpg/prepared_stmt.py", line 256, in __do_execute
+    return await executor(protocol)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "asyncpg/protocol/protocol.pyx", line 206, in bind_execute
+asyncpg.exceptions.UniqueViolationError: duplicate key value violates unique constraint "ix_users_username"
+DETAIL:  Key (username)=(string) already exists.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1963, in _exec_single_context
+    self.dialect.do_execute(
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 943, in do_execute
+    cursor.execute(statement, parameters)
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 580, in execute
+    self._adapt_connection.await_(
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 132, in await_only
+    return current.parent.switch(awaitable)  # type: ignore[no-any-return,attr-defined] # noqa: E501
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 196, in greenlet_spawn
+    value = await result
+            ^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 558, in _prepare_and_execute
+    self._handle_exception(error)
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 508, in _handle_exception
+    self._adapt_connection._handle_exception(error)
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 792, in _handle_exception
+    raise translated_error from error
+sqlalchemy.dialects.postgresql.asyncpg.AsyncAdapt_asyncpg_dbapi.IntegrityError: <class 'asyncpg.exceptions.UniqueViolationError'>: duplicate key value violates unique constraint "ix_users_username"
+DETAIL:  Key (username)=(string) already exists.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/usr/local/lib/python3.12/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/middleware/cors.py", line 93, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/usr/local/lib/python3.12/site-packages/starlette/middleware/cors.py", line 144, in simple_response
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/fastapi/routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/handlers/auth.py", line 23, in register_user
+    return await service.register_user(user)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/service/user_service.py", line 18, in register_user
+    db_user = await self.repository.create_user(user_copy)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/repository/user_repository.py", line 23, in create_user
+    await self.db.commit()
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/ext/asyncio/session.py", line 1014, in commit
+    await greenlet_spawn(self.sync_session.commit)
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 203, in greenlet_spawn
+    result = context.switch(value)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2032, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 1313, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 1288, in _prepare_impl
+    self.session.flush()
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4345, in flush
+    self._flush(objects)
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4480, in _flush
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4441, in _flush
+    flush_context.execute()
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/persistence.py", line 1233, in _emit_insert_statements
+    result = connection.execute(
+             ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1415, in execute
+    return meth(
+           ^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1637, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1842, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1982, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2351, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1963, in _exec_single_context
+    self.dialect.do_execute(
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 943, in do_execute
+    cursor.execute(statement, parameters)
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 580, in execute
+    self._adapt_connection.await_(
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 132, in await_only
+    return current.parent.switch(awaitable)  # type: ignore[no-any-return,attr-defined] # noqa: E501
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 196, in greenlet_spawn
+    value = await result
+            ^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 558, in _prepare_and_execute
+    self._handle_exception(error)
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 508, in _handle_exception
+    self._adapt_connection._handle_exception(error)
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 792, in _handle_exception
+    raise translated_error from error
+sqlalchemy.exc.IntegrityError: (sqlalchemy.dialects.postgresql.asyncpg.IntegrityError) <class 'asyncpg.exceptions.UniqueViolationError'>: duplicate key value violates unique constraint "ix_users_username"
+DETAIL:  Key (username)=(string) already exists.
+[SQL: INSERT INTO users (username, email, hashed_password, is_active, is_superuser, role, permissions, is_deleted) VALUES ($1::VARCHAR, $2::VARCHAR, $3::VARCHAR, $4::BOOLEAN, $5::BOOLEAN, $6::role, $7::VARCHAR, $8::BOOLEAN) RETURNING users.id, users.created_at, users.updated_at]
+[parameters: ('string', 'user2@example.com', '$2b$12$Zzp.Sqr/PFkBfCN1RpHq..Rd1UEm6CJdkISM6Hd43mv.t00SZhSOi', True, False, 'USER', '["read", "delete", "write"]', False)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-07-16 12:27:51,259 [INFO] uvicorn.error: Shutting down
+2025-07-16 12:27:51,360 [INFO] uvicorn.error: Waiting for application shutdown.
+2025-07-16 12:27:51,360 [INFO] app.core.logging_config: Shutting down application...
+2025-07-16 12:27:51,360 [INFO] app.core.logging_config: Closing Redis connection...
+2025-07-16 12:27:51,360 [INFO] app.core.logging_config: Disposing database engine...
+2025-07-16 12:27:51,364 [INFO] app.core.logging_config: Shutdown completed
+2025-07-16 12:27:51,364 [INFO] uvicorn.error: Application shutdown complete.
+2025-07-16 12:27:51,364 [INFO] uvicorn.error: Finished server process [12]
+2025-07-16 12:27:52,346 [INFO] uvicorn.error: Started server process [15]
+2025-07-16 12:27:52,347 [INFO] uvicorn.error: Waiting for application startup.
+2025-07-16 12:27:52,351 [INFO] uvicorn.error: Application startup complete.
+2025-07-16 12:27:55,460 [INFO] uvicorn.error: Shutting down
+2025-07-16 12:27:55,560 [INFO] uvicorn.error: Waiting for application shutdown.
+2025-07-16 12:27:55,561 [INFO] uvicorn.error: Application shutdown complete.
+2025-07-16 12:27:55,562 [INFO] uvicorn.error: Finished server process [15]
+2025-07-16 12:28:08,418 [INFO] uvicorn.error: Started server process [9]
+2025-07-16 12:28:08,419 [INFO] uvicorn.error: Waiting for application startup.
+2025-07-16 12:28:08,427 [INFO] uvicorn.error: Application startup complete.
+2025-07-16 12:28:10,534 [INFO] sqlalchemy.engine.Engine: select pg_catalog.version()
+2025-07-16 12:28:10,534 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2025-07-16 12:28:10,536 [INFO] sqlalchemy.engine.Engine: select current_schema()
+2025-07-16 12:28:10,537 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2025-07-16 12:28:10,539 [INFO] sqlalchemy.engine.Engine: show standard_conforming_strings
+2025-07-16 12:28:10,539 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2025-07-16 12:28:10,540 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2025-07-16 12:28:10,550 [INFO] sqlalchemy.engine.Engine: SELECT users.id, users.username, users.email, users.hashed_password, users.is_active, users.is_superuser, users.role, users.permissions, users.created_at, users.updated_at, users.is_deleted 
+FROM users 
+WHERE users.email = $1::VARCHAR
+2025-07-16 12:28:10,550 [INFO] sqlalchemy.engine.Engine: [generated in 0.00055s] ('user2@example.com',)
+2025-07-16 12:28:10,775 [INFO] sqlalchemy.engine.Engine: INSERT INTO users (username, email, hashed_password, is_active, is_superuser, role, permissions, is_deleted) VALUES ($1::VARCHAR, $2::VARCHAR, $3::VARCHAR, $4::BOOLEAN, $5::BOOLEAN, $6::role, $7::VARCHAR, $8::BOOLEAN) RETURNING users.id, users.created_at, users.updated_at
+2025-07-16 12:28:10,775 [INFO] sqlalchemy.engine.Engine: [generated in 0.00043s] ('string', 'user2@example.com', '$2b$12$I7P4VIpcN0JzFjIr8Au7kephCQJg9egX1x4o/6hHSpPlyKBcy.KPO', True, False, 'USER', '["read", "delete", "write"]', False)
+2025-07-16 12:28:10,777 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2025-07-16 12:28:10,779 [INFO] uvicorn.access: 172.20.0.1:40078 - "POST /auth/register HTTP/1.1" 500
+2025-07-16 12:28:10,779 [ERROR] uvicorn.error: Exception in ASGI application
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 545, in _prepare_and_execute
+    self._rows = deque(await prepared_stmt.fetch(*parameters))
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/asyncpg/prepared_stmt.py", line 176, in fetch
+    data = await self.__bind_execute(args, 0, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/asyncpg/prepared_stmt.py", line 267, in __bind_execute
+    data, status, _ = await self.__do_execute(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/asyncpg/prepared_stmt.py", line 256, in __do_execute
+    return await executor(protocol)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "asyncpg/protocol/protocol.pyx", line 206, in bind_execute
+asyncpg.exceptions.UniqueViolationError: duplicate key value violates unique constraint "ix_users_username"
+DETAIL:  Key (username)=(string) already exists.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1963, in _exec_single_context
+    self.dialect.do_execute(
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 943, in do_execute
+    cursor.execute(statement, parameters)
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 580, in execute
+    self._adapt_connection.await_(
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 132, in await_only
+    return current.parent.switch(awaitable)  # type: ignore[no-any-return,attr-defined] # noqa: E501
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 196, in greenlet_spawn
+    value = await result
+            ^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 558, in _prepare_and_execute
+    self._handle_exception(error)
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 508, in _handle_exception
+    self._adapt_connection._handle_exception(error)
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 792, in _handle_exception
+    raise translated_error from error
+sqlalchemy.dialects.postgresql.asyncpg.AsyncAdapt_asyncpg_dbapi.IntegrityError: <class 'asyncpg.exceptions.UniqueViolationError'>: duplicate key value violates unique constraint "ix_users_username"
+DETAIL:  Key (username)=(string) already exists.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/usr/local/lib/python3.12/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/middleware/cors.py", line 93, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/usr/local/lib/python3.12/site-packages/starlette/middleware/cors.py", line 144, in simple_response
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/fastapi/routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/handlers/auth.py", line 23, in register_user
+    return await service.register_user(user)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/service/user_service.py", line 18, in register_user
+    db_user = await self.repository.create_user(user_copy)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/repository/user_repository.py", line 23, in create_user
+    await self.db.commit()
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/ext/asyncio/session.py", line 1014, in commit
+    await greenlet_spawn(self.sync_session.commit)
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 203, in greenlet_spawn
+    result = context.switch(value)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2032, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 1313, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 1288, in _prepare_impl
+    self.session.flush()
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4345, in flush
+    self._flush(objects)
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4480, in _flush
+    with util.safe_reraise():
+         ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4441, in _flush
+    flush_context.execute()
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/orm/persistence.py", line 1233, in _emit_insert_statements
+    result = connection.execute(
+             ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1415, in execute
+    return meth(
+           ^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 523, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1637, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1842, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1982, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2351, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1963, in _exec_single_context
+    self.dialect.do_execute(
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 943, in do_execute
+    cursor.execute(statement, parameters)
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 580, in execute
+    self._adapt_connection.await_(
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 132, in await_only
+    return current.parent.switch(awaitable)  # type: ignore[no-any-return,attr-defined] # noqa: E501
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 196, in greenlet_spawn
+    value = await result
+            ^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 558, in _prepare_and_execute
+    self._handle_exception(error)
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 508, in _handle_exception
+    self._adapt_connection._handle_exception(error)
+  File "/usr/local/lib/python3.12/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 792, in _handle_exception
+    raise translated_error from error
+sqlalchemy.exc.IntegrityError: (sqlalchemy.dialects.postgresql.asyncpg.IntegrityError) <class 'asyncpg.exceptions.UniqueViolationError'>: duplicate key value violates unique constraint "ix_users_username"
+DETAIL:  Key (username)=(string) already exists.
+[SQL: INSERT INTO users (username, email, hashed_password, is_active, is_superuser, role, permissions, is_deleted) VALUES ($1::VARCHAR, $2::VARCHAR, $3::VARCHAR, $4::BOOLEAN, $5::BOOLEAN, $6::role, $7::VARCHAR, $8::BOOLEAN) RETURNING users.id, users.created_at, users.updated_at]
+[parameters: ('string', 'user2@example.com', '$2b$12$I7P4VIpcN0JzFjIr8Au7kephCQJg9egX1x4o/6hHSpPlyKBcy.KPO', True, False, 'USER', '["read", "delete", "write"]', False)]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2025-07-16 12:29:00,020 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2025-07-16 12:29:00,020 [INFO] sqlalchemy.engine.Engine: SELECT users.id, users.username, users.email, users.hashed_password, users.is_active, users.is_superuser, users.role, users.permissions, users.created_at, users.updated_at, users.is_deleted 
+FROM users 
+WHERE users.email = $1::VARCHAR
+2025-07-16 12:29:00,021 [INFO] sqlalchemy.engine.Engine: [cached since 49.47s ago] ('user2@example.com',)
+2025-07-16 12:29:00,212 [INFO] sqlalchemy.engine.Engine: INSERT INTO users (username, email, hashed_password, is_active, is_superuser, role, permissions, is_deleted) VALUES ($1::VARCHAR, $2::VARCHAR, $3::VARCHAR, $4::BOOLEAN, $5::BOOLEAN, $6::role, $7::VARCHAR, $8::BOOLEAN) RETURNING users.id, users.created_at, users.updated_at
+2025-07-16 12:29:00,212 [INFO] sqlalchemy.engine.Engine: [cached since 49.44s ago] ('string2', 'user2@example.com', '$2b$12$OIaX.xppYLXyA5XZODBd6..Go.hwe/dXGCkI9qI.meg2tBFALibce', True, False, 'USER', '["read", "delete", "write"]', False)
+2025-07-16 12:29:00,214 [INFO] sqlalchemy.engine.Engine: COMMIT
+2025-07-16 12:29:00,225 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2025-07-16 12:29:00,228 [INFO] sqlalchemy.engine.Engine: SELECT users.id, users.username, users.email, users.hashed_password, users.is_active, users.is_superuser, users.role, users.permissions, users.created_at, users.updated_at, users.is_deleted 
+FROM users 
+WHERE users.id = $1::INTEGER
+2025-07-16 12:29:00,228 [INFO] sqlalchemy.engine.Engine: [generated in 0.00069s] (4,)
+2025-07-16 12:29:00,232 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2025-07-16 12:29:00,233 [INFO] uvicorn.access: 172.20.0.1:44558 - "POST /auth/register HTTP/1.1" 200
+2025-07-16 12:29:16,499 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2025-07-16 12:29:16,499 [INFO] sqlalchemy.engine.Engine: SELECT users.id, users.username, users.email, users.hashed_password, users.is_active, users.is_superuser, users.role, users.permissions, users.created_at, users.updated_at, users.is_deleted 
+FROM users 
+WHERE users.email = $1::VARCHAR
+2025-07-16 12:29:16,500 [INFO] sqlalchemy.engine.Engine: [cached since 65.95s ago] ('user2@example.com',)
+2025-07-16 12:29:16,693 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2025-07-16 12:29:16,694 [INFO] uvicorn.access: 172.20.0.1:41004 - "POST /auth/login HTTP/1.1" 200
+2025-07-16 12:29:26,282 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2025-07-16 12:29:26,284 [INFO] sqlalchemy.engine.Engine: SELECT users.id AS users_id, users.username AS users_username, users.email AS users_email, users.hashed_password AS users_hashed_password, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.role AS users_role, users.permissions AS users_permissions, users.created_at AS users_created_at, users.updated_at AS users_updated_at, users.is_deleted AS users_is_deleted 
+FROM users 
+WHERE users.id = $1::INTEGER
+2025-07-16 12:29:26,284 [INFO] sqlalchemy.engine.Engine: [generated in 0.00071s] (4,)
+2025-07-16 12:29:26,291 [INFO] sqlalchemy.engine.Engine: INSERT INTO tasks (name, pomodoro_count, category_id, description, owner_id, is_deleted) VALUES ($1::VARCHAR, $2::INTEGER, $3::INTEGER, $4::VARCHAR, $5::INTEGER, $6::BOOLEAN) RETURNING tasks.id, tasks.created_at, tasks.updated_at
+2025-07-16 12:29:26,292 [INFO] sqlalchemy.engine.Engine: [generated in 0.00038s] ('Моя задача2', 4, 1, 'Нужно сделать это и то', 4, False)
+2025-07-16 12:29:26,295 [INFO] sqlalchemy.engine.Engine: COMMIT
+2025-07-16 12:29:26,302 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2025-07-16 12:29:26,304 [INFO] sqlalchemy.engine.Engine: SELECT tasks.name, tasks.pomodoro_count, tasks.category_id, tasks.description, tasks.owner_id, tasks.id, tasks.created_at, tasks.updated_at, tasks.is_deleted 
+FROM tasks 
+WHERE tasks.id = $1::INTEGER
+2025-07-16 12:29:26,305 [INFO] sqlalchemy.engine.Engine: [generated in 0.00029s] (2,)
+2025-07-16 12:29:26,307 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2025-07-16 12:29:26,308 [INFO] uvicorn.access: 172.20.0.1:33120 - "POST /api/tasks HTTP/1.1" 201
+2025-07-16 12:29:31,442 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2025-07-16 12:29:31,443 [INFO] sqlalchemy.engine.Engine: SELECT users.id AS users_id, users.username AS users_username, users.email AS users_email, users.hashed_password AS users_hashed_password, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.role AS users_role, users.permissions AS users_permissions, users.created_at AS users_created_at, users.updated_at AS users_updated_at, users.is_deleted AS users_is_deleted 
+FROM users 
+WHERE users.id = $1::INTEGER
+2025-07-16 12:29:31,443 [INFO] sqlalchemy.engine.Engine: [cached since 5.159s ago] (4,)
+2025-07-16 12:29:31,446 [INFO] sqlalchemy.engine.Engine: SELECT tasks.name, tasks.pomodoro_count, tasks.category_id, tasks.description, tasks.owner_id, tasks.id, tasks.created_at, tasks.updated_at, tasks.is_deleted 
+FROM tasks 
+WHERE tasks.owner_id = $1::INTEGER AND tasks.is_deleted IS false ORDER BY tasks.created_at DESC
+2025-07-16 12:29:31,446 [INFO] sqlalchemy.engine.Engine: [generated in 0.00037s] (4,)
+2025-07-16 12:29:31,449 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2025-07-16 12:29:31,451 [INFO] uvicorn.access: 172.20.0.1:35270 - "GET /api/tasks HTTP/1.1" 200
+2025-07-16 12:29:48,340 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2025-07-16 12:29:48,341 [INFO] sqlalchemy.engine.Engine: SELECT users.id, users.username, users.email, users.hashed_password, users.is_active, users.is_superuser, users.role, users.permissions, users.created_at, users.updated_at, users.is_deleted 
+FROM users 
+WHERE users.email = $1::VARCHAR
+2025-07-16 12:29:48,341 [INFO] sqlalchemy.engine.Engine: [cached since 97.79s ago] ('user@example.com',)
+2025-07-16 12:29:48,531 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2025-07-16 12:29:48,532 [INFO] uvicorn.access: 172.20.0.1:48768 - "POST /auth/login HTTP/1.1" 200
+2025-07-16 12:29:57,302 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2025-07-16 12:29:57,302 [INFO] sqlalchemy.engine.Engine: SELECT users.id AS users_id, users.username AS users_username, users.email AS users_email, users.hashed_password AS users_hashed_password, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.role AS users_role, users.permissions AS users_permissions, users.created_at AS users_created_at, users.updated_at AS users_updated_at, users.is_deleted AS users_is_deleted 
+FROM users 
+WHERE users.id = $1::INTEGER
+2025-07-16 12:29:57,302 [INFO] sqlalchemy.engine.Engine: [cached since 31.02s ago] (1,)
+2025-07-16 12:29:57,304 [INFO] sqlalchemy.engine.Engine: SELECT tasks.name, tasks.pomodoro_count, tasks.category_id, tasks.description, tasks.owner_id, tasks.id, tasks.created_at, tasks.updated_at, tasks.is_deleted 
+FROM tasks 
+WHERE tasks.owner_id = $1::INTEGER AND tasks.is_deleted IS false ORDER BY tasks.created_at DESC
+2025-07-16 12:29:57,305 [INFO] sqlalchemy.engine.Engine: [cached since 25.86s ago] (1,)
+2025-07-16 12:29:57,306 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2025-07-16 12:29:57,306 [INFO] uvicorn.access: 172.20.0.1:47406 - "GET /api/tasks HTTP/1.1" 200
+2025-07-16 12:30:54,295 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2025-07-16 12:30:54,296 [INFO] sqlalchemy.engine.Engine: SELECT users.id, users.username, users.email, users.hashed_password, users.is_active, users.is_superuser, users.role, users.permissions, users.created_at, users.updated_at, users.is_deleted 
+FROM users 
+WHERE users.email = $1::VARCHAR
+2025-07-16 12:30:54,296 [INFO] sqlalchemy.engine.Engine: [cached since 163.7s ago] ('user@example.com',)
+2025-07-16 12:30:54,488 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2025-07-16 12:30:54,489 [INFO] uvicorn.access: 172.20.0.1:35894 - "POST /auth/login HTTP/1.1" 401
+2025-07-16 12:31:01,084 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2025-07-16 12:31:01,084 [INFO] sqlalchemy.engine.Engine: SELECT users.id, users.username, users.email, users.hashed_password, users.is_active, users.is_superuser, users.role, users.permissions, users.created_at, users.updated_at, users.is_deleted 
+FROM users 
+WHERE users.email = $1::VARCHAR
+2025-07-16 12:31:01,085 [INFO] sqlalchemy.engine.Engine: [cached since 170.5s ago] ('user@example.com',)
+2025-07-16 12:31:01,276 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2025-07-16 12:31:01,277 [INFO] uvicorn.access: 172.20.0.1:52464 - "POST /auth/login HTTP/1.1" 200
+2025-07-16 12:34:32,682 [INFO] uvicorn.error: Shutting down
+2025-07-16 12:34:32,783 [INFO] uvicorn.error: Waiting for application shutdown.
+2025-07-16 12:34:32,789 [INFO] uvicorn.error: Application shutdown complete.
+2025-07-16 12:34:32,790 [INFO] uvicorn.error: Finished server process [9]
+2025-07-16 12:44:47,785 [INFO] uvicorn.error: Started server process [20]
+2025-07-16 12:44:47,785 [INFO] uvicorn.error: Waiting for application startup.
+2025-07-16 12:44:47,790 [INFO] uvicorn.error: Application startup complete.
+2025-07-16 12:44:47,827 [INFO] sqlalchemy.engine.Engine: select pg_catalog.version()
+2025-07-16 12:44:47,827 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2025-07-16 12:44:47,828 [INFO] sqlalchemy.engine.Engine: select current_schema()
+2025-07-16 12:44:47,829 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2025-07-16 12:44:47,830 [INFO] sqlalchemy.engine.Engine: show standard_conforming_strings
+2025-07-16 12:44:47,830 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2025-07-16 12:44:47,831 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2025-07-16 12:44:47,841 [INFO] sqlalchemy.engine.Engine: SELECT users.id AS users_id, users.username AS users_username, users.email AS users_email, users.hashed_password AS users_hashed_password, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.role AS users_role, users.permissions AS users_permissions, users.created_at AS users_created_at, users.updated_at AS users_updated_at, users.is_deleted AS users_is_deleted 
+FROM users 
+WHERE users.id = $1::INTEGER
+2025-07-16 12:44:47,841 [INFO] sqlalchemy.engine.Engine: [generated in 0.00032s] (1,)
+2025-07-16 12:44:47,856 [INFO] sqlalchemy.engine.Engine: SELECT tasks.name, tasks.pomodoro_count, tasks.category_id, tasks.description, tasks.owner_id, tasks.id, tasks.created_at, tasks.updated_at, tasks.is_deleted 
+FROM tasks 
+WHERE tasks.owner_id = $1::INTEGER AND tasks.is_deleted IS false ORDER BY tasks.created_at DESC
+2025-07-16 12:44:47,856 [INFO] sqlalchemy.engine.Engine: [generated in 0.00041s] (1,)
+2025-07-16 12:44:47,859 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2025-07-16 12:44:47,860 [INFO] uvicorn.access: 172.20.0.1:48748 - "GET /api/tasks HTTP/1.1" 200
+2025-07-16 12:44:50,175 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2025-07-16 12:44:50,175 [INFO] sqlalchemy.engine.Engine: SELECT users.id AS users_id, users.username AS users_username, users.email AS users_email, users.hashed_password AS users_hashed_password, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.role AS users_role, users.permissions AS users_permissions, users.created_at AS users_created_at, users.updated_at AS users_updated_at, users.is_deleted AS users_is_deleted 
+FROM users 
+WHERE users.id = $1::INTEGER
+2025-07-16 12:44:50,175 [INFO] sqlalchemy.engine.Engine: [cached since 2.335s ago] (1,)
+2025-07-16 12:44:50,178 [INFO] sqlalchemy.engine.Engine: SELECT tasks.name, tasks.pomodoro_count, tasks.category_id, tasks.description, tasks.owner_id, tasks.id, tasks.created_at, tasks.updated_at, tasks.is_deleted 
+FROM tasks 
+WHERE tasks.owner_id = $1::INTEGER AND tasks.is_deleted IS false ORDER BY tasks.created_at DESC
+2025-07-16 12:44:50,179 [INFO] sqlalchemy.engine.Engine: [cached since 2.324s ago] (1,)
+2025-07-16 12:44:50,183 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2025-07-16 12:44:50,186 [INFO] uvicorn.access: 172.20.0.1:48748 - "GET /api/tasks HTTP/1.1" 200
+2025-07-16 12:54:03,093 [INFO] uvicorn.error: Shutting down
+2025-07-16 12:54:03,193 [INFO] uvicorn.error: Waiting for application shutdown.
+2025-07-16 12:54:03,198 [INFO] uvicorn.error: Application shutdown complete.
+2025-07-16 12:54:03,198 [INFO] uvicorn.error: Finished server process [20]
+2025-07-16 12:54:04,246 [INFO] uvicorn.error: Started server process [22]
+2025-07-16 12:54:04,247 [INFO] uvicorn.error: Waiting for application startup.
+2025-07-16 12:54:04,251 [INFO] uvicorn.error: Application startup complete.
+2025-07-16 12:59:53,862 [INFO] uvicorn.error: Shutting down
+2025-07-16 12:59:53,962 [INFO] uvicorn.error: Waiting for application shutdown.
+2025-07-16 12:59:53,964 [INFO] uvicorn.error: Application shutdown complete.
+2025-07-16 12:59:53,964 [INFO] uvicorn.error: Finished server process [22]
+2025-07-16 12:59:54,932 [INFO] uvicorn.error: Started server process [24]
+2025-07-16 12:59:54,932 [INFO] uvicorn.error: Waiting for application startup.
+2025-07-16 12:59:54,939 [INFO] uvicorn.error: Application startup complete.
+2025-07-16 13:12:00,129 [INFO] uvicorn.error: Shutting down
+2025-07-16 13:12:00,230 [INFO] uvicorn.error: Waiting for application shutdown.
+2025-07-16 13:12:00,232 [INFO] uvicorn.error: Application shutdown complete.
+2025-07-16 13:12:00,233 [INFO] uvicorn.error: Finished server process [24]
+2025-07-16 13:12:01,337 [INFO] uvicorn.error: Started server process [26]
+2025-07-16 13:12:01,337 [INFO] uvicorn.error: Waiting for application startup.
+2025-07-16 13:12:01,342 [INFO] uvicorn.error: Application startup complete.
+2025-07-16 13:43:45,178 [INFO] uvicorn.error: Shutting down
+2025-07-16 13:43:45,279 [INFO] uvicorn.error: Waiting for application shutdown.
+2025-07-16 13:43:45,280 [INFO] uvicorn.error: Application shutdown complete.
+2025-07-16 13:43:45,281 [INFO] uvicorn.error: Finished server process [26]
+2025-07-16 13:43:46,108 [INFO] uvicorn.error: Started server process [28]
+2025-07-16 13:43:46,108 [INFO] uvicorn.error: Waiting for application startup.
+2025-07-16 13:43:46,112 [INFO] uvicorn.error: Application startup complete.
+2025-07-16 13:44:00,752 [INFO] uvicorn.error: Shutting down
+2025-07-16 13:44:00,852 [INFO] uvicorn.error: Waiting for application shutdown.
+2025-07-16 13:44:00,854 [INFO] uvicorn.error: Application shutdown complete.
+2025-07-16 13:44:00,854 [INFO] uvicorn.error: Finished server process [28]
+2025-07-16 13:44:01,623 [INFO] uvicorn.error: Started server process [30]
+2025-07-16 13:44:01,623 [INFO] uvicorn.error: Waiting for application startup.
+2025-07-16 13:44:01,626 [INFO] uvicorn.error: Application startup complete.
+2025-07-16 13:44:07,046 [INFO] uvicorn.error: Shutting down
+2025-07-16 13:44:07,147 [INFO] uvicorn.error: Waiting for application shutdown.
+2025-07-16 13:44:07,148 [INFO] uvicorn.error: Application shutdown complete.
+2025-07-16 13:44:07,149 [INFO] uvicorn.error: Finished server process [30]
+2025-07-16 13:44:19,917 [INFO] uvicorn.error: Started server process [9]
+2025-07-16 13:44:19,917 [INFO] uvicorn.error: Waiting for application startup.
+2025-07-16 13:44:19,926 [INFO] uvicorn.error: Application startup complete.
+2025-07-16 13:44:20,395 [INFO] uvicorn.access: 172.20.0.1:34314 - "GET /docs HTTP/1.1" 200
+2025-07-16 13:44:20,519 [INFO] uvicorn.access: 172.20.0.1:34314 - "GET /openapi.json HTTP/1.1" 200
+2025-07-16 13:44:29,049 [ERROR] app.core.auth: Token decoding error: Signature has expired.
+2025-07-16 13:44:29,050 [ERROR] app.core.auth: Token decoding error: Subject must be a string.
+2025-07-16 13:44:29,050 [INFO] uvicorn.access: 172.20.0.1:34318 - "GET /api/tasks HTTP/1.1" 500
+2025-07-16 13:44:29,050 [ERROR] uvicorn.error: Exception in ASGI application
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/usr/local/lib/python3.12/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/middleware/cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/fastapi/routing.py", line 291, in app
+    solved_result = await solve_dependencies(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/fastapi/dependencies/utils.py", line 615, in solve_dependencies
+    solved_result = await solve_dependencies(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/fastapi/dependencies/utils.py", line 638, in solve_dependencies
+    solved = await call(**solved_result.values)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/core/authz.py", line 39, in get_current_user
+    user = await db.get(User, int(payload["sub"]))
+                                  ~~~~~~~^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-07-16 13:44:38,800 [INFO] uvicorn.access: 172.20.0.1:38462 - "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404
+2025-07-16 13:46:49,636 [INFO] uvicorn.error: Shutting down
+2025-07-16 13:46:49,737 [INFO] uvicorn.error: Waiting for application shutdown.
+2025-07-16 13:46:49,738 [INFO] uvicorn.error: Application shutdown complete.
+2025-07-16 13:46:49,738 [INFO] uvicorn.error: Finished server process [9]
+2025-07-16 13:46:50,476 [INFO] uvicorn.error: Started server process [11]
+2025-07-16 13:46:50,476 [INFO] uvicorn.error: Waiting for application startup.
+2025-07-16 13:46:50,480 [INFO] uvicorn.error: Application startup complete.
+2025-07-16 13:46:53,261 [ERROR] app.core.auth: Token decoding error: Signature has expired.
+2025-07-16 13:46:53,261 [ERROR] app.core.auth: Token decoding error: Subject must be a string.
+2025-07-16 13:46:53,262 [INFO] uvicorn.access: 172.20.0.1:33918 - "GET /api/tasks HTTP/1.1" 500
+2025-07-16 13:46:53,263 [ERROR] uvicorn.error: Exception in ASGI application
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/usr/local/lib/python3.12/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/middleware/cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/fastapi/routing.py", line 291, in app
+    solved_result = await solve_dependencies(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/fastapi/dependencies/utils.py", line 615, in solve_dependencies
+    solved_result = await solve_dependencies(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/fastapi/dependencies/utils.py", line 638, in solve_dependencies
+    solved = await call(**solved_result.values)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/core/authz.py", line 40, in get_current_user
+    user = await db.get(User, int(payload["sub"]))
+                                  ~~~~~~~^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-07-16 13:47:22,498 [INFO] uvicorn.error: Shutting down
+2025-07-16 13:47:22,599 [INFO] uvicorn.error: Waiting for application shutdown.
+2025-07-16 13:47:22,600 [INFO] uvicorn.error: Application shutdown complete.
+2025-07-16 13:47:22,601 [INFO] uvicorn.error: Finished server process [11]
+2025-07-16 13:47:23,383 [INFO] uvicorn.error: Started server process [13]
+2025-07-16 13:47:23,383 [INFO] uvicorn.error: Waiting for application startup.
+2025-07-16 13:47:23,387 [INFO] uvicorn.error: Application startup complete.
+2025-07-16 13:47:23,805 [ERROR] app.core.auth: Token decoding error: Signature has expired.
+2025-07-16 13:47:23,805 [ERROR] app.core.auth: Token decoding error: Subject must be a string.
+2025-07-16 13:47:23,805 [INFO] uvicorn.access: 172.20.0.1:44416 - "GET /api/tasks HTTP/1.1" 500
+2025-07-16 13:47:23,806 [ERROR] uvicorn.error: Exception in ASGI application
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/usr/local/lib/python3.12/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/middleware/cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/fastapi/routing.py", line 291, in app
+    solved_result = await solve_dependencies(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/fastapi/dependencies/utils.py", line 615, in solve_dependencies
+    solved_result = await solve_dependencies(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/fastapi/dependencies/utils.py", line 638, in solve_dependencies
+    solved = await call(**solved_result.values)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/core/authz.py", line 41, in get_current_user
+    user = await db.get(User, int(payload["sub"]))
+                                  ~~~~~~~^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-07-16 13:47:41,162 [INFO] uvicorn.error: Shutting down
+2025-07-16 13:47:41,263 [INFO] uvicorn.error: Waiting for application shutdown.
+2025-07-16 13:47:41,264 [INFO] uvicorn.error: Application shutdown complete.
+2025-07-16 13:47:41,264 [INFO] uvicorn.error: Finished server process [13]
+2025-07-16 13:47:42,050 [INFO] uvicorn.error: Started server process [15]
+2025-07-16 13:47:42,051 [INFO] uvicorn.error: Waiting for application startup.
+2025-07-16 13:47:42,054 [INFO] uvicorn.error: Application startup complete.
+2025-07-16 13:47:43,332 [ERROR] app.core.auth: Token decoding error: Signature has expired.
+2025-07-16 13:47:43,333 [ERROR] app.core.auth: Token decoding error: Subject must be a string.
+2025-07-16 13:47:43,333 [INFO] uvicorn.access: 172.20.0.1:34648 - "GET /api/tasks HTTP/1.1" 500
+2025-07-16 13:47:43,334 [ERROR] uvicorn.error: Exception in ASGI application
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/usr/local/lib/python3.12/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/middleware/cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/fastapi/routing.py", line 291, in app
+    solved_result = await solve_dependencies(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/fastapi/dependencies/utils.py", line 615, in solve_dependencies
+    solved_result = await solve_dependencies(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/fastapi/dependencies/utils.py", line 638, in solve_dependencies
+    solved = await call(**solved_result.values)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/core/authz.py", line 42, in get_current_user
+    user = await db.get(User, int(payload["sub"]))
+                                  ~~~~~~~^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-07-16 13:48:11,655 [INFO] uvicorn.error: Shutting down
+2025-07-16 13:48:11,756 [INFO] uvicorn.error: Waiting for application shutdown.
+2025-07-16 13:48:11,757 [INFO] uvicorn.error: Application shutdown complete.
+2025-07-16 13:48:11,758 [INFO] uvicorn.error: Finished server process [15]
+2025-07-16 13:48:12,670 [INFO] uvicorn.error: Started server process [17]
+2025-07-16 13:48:12,670 [INFO] uvicorn.error: Waiting for application startup.
+2025-07-16 13:48:12,674 [INFO] uvicorn.error: Application startup complete.
+2025-07-16 13:48:12,946 [ERROR] app.core.auth: Token decoding error: Signature has expired.
+2025-07-16 13:48:12,947 [ERROR] app.core.auth: Token decoding error: Subject must be a string.
+2025-07-16 13:48:12,947 [INFO] uvicorn.access: 172.20.0.1:36346 - "GET /api/tasks HTTP/1.1" 500
+2025-07-16 13:48:12,948 [ERROR] uvicorn.error: Exception in ASGI application
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/usr/local/lib/python3.12/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/middleware/cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/fastapi/routing.py", line 291, in app
+    solved_result = await solve_dependencies(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/fastapi/dependencies/utils.py", line 615, in solve_dependencies
+    solved_result = await solve_dependencies(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/fastapi/dependencies/utils.py", line 638, in solve_dependencies
+    solved = await call(**solved_result.values)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/core/authz.py", line 42, in get_current_user
+    user = await db.get(User, int(payload["sub"]))
+                                  ~~~~~~~^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-07-16 13:48:52,903 [INFO] uvicorn.error: Shutting down
+2025-07-16 13:48:53,004 [INFO] uvicorn.error: Waiting for application shutdown.
+2025-07-16 13:48:53,005 [INFO] uvicorn.error: Application shutdown complete.
+2025-07-16 13:48:53,005 [INFO] uvicorn.error: Finished server process [17]
+2025-07-16 13:48:53,843 [INFO] uvicorn.error: Started server process [19]
+2025-07-16 13:48:53,843 [INFO] uvicorn.error: Waiting for application startup.
+2025-07-16 13:48:53,847 [INFO] uvicorn.error: Application startup complete.
+2025-07-16 13:48:54,058 [ERROR] app.core.auth: Token decoding error: Signature has expired.
+2025-07-16 13:48:54,058 [ERROR] app.core.auth: Token decoding error: Subject must be a string.
+2025-07-16 13:48:54,059 [INFO] uvicorn.access: 172.20.0.1:35634 - "GET /api/tasks HTTP/1.1" 500
+2025-07-16 13:48:54,059 [ERROR] uvicorn.error: Exception in ASGI application
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/fastapi/applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/applications.py", line 112, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/middleware/errors.py", line 187, in __call__
+    raise exc
+  File "/usr/local/lib/python3.12/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/middleware/cors.py", line 85, in __call__
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 714, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 734, in app
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.12/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/fastapi/routing.py", line 291, in app
+    solved_result = await solve_dependencies(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/fastapi/dependencies/utils.py", line 615, in solve_dependencies
+    solved_result = await solve_dependencies(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/fastapi/dependencies/utils.py", line 638, in solve_dependencies
+    solved = await call(**solved_result.values)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/app/core/authz.py", line 42, in get_current_user
+    user = await db.get(User, int(payload["sub"]))
+                                  ~~~~~~~^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+2025-07-16 13:51:27,679 [INFO] uvicorn.error: Shutting down
+2025-07-16 13:51:27,780 [INFO] uvicorn.error: Waiting for application shutdown.
+2025-07-16 13:51:27,782 [INFO] uvicorn.error: Application shutdown complete.
+2025-07-16 13:51:27,782 [INFO] uvicorn.error: Finished server process [19]
+2025-07-16 13:51:28,598 [INFO] uvicorn.error: Started server process [21]
+2025-07-16 13:51:28,598 [INFO] uvicorn.error: Waiting for application startup.
+2025-07-16 13:51:28,602 [INFO] uvicorn.error: Application startup complete.
+2025-07-16 14:10:15,666 [INFO] uvicorn.error: Shutting down
+2025-07-16 14:10:15,767 [INFO] uvicorn.error: Waiting for application shutdown.
+2025-07-16 14:10:15,769 [INFO] uvicorn.error: Application shutdown complete.
+2025-07-16 14:10:15,769 [INFO] uvicorn.error: Finished server process [21]
+2025-07-16 14:10:16,913 [INFO] uvicorn.error: Started server process [23]
+2025-07-16 14:10:16,913 [INFO] uvicorn.error: Waiting for application startup.
+2025-07-16 14:10:16,919 [INFO] uvicorn.error: Application startup complete.
+2025-07-16 14:12:34,376 [ERROR] app.core.auth: Token decoding error: Signature has expired.
+2025-07-16 14:12:34,376 [ERROR] app.core.auth: Token decoding error: Subject must be a string.
+2025-07-16 14:12:34,376 [ERROR] app.core.authz: Invalid token
+2025-07-16 14:12:34,377 [INFO] uvicorn.access: 172.20.0.1:36782 - "GET /api/tasks HTTP/1.1" 401
+2025-07-16 14:12:59,152 [INFO] sqlalchemy.engine.Engine: select pg_catalog.version()
+2025-07-16 14:12:59,152 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2025-07-16 14:12:59,154 [INFO] sqlalchemy.engine.Engine: select current_schema()
+2025-07-16 14:12:59,155 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2025-07-16 14:12:59,157 [INFO] sqlalchemy.engine.Engine: show standard_conforming_strings
+2025-07-16 14:12:59,157 [INFO] sqlalchemy.engine.Engine: [raw sql] ()
+2025-07-16 14:12:59,158 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2025-07-16 14:12:59,171 [INFO] sqlalchemy.engine.Engine: SELECT users.id, users.username, users.email, users.hashed_password, users.is_active, users.is_superuser, users.role, users.permissions, users.refresh_token, users.created_at, users.updated_at, users.is_deleted 
+FROM users 
+WHERE users.email = $1::VARCHAR
+2025-07-16 14:12:59,171 [INFO] sqlalchemy.engine.Engine: [generated in 0.00059s] ('user@example.com',)
+2025-07-16 14:12:59,402 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2025-07-16 14:12:59,404 [INFO] uvicorn.access: 172.20.0.1:59300 - "POST /auth/login HTTP/1.1" 200
+2025-07-16 14:13:47,047 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2025-07-16 14:13:47,049 [INFO] sqlalchemy.engine.Engine: SELECT users.id AS users_id, users.username AS users_username, users.email AS users_email, users.hashed_password AS users_hashed_password, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.role AS users_role, users.permissions AS users_permissions, users.refresh_token AS users_refresh_token, users.created_at AS users_created_at, users.updated_at AS users_updated_at, users.is_deleted AS users_is_deleted 
+FROM users 
+WHERE users.id = $1::INTEGER
+2025-07-16 14:13:47,050 [INFO] sqlalchemy.engine.Engine: [generated in 0.00077s] (1,)
+2025-07-16 14:13:47,052 [ERROR] app.core.authz: Permission: Permission.READ, User Permissions: ["read", "delete", "write"]
+2025-07-16 14:13:47,054 [INFO] sqlalchemy.engine.Engine: SELECT tasks.name, tasks.pomodoro_count, tasks.category_id, tasks.description, tasks.owner_id, tasks.id, tasks.created_at, tasks.updated_at, tasks.is_deleted 
+FROM tasks 
+WHERE tasks.owner_id = $1::INTEGER AND tasks.is_deleted IS false ORDER BY tasks.created_at DESC
+2025-07-16 14:13:47,054 [INFO] sqlalchemy.engine.Engine: [generated in 0.00027s] (1,)
+2025-07-16 14:13:47,058 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2025-07-16 14:13:47,059 [INFO] uvicorn.access: 172.20.0.1:55968 - "GET /api/tasks HTTP/1.1" 200
+2025-07-16 14:13:50,242 [INFO] sqlalchemy.engine.Engine: BEGIN (implicit)
+2025-07-16 14:13:50,243 [INFO] sqlalchemy.engine.Engine: SELECT users.id AS users_id, users.username AS users_username, users.email AS users_email, users.hashed_password AS users_hashed_password, users.is_active AS users_is_active, users.is_superuser AS users_is_superuser, users.role AS users_role, users.permissions AS users_permissions, users.refresh_token AS users_refresh_token, users.created_at AS users_created_at, users.updated_at AS users_updated_at, users.is_deleted AS users_is_deleted 
+FROM users 
+WHERE users.id = $1::INTEGER
+2025-07-16 14:13:50,243 [INFO] sqlalchemy.engine.Engine: [cached since 3.194s ago] (1,)
+2025-07-16 14:13:50,245 [ERROR] app.core.authz: Permission: Permission.READ, User Permissions: ["read", "delete", "write"]
+2025-07-16 14:13:50,246 [INFO] sqlalchemy.engine.Engine: SELECT tasks.name, tasks.pomodoro_count, tasks.category_id, tasks.description, tasks.owner_id, tasks.id, tasks.created_at, tasks.updated_at, tasks.is_deleted 
+FROM tasks 
+WHERE tasks.owner_id = $1::INTEGER AND tasks.is_deleted IS false ORDER BY tasks.created_at DESC
+2025-07-16 14:13:50,246 [INFO] sqlalchemy.engine.Engine: [cached since 3.192s ago] (1,)
+2025-07-16 14:13:50,248 [INFO] sqlalchemy.engine.Engine: ROLLBACK
+2025-07-16 14:13:50,248 [INFO] uvicorn.access: 172.20.0.1:55968 - "GET /api/tasks HTTP/1.1" 200
+2025-07-16 14:14:56,778 [ERROR] app.core.auth: Token decoding error: Signature has expired.
+2025-07-16 14:14:56,778 [ERROR] app.core.auth: Token decoding error: Subject must be a string.
+2025-07-16 14:14:56,778 [ERROR] app.core.authz: Invalid token
+2025-07-16 14:14:56,779 [INFO] uvicorn.access: 172.20.0.1:49310 - "GET /api/tasks HTTP/1.1" 401
+2025-07-16 14:17:48,158 [INFO] uvicorn.error: Shutting down
+2025-07-16 14:17:48,259 [INFO] uvicorn.error: Waiting for application shutdown.
+2025-07-16 14:17:48,265 [INFO] uvicorn.error: Application shutdown complete.
+2025-07-16 14:17:48,265 [INFO] uvicorn.error: Finished server process [23]
+2025-07-16 14:17:53,538 [INFO] uvicorn.error: Started server process [27]
+2025-07-16 14:17:53,538 [INFO] uvicorn.error: Waiting for application startup.
+2025-07-16 14:17:53,542 [INFO] uvicorn.error: Application startup complete.
+2025-07-16 14:29:00,739 [INFO] uvicorn.error: Shutting down
+2025-07-16 14:29:00,840 [INFO] uvicorn.error: Waiting for application shutdown.
+2025-07-16 14:29:00,842 [INFO] uvicorn.error: Application shutdown complete.
+2025-07-16 14:29:00,842 [INFO] uvicorn.error: Finished server process [27]

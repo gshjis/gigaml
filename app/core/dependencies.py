@@ -1,4 +1,4 @@
-from app.service.user_service import UserService
+from app.service.user import UserService
 from app.core.database import get_db_session
 
 from typing import Annotated, Callable, Type

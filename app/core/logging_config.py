@@ -28,7 +28,7 @@ def setup_logging():
         "loggers": {
             "": {  # root logger
                 "handlers": ["default", "file"],
-                "level": "INFO",
+                "level": "ERROR",
                 "propagate": False
             },
             "uvicorn": {

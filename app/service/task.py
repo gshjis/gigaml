@@ -5,7 +5,7 @@ from app.utils.cache import cache_result
 from app.core.exceptions import DatabaseError, TaskNotFoundError
 from app.models.task import Task
 from app.repository.task import TaskRepository
-from app.repository.user_repository import UserRepository
+from app.repository.user import UserRepository
 from app.schemas.task import (TaskSchemaInput, TaskSchemaOutput, 
                               TaskSchemaUpdate, TaskSchemaDB)
 
