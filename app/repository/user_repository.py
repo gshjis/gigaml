@@ -14,11 +14,10 @@ class UserRepository:
     
 
     async def create_user(self, user: UserCreate) -> User:
-        hashed_password = get_password_hash(user.password)
         db_user = User(
             username=user.username,
             email=user.email,
-            hashed_password=hashed_password
+            hashed_password=user.password
         )
         self.db.add(db_user)
         await self.db.commit()

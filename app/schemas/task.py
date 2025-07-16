@@ -51,6 +51,12 @@ class TaskSchemaInput(TaskBaseSchema):
         return data
 
 class TaskSchemaOutput(TaskBaseSchema):
+    owner_id: int = Field(
+        ...,
+        gt=0,
+        description="ID владельца задачи",
+        examples=[1]
+    )
     """Схема для вывода задачи"""
     id: int = Field(..., gt=0, description="ID задачи")
     created_at: datetime
@@ -97,3 +103,9 @@ class TaskSchemaUpdate(TaskBaseSchema):
         if not data or all(v is None for v in data.values()):
             raise ValueError("Должно быть указано хотя бы одно поле для обновления")
         return data
+
+class TaskSchemaDB(TaskSchemaInput):
+    owner_id: int = Field(
+        gt=0,
+        description="Новый ID владельца задачи"
+    )

@@ -1,4 +1,3 @@
-# app/handlers/task.py
 from fastapi import APIRouter, Depends, HTTPException, Response, status
 from app.core.authz import require_role, require_permission
 from app.core.permissions import Role, Permission
@@ -6,7 +5,7 @@ from app.core.permissions import Role, Permission
 from app.core.exceptions import InvalidTaskDataError
 from app.core.dependencies import get_task_service
 from app.schemas.task import (TaskSchemaInput, TaskSchemaOutput,
-                              TaskSchemaUpdate)
+                              TaskSchemaUpdate, TaskSchemaDB)
 from app.service.task import TaskService
 from app.models.user import User
 
@@ -40,6 +39,7 @@ logger = logging.getLogger(__name__)
 )
 async def get_all_tasks(
     service: TaskService = Depends(get_task_service),
+    user: User = Depends(require_permission(Permission.READ))
 ) -> list[TaskSchemaOutput]:
     """
     Retrieve all active tasks.
@@ -48,7 +48,7 @@ async def get_all_tasks(
         List of TaskSchemaOutput objects representing all active tasks
     """
     logger.info("Fetching all tasks")
-    tasks = await service.get_all_tasks()
+    tasks = await service.get_tasks_by_user_id(user_id= user.id)
     logger.info("Fetched %s tasks successfully", len(tasks))
     return tasks
 
@@ -88,7 +88,8 @@ async def create_task(
     """
     try:
         logger.info("Creating task with data: %s", task_data)
-        return await service.create_task(task_data)
+        task_db = TaskSchemaDB(**dict(task_data), owner_id=user.id)
+        return await service.create_task(task_db)
     except InvalidTaskDataError as e:
         logger.error("Invalid task data: %s", e)
         raise HTTPException(
@@ -164,4 +165,5 @@ async def update_task(
         HTTPException: If task not found or invalid data
     """
     logger.info("Updating task with ID: %s and data: %s", task_id, update_data)
-    return await service.update_task(task_id, update_data)
+    update_data_db = TaskSchemaDB(**dict(update_data), owner_id = user.id)
+    return await service.update_task(task_id, update_data_db)

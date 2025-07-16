@@ -57,12 +57,3 @@ for router in routers:
 @app.get("/health")
 async def health_check():
     return {"status": "ok"}
-
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://localhost:8080"],  # Разрешить запросы с фронтенда
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)

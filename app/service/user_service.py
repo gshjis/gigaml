@@ -13,7 +13,9 @@ class UserService:
         if existing_user:
             raise UserAlreadyExistsError("User with this email already exists")
 
-        db_user = await self.repository.create_user(user)
+        user_copy: UserCreate = user.copy()
+        user_copy.password = get_password_hash(user.password)
+        db_user = await self.repository.create_user(user_copy)
         return UserOut.from_orm(db_user)
 
     async def refresh_token(self, refresh_token: str) -> dict:

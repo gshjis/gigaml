@@ -6,7 +6,8 @@ from app.core.exceptions import DatabaseError, TaskNotFoundError
 from app.models.task import Task
 from app.repository.task import TaskRepository
 from app.repository.user_repository import UserRepository
-from app.schemas.task import TaskSchemaInput, TaskSchemaOutput, TaskSchemaUpdate
+from app.schemas.task import (TaskSchemaInput, TaskSchemaOutput, 
+                              TaskSchemaUpdate, TaskSchemaDB)
 
 logger = logging.getLogger(__name__)
 
@@ -14,7 +15,7 @@ class TaskService:
     def __init__(self, task_repository: TaskRepository):
         self.repository = task_repository
 
-    async def create_task(self, task_data: TaskSchemaInput) -> TaskSchemaOutput:
+    async def create_task(self, task_data: TaskSchemaDB) -> TaskSchemaOutput:
         """Создание задачи с валидацией"""
         try:
             logger.info("Creating task with data: %s", task_data.model_dump())
@@ -28,7 +29,7 @@ class TaskService:
             logger.error("Failed to create task: %s", e)
             raise DatabaseError("Failed to create task") from e
 
-    @cache_result(expiration_time=300)
+    # @cache_result(expiration_time=300)
     async def get_task(self, task_id: int) -> Optional[TaskSchemaOutput]:
         """Получение задачи по ID с кешированием"""
         logger.info("Fetching task with ID: %s", task_id)
@@ -79,7 +80,26 @@ class TaskService:
             logger.error("Failed to delete task: %s", e)
             raise DatabaseError("Failed to delete task") from e
 
-    @cache_result(expiration_time=300)
+    async def get_tasks_by_user_id(self, user_id: int, include_deleted: bool = False) -> List[TaskSchemaOutput]:
+        """Получить задачи пользователя по user_id с учетом флага soft delete.
+
+        Args:
+            user_id: ID пользователя
+            include_deleted: Флаг для включения удаленных задач (по умолчанию False)
+
+        Returns:
+            List[TaskSchemaOutput]: Список задач или пустой список при ошибке
+        """
+        try:
+            logger.info("Fetching tasks for user ID: %s with include_deleted: %s", user_id, include_deleted)
+            tasks = await self.repository.get_tasks_by_user_id(user_id, include_deleted)
+            logger.info("Fetched %s tasks for user ID: %s", len(tasks), user_id)
+            return [TaskSchemaOutput.model_validate(task, from_attributes=True) for task in tasks]
+        except Exception as e:
+            logger.error("Failed to fetch tasks for user ID: %s. Error: %s", user_id, e)
+            raise DatabaseError("Failed to fetch tasks for user") from e
+            
+    # @cache_result(expiration_time=300)
     async def update_task(
         self, task_id: int, update_data: TaskSchemaUpdate
     ) -> dict:
@@ -104,5 +124,3 @@ class TaskService:
         except Exception as e:
             logger.error("Failed to update task: %s", e)
             raise DatabaseError("Failed to update task") from e
-    
-    

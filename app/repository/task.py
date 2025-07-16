@@ -40,26 +40,28 @@ class TaskRepository(BaseRepository[Task]):
             logger.error("Failed to fetch tasks for category ID: %s. Error: %s", category_id, e)
             return []
 
-    async def get_active_tasks(self, limit: int = 100) -> list[Task]:
-        """Получить последние активные задачи.
+    async def get_tasks_by_user_id(self, user_id: int, include_deleted: bool = False) -> list[Task]:
+        """Получить задачи пользователя по user_id с учетом флага soft delete.
 
         Args:
-            limit: Максимальное количество возвращаемых задач
+            user_id: ID пользователя
+            include_deleted: Флаг для включения удаленных задач (по умолчанию False)
 
         Returns:
             list[Task]: Список задач или пустой список при ошибке
         """
         try:
-            logger.info("Fetching active tasks with limit: %s", limit)
+            logger.info("Fetching tasks for user ID: %s with include_deleted: %s", user_id, include_deleted)
             stmt = (
                 select(Task)
-                .where(Task.is_deleted.is_(false()))
+                .where(Task.owner_id == user_id)
+                .where(Task.is_deleted.is_(include_deleted))
                 .order_by(Task.created_at.desc())
-                .limit(limit)
             )
             tasks = list((await self.db_session.scalars(stmt)).all())
-            logger.info("Fetched %s active tasks", len(tasks))
+            logger.info("Fetched %s tasks for user ID: %s", len(tasks), user_id)
             return tasks
         except Exception as e:
-            logger.error("Failed to fetch active tasks. Error: %s", e)
+            logger.error("Failed to fetch tasks for user ID: %s. Error: %s", user_id, e)
             return []
+        
