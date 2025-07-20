@@ -9,6 +9,7 @@ class Permission(Enum):
     READ = "read"
     WRITE = "write"
     DELETE = "delete"
+    ALL = [READ, WRITE, DELETE]
 
 # Register the Role enum with SQLAlchemy
 RoleEnum = SQLAlchemyEnum(Role, name="role")
