@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Pomodoro Tasks</title>
+  <link rel="stylesheet" href="/styles/main.css">
+</head>
+<body>
+  <header>
+    <h1>🍅 Pomodoro Tasks</h1>
+    <button id="logout-btn">Logout</button>
+  </header>
+
+  <main>
+    <section id="task-creation">
+      <h2>Create New Task</h2>
+      <form id="task-form">
+        <input type="text" name="name" placeholder="Task name" required>
+        <input type="number" name="pomodoro_count" placeholder="Pomodoros" min="1" value="1" required>
+        <input type="number" name="category_id" placeholder="Category ID" min="1" value="1" required>
+        <button type="submit">Create Task</button>
+      </form>
+    </section>
+
+    <section id="tasks-list">
+      <h2>Your Tasks</h2>
+      <div id="tasks-container">
+        <!-- Tasks will be loaded here -->
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="/scripts/tasks.js"></script>
+</body>
+</html>

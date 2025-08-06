@@ -1,26 +1,50 @@
-from typing import List, Optional
 import logging
-from pydantic import ValidationError
-from app.utils.cache import cache_result
-from app.core.exceptions import DatabaseError, TaskNotFoundError
-from app.models.task import Task
+from datetime import datetime
+from typing import Any, Dict, List, Optional
+
+from app.core.exceptions import DatabaseError, TaskNotFoundException
+from app.domain.task import TaskData
 from app.repository.task import TaskRepository
-from app.schemas.task import TaskSchemaInput, TaskSchemaOutput, TaskSchemaUpdate
 
 logger = logging.getLogger(__name__)
 
+
 class TaskService:
     def __init__(self, task_repository: TaskRepository):
-        # 
         self.repository = task_repository
 
-    async def create_task(self, task_data: TaskSchemaInput) -> TaskSchemaOutput:
+    async def create_task(
+        self,
+        name: str,
+        description: Optional[str],
+        pomodoro_count: int,
+        category_id: int,
+        owner_id: int,
+    ) -> Dict[str, Any]:
         """Создание задачи с валидацией"""
         try:
-            logger.info("Creating task with data: %s", task_data.model_dump())
-            task = await self.repository.create(Task(**task_data.model_dump()))
-            logger.info("Task created successfully with ID: %s", task.id)
-            return TaskSchemaOutput.model_validate(task, from_attributes=True)
+            task = await self.repository.create(
+                TaskData(
+                    task_id=12,
+                    name=name,
+                    pomodoro_count=pomodoro_count,
+                    category_id=category_id,
+                    description=description,
+                    owner_id=owner_id,
+                    created_at=datetime.now(),
+                    updated_at=datetime.now(),
+                )
+            )
+            return TaskData(
+                task_id=task.task_id,
+                name=task.name,
+                description=task.description,
+                pomodoro_count=task.pomodoro_count,
+                category_id=task.category_id,
+                owner_id=task.owner_id,
+                created_at=task.created_at,
+                updated_at=task.updated_at,
+            ).__dict__
         except ValueError as e:
             logger.error("Invalid task data: %s", e)
             raise DatabaseError("Invalid task data") from e
@@ -28,81 +52,145 @@ class TaskService:
             logger.error("Failed to create task: %s", e)
             raise DatabaseError("Failed to create task") from e
 
-    @cache_result(expiration_time=300)
-    async def get_task(self, task_id: int) -> Optional[TaskSchemaOutput]:
-        """Получение задачи по ID с кешированием"""
+    async def get_task(self, task_id: int) -> Optional[Dict[str, Any]]:
+        """Получение задачи по ID"""
         logger.info("Fetching task with ID: %s", task_id)
-        task = await self.repository.get(task_id)
+        task = await self.repository.get_task_by_id(task_id)
         if not task:
             logger.debug("Task not found: %s", task_id)
             return None
-        logger.info("Task fetched successfully: %s", task_id)
-        return TaskSchemaOutput.model_validate(task, from_attributes=True)
+        return TaskData(
+            task_id=task.task_id,
+            name=task.name,
+            description=task.description,
+            pomodoro_count=task.pomodoro_count,
+            category_id=task.category_id,
+            owner_id=task.owner_id,
+            created_at=task.created_at,
+            updated_at=task.updated_at,
+        ).__dict__
 
-    async def get_task_or_raise(self, task_id: int) -> TaskSchemaOutput:
+    async def get_task_or_raise(self, task_id: int) -> Dict[str, Any]:
         """Получение задачи с проверкой существования"""
-        task = await self.get_task(task_id)        
+        task = await self.get_task(task_id)
         if not task:
             logger.error("Task not found: %s", task_id)
-            raise TaskNotFoundError(f"Task {task_id} not found")
+            raise TaskNotFoundException(f"Task {task_id} not found")
         return task
 
-    # @cache_result(expiration_time=300)
-    async def get_all_tasks(self) -> List[dict]:
-        """Получение всех активных задач с кешированием"""
+    async def get_all_tasks(self) -> List[Dict[str, Any]]:
+        """Получение всех активных задач"""
         try:
             logger.info("Fetching all tasks")
-            tasks = await self.repository.get_all()
-            logger.info("Fetched %s tasks successfully", len(tasks))
-            
-            # Возвращаем словари для кеширования
+            tasks = await self.repository.get_all_tasks()
             return [
-                TaskSchemaOutput.model_validate(task, from_attributes=True).model_dump()
+                TaskData(
+                    task_id=task.task_id,
+                    name=task.name,
+                    description=task.description,
+                    pomodoro_count=task.pomodoro_count,
+                    category_id=task.category_id,
+                    owner_id=task.owner_id,
+                    created_at=task.created_at,
+                    updated_at=task.updated_at,
+                ).__dict__
                 for task in tasks
             ]
         except Exception as e:
             logger.error("Error fetching tasks: %s", e)
             raise DatabaseError("Failed to get tasks") from e
 
-    async def delete_task(self, task_id: int) -> bool:
+    async def delete_task(self, task_id: int, user_id: int) -> bool:
         """Мягкое удаление задачи"""
         try:
-            logger.info("Deleting task with ID: %s", task_id)
-            if not await self.repository.delete(task_id, hard_delete=True):
+            logger.info("Deleting task with ID: %s for user ID: %s", task_id, user_id)
+            task = await self.repository.get_task_by_id(task_id)
+            if not task:
                 logger.error("Task not found: %s", task_id)
-                raise TaskNotFoundError(f"Task {task_id} not found")
+                raise TaskNotFoundException(f"Task {task_id} not found")
+
+            if task.owner_id != user_id:
+                logger.error("Task not found: %s", task_id)
+                raise TaskNotFoundException(f"Task {task_id} not found")
+
+            if not await self.repository.delete_task(task_id, hard_delete=True):
+                logger.error("Task not found: %s", task_id)
+                raise TaskNotFoundException(f"Task {task_id} not found")
             logger.info("Task deleted successfully: %s", task_id)
             return True
-        except TaskNotFoundError:
+        except TaskNotFoundException:
             raise
         except Exception as e:
             logger.error("Failed to delete task: %s", e)
             raise DatabaseError("Failed to delete task") from e
 
-    @cache_result(expiration_time=300)
-    async def update_task(
-        self, task_id: int, update_data: TaskSchemaUpdate
-    ) -> dict:
-        """Обновление задачи с кешированием"""
+    async def get_tasks_by_user_id(
+        self, user_id: int, include_deleted: bool = False
+    ) -> List[Dict[str, Any]]:
+        """Получить задачи пользователя по user_id с учетом флага soft delete."""
         try:
-            logger.info("Updating task %s with data: %s", task_id, update_data.model_dump())
-            task = await self.repository.get(task_id)
+            logger.info(
+                "Fetching tasks for user ID: %s with include_deleted: %s",
+                user_id,
+                include_deleted,
+            )
+            tasks = await self.repository.get_tasks_by_user_id(user_id, include_deleted)
+            return [
+                TaskData(
+                    task_id=task.task_id,
+                    name=task.name,
+                    description=task.description,
+                    pomodoro_count=task.pomodoro_count,
+                    category_id=task.category_id,
+                    owner_id=task.owner_id,
+                    created_at=task.created_at,
+                    updated_at=task.updated_at,
+                ).__dict__
+                for task in tasks
+            ]
+        except Exception as e:
+            logger.error("Failed to fetch tasks for user ID: %s. Error: %s", user_id, e)
+            raise DatabaseError("Failed to fetch tasks for user") from e
+
+    async def update_task(
+        self,
+        task_id: int,
+        owner_id: int,
+        name: Optional[str] = None,
+        description: Optional[str] = None,
+        pomodoro_count: Optional[int] = None,
+        category_id: Optional[int] = None,
+    ) -> Dict[str, Any]:
+        """Обновление задачи"""
+        try:
+            logger.info("Updating task %s with data: %s", task_id, locals())
+            task = await self.repository.get_task_by_id(task_id)
             if not task:
                 logger.error("Task not found: %s", task_id)
-                raise TaskNotFoundError(f"Task {task_id} not found")
+                raise TaskNotFoundException(f"Task {task_id} not found")
 
-            update_dict = update_data.model_dump(exclude_unset=True)
-            for field, value in update_dict.items():
+            update_data = {
+                k: v for k, v in locals().items() if v is not None and k != "task_id"
+            }
+            for field, value in update_data.items():
                 setattr(task, field, value)
 
-            updated_task = await self.repository.update(task)
-            logger.info("Task updated successfully: %s", task_id)
-            return TaskSchemaOutput.model_validate(updated_task, from_attributes=True).model_dump()
+            updated_task = await self.repository.update_task(
+                task_data=task, task_id=task_id
+            )
+            return TaskData(
+                task_id=updated_task.task_id,
+                name=updated_task.name,
+                description=updated_task.description,
+                pomodoro_count=updated_task.pomodoro_count,
+                category_id=updated_task.category_id,
+                owner_id=updated_task.owner_id,
+                created_at=task.created_at,
+                updated_at=task.updated_at,
+            ).__dict__
         except ValueError as e:
             logger.error("Invalid update data: %s", e)
             raise DatabaseError("Invalid update data") from e
         except Exception as e:
             logger.error("Failed to update task: %s", e)
             raise DatabaseError("Failed to update task") from e
-    
-    

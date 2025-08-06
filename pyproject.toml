@@ -4,20 +4,32 @@ version = "0.1.0"
 description = ""
 authors = ["gshjis <ilya.togan@gmail.com>"]
 readme = "README.md"
+packages = [
+    { include = "app" }  # Указывает, что `app` - это пакет
+]
 
 [tool.poetry.dependencies]
 python = "^3.12"
 fastapi = "^0.115.13"
 uvicorn = "^0.34.3"
-pydantic = "^2.11.7"
+pydantic = { extras = ["email"], version = "^2.11.7" }
 pydantic-settings = "^2.10.1"
-sqlalchemy = {extras = ["asyncio"], version = "^2.0.41"}
+sqlalchemy = { extras = ["asyncio"], version = "^2.0.41" }
 alembic = "^1.16.2"
 psycopg2-binary = "^2.9.10"
 redis = "^6.2.0"
 python-dotenv = "^1.1.1"
 asyncpg = "^0.30.0"
 fastapi-cors = "^0.0.6"
+python-jose = { extras = ["cryptography"], version = "^3.5.0" }
+passlib = "^1.7.4"
+python-multipart = "^0.0.20"
+jose = "^1.0.0"
+types-passlib = "^1.7.7.20250602"
+types-python-jose = "^3.5.0.20250531"
+uuid = "^1.30"
+pyjwt = "^2.10.1"
+pycryptodome = "^3.23.0"
 
 [tool.poetry.group.dev.dependencies]
 flake8 = "^7.3.0"
@@ -28,6 +40,11 @@ isort = "^6.0.1"
 bandit = "^1.8.5"
 pytest = "^8.4.1"
 httpx = "^0.28.1"
+flake8-bugbear = "^24.12.12"
+flake8-builtins = "^2.5.0"
+pep8-naming = "^0.15.1"
+flake8-variables-names = "^0.0.6"
+sqlalchemy-schemadisplay = "^2.0"
 
 [build-system]
 requires = ["poetry-core"]

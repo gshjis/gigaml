@@ -5,7 +5,7 @@ services:
       - "8000:8000"
     volumes:
       - .:/app
-    command: uvicorn app.core.main:app --host 0.0.0.0 --port 8000 --reload
+    command: "make run"
     depends_on:
       db:
         condition: service_healthy
@@ -33,6 +33,8 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+    ports:
+      - "5432:5432"
 
   cache:
     image: redis:7.2.4-alpine
