@@ -29,8 +29,6 @@ class UserRepository:
         return None
 
     async def create_user(self, user: UserData) -> UserData:
-        print("__" * 30)
-
         # Проверка наличия пользователя с таким же адресом электронной почты
         existing_user = await self.get_user_by_email(user.email)
         if existing_user:

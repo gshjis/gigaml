@@ -5,6 +5,8 @@ from typing import Optional
 
 @dataclass
 class TaskData:
+    """Класс предназначен для передачи между всеми слоями кроме handlers."""
+
     task_id: int
     name: str
     pomodoro_count: int
