@@ -1,9 +1,11 @@
 import logging
+
 import redis.asyncio as aioredis
-from typing import Any
+
 from app.core.settings import settings
 
 logger = logging.getLogger(__name__)
+
 
 async def get_redis() -> aioredis.Redis:
     """

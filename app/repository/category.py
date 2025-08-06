@@ -1,10 +1,4 @@
-from app.models import Categorie
-from app.repository.repository import BaseRepository
-
-
-class CategoryRepository(BaseRepository[Categorie]):
+class CategoryRepository:
     """Репозиторий для работы с задачами."""
 
-    @property
-    def model(self) -> type[Categorie]:
-        return Categorie
+    pass

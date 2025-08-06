@@ -1,6 +1,10 @@
 from pydantic import BaseModel
 
 
-class CategorySchema(BaseModel):
-    id: int
+class CategorySchemaInput(BaseModel):
+    name: str
+
+
+class CategorySchemaOutput(BaseModel):
+    category_id: int
     name: str

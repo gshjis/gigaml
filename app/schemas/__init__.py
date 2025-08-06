@@ -1,3 +1,14 @@
-from .category import CategorySchema
-from .task import TaskBaseSchema, TaskSchemaInput, TaskSchemaOutput, TaskSchemaUpdate
-from .user import UserBase, UserCreate, UserOut
+from .category import CategorySchemaInput, CategorySchemaOutput
+from .task import TaskSchemaInput, TaskSchemaOutput, TaskSchemaUpdate
+from .user import UserCreate, UserOut
+
+__all__ = [
+    "TaskSchemaInput",
+    "CategorySchemaInput",
+    "CategorySchemaOutput",
+    "TaskSchemaInput",
+    "TaskSchemaOutput",
+    "TaskSchemaUpdate",
+    "UserCreate",
+    "UserOut",
+]

@@ -1,19 +1,17 @@
-from fastapi import APIRouter, Depends, HTTPException, Response, status
-from app.core.authz import require_role, require_permission
-from app.core.permissions import Role, Permission
+import logging
+from typing import Annotated
 
-from app.core.exceptions import InvalidTaskDataError
-from app.core.dependencies import get_task_service
-from app.schemas.task import (TaskSchemaInput, TaskSchemaOutput,
-                              TaskSchemaUpdate, TaskSchemaDB)
-from app.service.task import TaskService
+from fastapi import APIRouter, Depends, Response, status
+
+from app.core.dependencies import get_current_user, get_task_service
 from app.models.user import User
+from app.schemas.task import TaskSchemaInput, TaskSchemaOutput, TaskSchemaUpdate
+from app.service.task import TaskService
 
 router = APIRouter(prefix="/api/tasks", tags=["Tasks 📑"])
 
-import logging
-
 logger = logging.getLogger(__name__)
+
 
 @router.get(
     "",
@@ -38,8 +36,8 @@ logger = logging.getLogger(__name__)
     },
 )
 async def get_all_tasks(
-    service: TaskService = Depends(get_task_service),
-    user: User = Depends(require_permission(Permission.READ))
+    user: Annotated[User, Depends(get_current_user)],
+    service: Annotated[TaskService, Depends(get_task_service)],
 ) -> list[TaskSchemaOutput]:
     """
     Retrieve all active tasks.
@@ -48,9 +46,10 @@ async def get_all_tasks(
         List of TaskSchemaOutput objects representing all active tasks
     """
     logger.info("Fetching all tasks")
-    tasks = await service.get_tasks_by_user_id(user_id= user.id)
+    tasks = await service.get_tasks_by_user_id(user_id=user.ID)
     logger.info("Fetched %s tasks successfully", len(tasks))
-    return tasks
+    return [TaskSchemaOutput(**task) for task in tasks]
+
 
 @router.post(
     "",
@@ -62,17 +61,15 @@ async def get_all_tasks(
         status.HTTP_400_BAD_REQUEST: {
             "description": "Invalid task data",
             "content": {
-                "application/json": {"example": {
-                    "detail": "Invalid pomodoro count"
-                }}
+                "application/json": {"example": {"detail": "Invalid pomodoro count"}}
             },
         },
     },
 )
 async def create_task(
     task_data: TaskSchemaInput,
-    service: TaskService = Depends(get_task_service),
-    user: User = Depends(require_permission(Permission.WRITE))
+    service: Annotated[TaskService, Depends(get_task_service)],
+    user: Annotated[User, Depends(get_current_user)],
 ) -> TaskSchemaOutput:
     """
     Create a new task.
@@ -86,37 +83,35 @@ async def create_task(
     Raises:
         HTTPException: If input data is invalid
     """
-    try:
-        logger.info("Creating task with data: %s", task_data)
-        task_db = TaskSchemaDB(**dict(task_data), owner_id=user.id)
-        return await service.create_task(task_db)
-    except InvalidTaskDataError as e:
-        logger.error("Invalid task data: %s", e)
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST, detail=str(e)
-        )
+    logger.info("Creating task with data: %s", task_data)
+    created_task = await service.create_task(
+        name=task_data.name,
+        description=task_data.description,
+        pomodoro_count=task_data.pomodoro_count,
+        category_id=task_data.category_id,
+        owner_id=user.ID,
+    )
+    return TaskSchemaOutput(**created_task)
+
 
 @router.delete(
     "/{task_id}",
     status_code=status.HTTP_204_NO_CONTENT,
     summary="Delete a task",
     responses={
-        status.HTTP_204_NO_CONTENT: {
-            "description": "Task deleted successfully"
-        },
+        status.HTTP_204_NO_CONTENT: {"description": "Task deleted successfully"},
         status.HTTP_404_NOT_FOUND: {
             "description": "Task not found",
             "content": {
-                "application/json": {"example": {"detail": "Task 123 not found"
-                                                 }}
+                "application/json": {"example": {"detail": "Task 123 not found"}}
             },
         },
     },
 )
 async def delete_task(
     task_id: int,
-    service: TaskService = Depends(get_task_service),
-    user: User = Depends(require_permission(Permission.DELETE))
+    service: Annotated[TaskService, Depends(get_task_service)],
+    user: Annotated[User, Depends(get_current_user)],
 ) -> Response:
     """
     Delete a task by ID.
@@ -131,9 +126,10 @@ async def delete_task(
         HTTPException: If task is not found
     """
     logger.info("Deleting task with ID: %s", task_id)
-    await service.delete_task(task_id)
+    await service.delete_task(task_id, user_id=user.ID)
     logger.info("Task deleted successfully: %s", task_id)
     return Response(status_code=status.HTTP_204_NO_CONTENT)
+
 
 @router.patch(
     "/{task_id}",
@@ -143,13 +139,14 @@ async def delete_task(
         status.HTTP_200_OK: {"description": "Task updated successfully"},
         status.HTTP_400_BAD_REQUEST: {"description": "Invalid update data"},
         status.HTTP_404_NOT_FOUND: {"description": "Task not found"},
+        status.HTTP_500_INTERNAL_SERVER_ERROR: {"description": "Database error"},
     },
 )
 async def update_task(
     task_id: int,
     update_data: TaskSchemaUpdate,
-    service: TaskService = Depends(get_task_service),
-    user: User = Depends(require_permission(Permission.WRITE))
+    service: Annotated[TaskService, Depends(get_task_service)],
+    user: Annotated[User, Depends(get_current_user)],
 ) -> TaskSchemaOutput:
     """
     Partially update a task.
@@ -165,5 +162,12 @@ async def update_task(
         HTTPException: If task not found or invalid data
     """
     logger.info("Updating task with ID: %s and data: %s", task_id, update_data)
-    update_data_db = TaskSchemaDB(**dict(update_data), owner_id = user.id)
-    return await service.update_task(task_id, update_data_db)
+    updated_task = await service.update_task(
+        task_id=task_id,
+        owner_id=user.ID,
+        name=update_data.name,
+        description=update_data.description,
+        pomodoro_count=update_data.pomodoro_count,
+        category_id=update_data.category_id,
+    )
+    return TaskSchemaOutput(**updated_task)
