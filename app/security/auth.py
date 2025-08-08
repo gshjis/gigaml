@@ -79,6 +79,17 @@ def create_jwt(
     secret_key: str,
     exp_timedelta: timedelta,
 ) -> str:
+    """Create a JWT token
+
+    Args:
+        data (Dict[str, Any]): Data to be encoded in the JWT token
+        algorithm (str): Algorithm to use for encoding the JWT token
+        secret_key (str): Secret key to use for encoding the JWT token
+        exp_timedelta (timedelta): Expiration time for the JWT token
+
+    Returns:
+        str: Encoded JWT token
+    """
     payload = data.copy()
     expiration = datetime.now() + exp_timedelta
     payload["exp"] = int(expiration.timestamp())
