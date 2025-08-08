@@ -1,10 +1,9 @@
 from typing import Any, Dict
 
-from fastapi import APIRouter, Depends, HTTPException, Request, Response, status
+from fastapi import APIRouter, Depends, Request, Response, status
 from fastapi.security import OAuth2PasswordRequestForm
 
 from app.core.dependencies import get_user_service
-from app.core.exceptions import InvalidTokenException
 from app.core.settings import settings
 from app.schemas.user import UserCreate
 from app.service.user import UserService

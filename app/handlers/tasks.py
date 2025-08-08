@@ -17,23 +17,9 @@ logger = logging.getLogger(__name__)
     "",
     response_model=list[TaskSchemaOutput],
     summary="Get all tasks",
-    responses={
-        status.HTTP_200_OK: {
-            "description": "List of all active tasks",
-            "content": {
-                "application/json": {
-                    "example": [
-                        {
-                            "id": 1,
-                            "name": "Example task",
-                            "pomodoro_count": 4,
-                            "category_id": 1,
-                        }
-                    ]
-                }
-            },
-        }
-    },
+    description="""Этот маршрут позволяет получить все активные задачи.
+    В случае успешного получения возвращается список задач.""",
+    status_code=status.HTTP_200_OK,
 )
 async def get_all_tasks(
     user: Annotated[User, Depends(get_current_user)],
@@ -48,23 +34,17 @@ async def get_all_tasks(
     logger.info("Fetching all tasks")
     tasks = await service.get_tasks_by_user_id(user_id=user.ID)
     logger.info("Fetched %s tasks successfully", len(tasks))
+
     return [TaskSchemaOutput(**task) for task in tasks]
 
 
 @router.post(
     "",
     response_model=TaskSchemaOutput,
+    summary="Создание новой задачи",
+    description="""Этот маршрут позволяет создать новую задачу.
+    В случае успешного создания возвращается информация о созданной задаче.""",
     status_code=status.HTTP_201_CREATED,
-    summary="Create a new task",
-    responses={
-        status.HTTP_201_CREATED: {"description": "Task created successfully"},
-        status.HTTP_400_BAD_REQUEST: {
-            "description": "Invalid task data",
-            "content": {
-                "application/json": {"example": {"detail": "Invalid pomodoro count"}}
-            },
-        },
-    },
 )
 async def create_task(
     task_data: TaskSchemaInput,
@@ -97,16 +77,9 @@ async def create_task(
 @router.delete(
     "/{task_id}",
     status_code=status.HTTP_204_NO_CONTENT,
-    summary="Delete a task",
-    responses={
-        status.HTTP_204_NO_CONTENT: {"description": "Task deleted successfully"},
-        status.HTTP_404_NOT_FOUND: {
-            "description": "Task not found",
-            "content": {
-                "application/json": {"example": {"detail": "Task 123 not found"}}
-            },
-        },
-    },
+    summary="Удаление задачи",
+    description="""Этот маршрут позволяет удалить задачу по ID.
+    В случае успешного удаления возвращается пустой ответ с кодом 204.""",
 )
 async def delete_task(
     task_id: int,
@@ -134,13 +107,10 @@ async def delete_task(
 @router.patch(
     "/{task_id}",
     response_model=TaskSchemaOutput,
-    summary="Update a task",
-    responses={
-        status.HTTP_200_OK: {"description": "Task updated successfully"},
-        status.HTTP_400_BAD_REQUEST: {"description": "Invalid update data"},
-        status.HTTP_404_NOT_FOUND: {"description": "Task not found"},
-        status.HTTP_500_INTERNAL_SERVER_ERROR: {"description": "Database error"},
-    },
+    summary="Обновление задачи",
+    description="""Этот маршрут позволяет частично обновить задачу.
+    В случае успешного обновления возвращается обновленная информация о задаче.""",
+    status_code=status.HTTP_200_OK,
 )
 async def update_task(
     task_id: int,
