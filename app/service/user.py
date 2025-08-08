@@ -15,6 +15,16 @@ class UserService:
     async def register_user(
         self, username: str, email: str, password: str
     ) -> Dict[str, str | UserData]:
+        """Регистрация нового пользователя
+
+        Args:
+            username (str): Имя пользователя
+            email (str): Email пользователя
+            password (str): Пароль пользователя
+
+        Returns:
+            Dict[str, str | UserData]: Данные пользователя, access token и refresh token
+        """
         hashed_password = get_password_hash(password)
         user_data = UserData(
             user_id=1,  # заглушка, ведь до создания у нас нет ID (ID генерируется сам)
@@ -59,6 +69,18 @@ class UserService:
     async def authentication(
         self, email_or_username: str, password: str
     ) -> Dict[str, Any]:
+        """Аутентификация пользователя
+
+        Args:
+            email_or_username (str): Email или имя пользователя
+            password (str): Пароль пользователя
+
+        Returns:
+            Dict[str, Any]: Данные пользователя, access token и refresh token
+
+        Raises:
+            InvalidCredentialsException: Если пользователь не найден или пароль неверный
+        """
         # Retrieve the user by email or username
 
         if "@" in email_or_username:
@@ -106,7 +128,7 @@ class UserService:
         """Получить пользователя по ID.
 
         Args:
-            user_id: ID пользователя
+            user_id (int): ID пользователя
 
         Returns:
             Dict[str, Any]: Пользователь или None, если пользователь не найден
@@ -122,6 +144,18 @@ class UserService:
         return {}
 
     async def refresh(self, refresh_token: Optional[str]) -> Dict[str, str]:
+        """Обновление токенов
+
+        Args:
+            refresh_token (Optional[str]): Refresh токен
+
+        Returns:
+            Dict[str, str]: Новые access и refresh токены
+
+        Raises:
+            InvalidTokenException: Если refresh токен не передан
+            InvalidCredentialsException: Если refresh токен недействителен или пользователь не найден
+        """
         try:
             if refresh_token is None:
                 raise InvalidTokenException

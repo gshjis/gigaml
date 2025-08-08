@@ -22,10 +22,13 @@ class TaskRepository:
         """Создать новую задачу.
 
         Args:
-            task: Объект задачи для создания
+            task (TaskData): Доменный объект задачи для создания
 
         Returns:
             TaskData: Созданная задача
+
+        Raises:
+            DatabaseError: Если произошла ошибка при создании задачи
         """
         try:
             logger.info("Creating task: %s", task)
@@ -69,10 +72,13 @@ class TaskRepository:
         """Получить активные задачи по категории.
 
         Args:
-            category_id: ID категории для фильтрации
+            category_id (int): ID категории для фильтрации
 
         Returns:
             list[TaskData]: Список задач или пустой список при ошибке
+
+        Raises:
+            DatabaseError: Если произошла ошибка при получении задач
         """
         try:
             logger.info("Fetching active tasks for category ID: %s", category_id)
@@ -109,11 +115,14 @@ class TaskRepository:
         """Получить задачи пользователя по user_id с учетом флага soft delete.
 
         Args:
-            user_id: ID пользователя
-            include_deleted: Флаг для включения удаленных задач (по умолчанию False)
+            user_id (int): ID пользователя
+            include_deleted (bool, optional): Флаг для включения удаленных задач. Defaults to False.
 
         Returns:
             list[TaskData]: Список задач или пустой список при ошибке
+
+        Raises:
+            DatabaseError: Если произошла ошибка при получении задач
         """
         try:
             logger.info(
@@ -150,10 +159,13 @@ class TaskRepository:
         """Получить задачу по ID.
 
         Args:
-            task_id: ID задачи
+            task_id (int): ID задачи
 
         Returns:
             TaskData | None: Задача или None, если задача не найдена
+
+        Raises:
+            DatabaseError: Если произошла ошибка при получении задачи
         """
         try:
             logger.info("Fetching task with ID: %s", task_id)
@@ -177,11 +189,14 @@ class TaskRepository:
             logger.error("Failed to fetch task with ID: %s. Error: %s", task_id, e)
             raise DatabaseError("Failed to fetch task") from e
 
-    async def get_all_tasks(self) -> list[TaskData]:
+    async def _get_all_tasks(self) -> list[TaskData]:
         """Получить все задачи.
 
         Returns:
             list[TaskData]: Список всех задач
+
+        Raises:
+            DatabaseError: Если произошла ошибка при получении задач
         """
         try:
             logger.info("Fetching all tasks")
@@ -209,11 +224,14 @@ class TaskRepository:
         """Удалить задачу по ID.
 
         Args:
-            task_id: ID задачи
-            hard_delete: Флаг для выполнения жесткого удаления (по умолчанию False)
+            task_id (int): ID задачи
+            hard_delete (bool, optional): Флаг для выполнения жесткого удаления. Defaults to False.
 
         Returns:
             bool: True, если задача успешно удалена, иначе False
+
+        Raises:
+            DatabaseError: Если произошла ошибка при удалении задачи
         """
         try:
             if hard_delete:
@@ -248,11 +266,15 @@ class TaskRepository:
         """Обновить задачу по ID.
 
         Args:
-            task_id: ID задачи
-            task_data: Данные для обновления задачи
+            task_id (int): ID задачи
+            task_data (TaskData): Данные для обновления задачи
 
         Returns:
             TaskData: Обновленная задача
+
+        Raises:
+            TaskNotFoundException: Если задача не найдена
+            DatabaseError: Если произошла ошибка при обновлении задачи
         """
         try:
             logger.info("Updating task with ID: %s and data: %s", task_id, task_data)

@@ -21,7 +21,21 @@ class TaskService:
         category_id: int,
         owner_id: int,
     ) -> Dict[str, Any]:
-        """Создание задачи с валидацией"""
+        """Создание задачи с валидацией
+
+        Args:
+            name (str): Название задачи
+            description (Optional[str]): Описание задачи
+            pomodoro_count (int): Количество помодоро
+            category_id (int): ID категории
+            owner_id (int): ID владельца задачи
+
+        Returns:
+            Dict[str, Any]: Данные созданной задачи
+
+        Raises:
+            DatabaseError: Если данные задачи некорректны или произошла ошибка при создании задачи
+        """
         try:
             task = await self.repository.create(
                 TaskData(
@@ -53,12 +67,22 @@ class TaskService:
             raise DatabaseError("Failed to create task") from e
 
     async def get_task(self, task_id: int) -> Optional[Dict[str, Any]]:
-        """Получение задачи по ID"""
+        """Получение задачи по ID
+
+        Args:
+            task_id (int): ID задачи
+
+        Returns:
+            Optional[Dict[str, Any]]: Данные задачи или None, если задача не найдена
+
+        Raises:
+            TaskNotFoundException: Если задача не найдена
+        """
         logger.info("Fetching task with ID: %s", task_id)
         task = await self.repository.get_task_by_id(task_id)
         if not task:
             logger.debug("Task not found: %s", task_id)
-            return None
+            raise TaskNotFoundException(f"Task {task_id} not found")
         return TaskData(
             task_id=task.task_id,
             name=task.name,
@@ -70,38 +94,20 @@ class TaskService:
             updated_at=task.updated_at,
         ).__dict__
 
-    async def get_task_or_raise(self, task_id: int) -> Dict[str, Any]:
-        """Получение задачи с проверкой существования"""
-        task = await self.get_task(task_id)
-        if not task:
-            logger.error("Task not found: %s", task_id)
-            raise TaskNotFoundException(f"Task {task_id} not found")
-        return task
-
-    async def get_all_tasks(self) -> List[Dict[str, Any]]:
-        """Получение всех активных задач"""
-        try:
-            logger.info("Fetching all tasks")
-            tasks = await self.repository.get_all_tasks()
-            return [
-                TaskData(
-                    task_id=task.task_id,
-                    name=task.name,
-                    description=task.description,
-                    pomodoro_count=task.pomodoro_count,
-                    category_id=task.category_id,
-                    owner_id=task.owner_id,
-                    created_at=task.created_at,
-                    updated_at=task.updated_at,
-                ).__dict__
-                for task in tasks
-            ]
-        except Exception as e:
-            logger.error("Error fetching tasks: %s", e)
-            raise DatabaseError("Failed to get tasks") from e
-
     async def delete_task(self, task_id: int, user_id: int) -> bool:
-        """Мягкое удаление задачи"""
+        """Мягкое удаление задачи
+
+        Args:
+            task_id (int): ID задачи
+            user_id (int): ID пользователя
+
+        Returns:
+            bool: True, если задача успешно удалена, иначе False
+
+        Raises:
+            TaskNotFoundException: Если задача не найдена или не принадлежит пользователю
+            DatabaseError: Если произошла ошибка при удалении задачи
+        """
         try:
             logger.info("Deleting task with ID: %s for user ID: %s", task_id, user_id)
             task = await self.repository.get_task_by_id(task_id)
@@ -127,7 +133,18 @@ class TaskService:
     async def get_tasks_by_user_id(
         self, user_id: int, include_deleted: bool = False
     ) -> List[Dict[str, Any]]:
-        """Получить задачи пользователя по user_id с учетом флага soft delete."""
+        """Получить задачи пользователя по user_id с учетом флага soft delete.
+
+        Args:
+            user_id (int): ID пользователя
+            include_deleted (bool, optional): Включать удаленные задачи. Defaults to False.
+
+        Returns:
+            List[Dict[str, Any]]: Список задач пользователя
+
+        Raises:
+            DatabaseError: Если произошла ошибка при получении задач
+        """
         try:
             logger.info(
                 "Fetching tasks for user ID: %s with include_deleted: %s",
@@ -161,7 +178,23 @@ class TaskService:
         pomodoro_count: Optional[int] = None,
         category_id: Optional[int] = None,
     ) -> Dict[str, Any]:
-        """Обновление задачи"""
+        """Обновление задачи
+
+        Args:
+            task_id (int): ID задачи
+            owner_id (int): ID владельца задачи
+            name (Optional[str], optional): Новое название задачи. Defaults to None.
+            description (Optional[str], optional): Новое описание задачи. Defaults to None.
+            pomodoro_count (Optional[int], optional): Новое количество помодоро. Defaults to None.
+            category_id (Optional[int], optional): Новый ID категории. Defaults to None.
+
+        Returns:
+            Dict[str, Any]: Данные обновленной задачи
+
+        Raises:
+            TaskNotFoundException: Если задача не найдена
+            DatabaseError: Если произошла ошибка при обновлении задачи
+        """
         try:
             logger.info("Updating task %s with data: %s", task_id, locals())
             task = await self.repository.get_task_by_id(task_id)
