@@ -21,15 +21,11 @@ class UserRepository:
 
         Returns:
             Optional[UserData]: Пользователь или None, если пользователь не найден
-
-        Raises:
-            UserNotFoundException: Если пользователь не найден
         """
         result = await self.db_session.execute(
             select(User).filter(User.email == email).options(selectinload(User.tasks))
         )
         user = result.scalar_one_or_none()
-        print("__" * 30)
         if user:
             return UserData(
                 user_id=user.ID,
@@ -37,7 +33,7 @@ class UserRepository:
                 email=user.email,
                 hashed_password=user.hashed_password,
             )
-        raise UserNotFoundException
+        return None
 
     async def create_user(self, user: UserData) -> UserData:
         """Создать нового пользователя.
@@ -94,7 +90,7 @@ class UserRepository:
                 email=user.email,
                 hashed_password=user.hashed_password,
             )
-        raise UserNotFoundException
+        return None
 
     async def get_user_by_id(self, user_id: int) -> Optional[UserData]:
         """Получить пользователя по ID.
