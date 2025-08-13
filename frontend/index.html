@@ -1,24 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pomodoro Task Manager</title>
-    <link rel="stylesheet" href="styles/main.css">
+    <title>Pomodoro Tracker</title>
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-    <header>
-        <h1>Pomodoro Task Manager</h1>
-        <nav>
-            <a href="login.html">Login</a>
-            <a href="tasks.html">Tasks</a>
-        </nav>
-    </header>
-    <main>
-        <section>
-            <h2>Welcome to the Pomodoro Task Manager</h2>
-            <p>Manage your tasks efficiently with the Pomodoro technique.</p>
-        </section>
-    </main>
+    <div class="container">
+        <h1>Pomodoro Tracker</h1>
+        <p>Пожалуйста, <a href="/login.html">войдите</a> или <a href="/register.html">зарегистрируйтесь</a>.</p>
+    </div>
+    <script>
+        if (localStorage.getItem('token')) {
+            window.location.href = '/tasks.html';
+        }
+    </script>
 </body>
 </html>

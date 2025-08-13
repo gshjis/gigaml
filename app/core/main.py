@@ -1,4 +1,5 @@
 from contextlib import asynccontextmanager
+from typing import AsyncGenerator
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -10,7 +11,7 @@ from app.handlers import routers
 
 
 @asynccontextmanager
-async def lifespan(app: FastAPI):
+async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     # Startup
     logger.info("Initializing application...")
 
@@ -46,9 +47,10 @@ app = FastAPI(lifespan=lifespan)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://frontend:80",  # Для запросов внутри Docker-сети
-        "http://localhost:8080",
-    ],  # Для запросов из браузера],
+        "http://localhost:8080",  # Docker nginx
+        "http://frontend:80",  # Docker frontend
+        "http://localhost",  # Local development
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -57,9 +59,3 @@ app.add_middleware(
 # Include all routers
 for router in routers:
     app.include_router(router)
-
-
-# Health check endpoint
-@app.get("/health")
-async def health_check():
-    return {"status": "ok"}
