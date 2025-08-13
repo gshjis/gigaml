@@ -44,6 +44,13 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+  frontend:
+    build:
+      context: ./taskmaster-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
 
 volumes:
   postgres_data:
