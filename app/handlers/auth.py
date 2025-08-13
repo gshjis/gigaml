@@ -30,7 +30,9 @@ async def register_user(
         username=user.username, email=user.email, password=user.password
     )
     new_user = payload["user"]
-    new_user = UserOut(**new_user)
+    new_user = UserOut(
+        user_id=new_user.user_id, username=new_user.username, email=new_user.email
+    )
     access_token = str(payload["access_token"])
     refresh_token = str(payload["refresh_token"])
 
