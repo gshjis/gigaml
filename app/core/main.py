@@ -46,7 +46,11 @@ app = FastAPI(lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[],
+    allow_origins=[
+        "http://localhost:8080",  # Docker nginx
+        "http://frontend:80",  # Docker frontend
+        "http://localhost",  # Local development
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

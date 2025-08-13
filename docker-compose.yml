@@ -1,17 +1,6 @@
-services:
-  backend:
-    build: .
-    ports:
-      - "8000:8000"
-    volumes:
-      - .:/app
-    command: "make run"
-    depends_on:
-      db:
-        condition: service_healthy
-      cache:
-        condition: service_healthy
+version: '3.8'
 
+services:
   db:
     image: postgres:latest
     restart: always
@@ -37,6 +26,35 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+
+  backend:
+    build: .
+    volumes:
+      - .:/app
+      - ./.env:/app/.env
+    command: "make run"
+    depends_on:
+      db:
+        condition: service_healthy
+      cache:
+        condition: service_healthy
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://gshjis:password@db/pomodoro
+      - REDIS_HOST=cache
+      - REDIS_PORT=6379
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      backend:
+        condition: service_healthy
 
 volumes:
   postgres_data:
