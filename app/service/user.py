@@ -14,7 +14,7 @@ class UserService:
 
     async def register_user(
         self, username: str, email: str, password: str
-    ) -> Dict[str, str | UserData]:
+    ) -> Dict[str, Any]:
         """Регистрация нового пользователя
 
         Args:

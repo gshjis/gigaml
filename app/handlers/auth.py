@@ -5,7 +5,8 @@ from fastapi.security import OAuth2PasswordRequestForm
 
 from app.core.dependencies import get_user_service
 from app.core.settings import settings
-from app.schemas.user import UserCreate
+from app.schemas.auth import RegisterResponse, TokenResponse
+from app.schemas.user import UserCreate, UserOut
 from app.service.user import UserService
 
 router = APIRouter(prefix="/auth")
@@ -13,7 +14,7 @@ router = APIRouter(prefix="/auth")
 
 @router.post(
     "/register",
-    response_model=dict,
+    response_model=RegisterResponse,
     summary="Регистрация нового пользователя",
     description="""Этот маршрут позволяет зарегистрировать нового пользователя в системе.
     В случае успешной регистрации возвращается информация о пользователе и токены доступа.""",
@@ -23,13 +24,14 @@ async def register_user(
     user: UserCreate,
     response: Response,
     service: UserService = Depends(get_user_service),  # noqa: B008
-) -> Dict[str, Any]:
+) -> RegisterResponse:
     # Создание нового пользователя в базе данных
     payload = await service.register_user(
         username=user.username, email=user.email, password=user.password
     )
-    new_user = payload.get("user", None)
-    access_token = payload["access_token"]
+    new_user = payload["user"]
+    new_user = UserOut(**new_user)
+    access_token = str(payload["access_token"])
     refresh_token = str(payload["refresh_token"])
 
     # Установка куки для обновления токена
@@ -38,11 +40,9 @@ async def register_user(
     )
 
     # Возврат информации о пользователе и токенов
-    return {
-        "user": new_user,
-        "access_token": access_token,
-        "token_type": "bearer",
-    }
+    return RegisterResponse(
+        access_token=access_token, token_type="bearer", user=new_user
+    )
 
 
 @router.post(
@@ -57,7 +57,7 @@ async def login_user(
     response: Response,
     form_data: OAuth2PasswordRequestForm = Depends(),  # noqa: B008
     service: UserService = Depends(get_user_service),  # noqa: B008
-) -> Dict[str, Any]:
+) -> Dict[Any, Any]:
     # Получение пользователя из базы данных
     payload = await service.authentication(
         email_or_username=form_data.username, password=form_data.password
@@ -72,10 +72,10 @@ async def login_user(
     )
 
     # Возврат информации о пользователе и токенов
-    return {
-        "access_token": access_token,
-        "token_type": "bearer",
-    }
+    return TokenResponse(
+        access_token=access_token,
+        token_type="bearer",
+    ).model_dump()
 
 
 @router.post(
@@ -90,7 +90,7 @@ async def refresh_token(
     response: Response,
     request: Request,
     service: UserService = Depends(get_user_service),  # noqa: B008
-) -> Dict[str, Any]:
+) -> TokenResponse:
     refresh_token = request.cookies.get(str(settings.REFRESH_TOKEN_COOKIES_NAME))
     # Обновление токенов
     tokens = await service.refresh(refresh_token)
@@ -104,7 +104,7 @@ async def refresh_token(
         httponly=True,
     )
     # Возврат обновленного access токена
-    return {
-        "access_token": access_token,
-        "token_type": "bearer",
-    }
+    return TokenResponse(
+        access_token=access_token,
+        token_type="bearer",
+    )
